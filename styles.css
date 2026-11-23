@@ -463,25 +463,45 @@ h1, h2, h3, h4, h5 {
   gap: 0.8rem;
 }
 
-/* --- Continuous Marquee Banner Strip (Placed Below Main Hero Banner) --- */
+/* --- Attractive Luxury Marquee Strip (Exclusive to index.html under Hero Banner) --- */
 .marquee-strip {
-  background-color: #121212;
-  color: #d8d8d8;
-  font-size: 0.76rem;
-  padding: 0.65rem 0;
-  letter-spacing: 0.05em;
-  border-top: 1px solid rgba(197, 160, 89, 0.25);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  background: linear-gradient(90deg, #161616 0%, #2A0914 50%, #161616 100%);
+  color: #FFFFFF;
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(197, 160, 89, 0.45);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.45);
   width: 100%;
   overflow: hidden;
   position: relative;
   z-index: 10;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+}
+
+.marquee-strip::before,
+.marquee-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-strip::before {
+  left: 0;
+  background: linear-gradient(90deg, #161616 0%, transparent 100%);
+}
+
+.marquee-strip::after {
+  right: 0;
+  background: linear-gradient(-90deg, #161616 0%, transparent 100%);
 }
 
 .marquee-strip-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: continuousMarqueeScroll 28s linear infinite;
+  animation: continuousMarqueeScroll 32s linear infinite;
 }
 
 .marquee-strip-track:hover {
@@ -491,16 +511,25 @@ h1, h2, h3, h4, h5 {
 .marquee-strip-item {
   display: inline-flex;
   align-items: center;
-  padding: 0 1.75rem;
-  font-size: 0.76rem;
-  letter-spacing: 0.05em;
-  color: #ececec;
+  gap: 0.6rem;
+  padding: 0 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F8F5EE;
+}
+
+.marquee-strip-item .marquee-highlight {
+  color: #DFC285;
+  font-weight: 700;
 }
 
 .marquee-strip-item .marquee-sep {
-  color: var(--color-gold, #c5a059);
-  margin-left: 1.75rem;
-  font-size: 0.7rem;
+  color: #9A2143;
+  margin-left: 2rem;
+  font-size: 0.85rem;
   opacity: 0.9;
 }
 
@@ -1082,7 +1111,7 @@ h1, h2, h3, h4, h5 {
    UNIFIED BANNER HEIGHT SYSTEM (All Website Banners Exact Same Size)
    ========================================================================== */
 :root {
-  --site-banner-height: clamp(400px, 48vh, 500px);
+  --site-banner-height: clamp(480px, 58vh, 600px);
 }
 
 .hero-carousel {
@@ -1210,55 +1239,66 @@ h1, h2, h3, h4, h5 {
 
 .raviva-action-group {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-  max-width: 270px;
+  align-items: center;
+  gap: 1rem;
+  width: auto;
+  max-width: 100%;
+  margin-top: 0.5rem;
 }
 
 .raviva-domain-badge {
-  display: block;
-  text-align: center;
-  background: #ba9975;
-  color: #ffffff;
-  padding: 0.6rem 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #8b6b47;
+  border: 1.5px solid #ba9975;
+  padding: 0.8rem 1.6rem;
   font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(186, 153, 117, 0.25);
+  border-radius: 4px;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: none;
+  white-space: nowrap;
 }
 
 .raviva-domain-badge:hover {
-  background: #a3825f;
+  background: #ba9975;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(186, 153, 117, 0.4);
+  box-shadow: 0 8px 20px rgba(186, 153, 117, 0.35);
 }
 
 .raviva-cta-btn {
-  display: block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #1a1a1a;
   color: #ffffff;
-  padding: 0.6rem 1.4rem;
+  padding: 0.82rem 2.2rem;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  border-radius: 4px;
+  border: 1.5px solid #1a1a1a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  white-space: nowrap;
 }
 
 .raviva-cta-btn:hover {
   background: #9A2143;
+  border-color: #9A2143;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(154, 33, 67, 0.3);
+  box-shadow: 0 8px 25px rgba(154, 33, 67, 0.35);
 }
 
 /* Right Visual Column */
@@ -3957,13 +3997,12 @@ h1, h2, h3, h4, h5 {
   margin-top: 1.6rem;
   font-weight: 300;
 }
-}
 
 /* --- Luxury Modern Footer (Ivory / Pure White Luxury Background) --- */
 .footer {
   background-color: #FFFFFF; /* Pure Clean White Luxury Background */
   color: #555555;
-  padding: 5rem 0 0;
+  padding: 6.5rem 0 0; /* Enhanced top breathing room */
   border-top: 1px solid #eee5d8;
   position: relative;
 }
