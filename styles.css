@@ -3322,6 +3322,154 @@ h1, h2, h3, h4, h5 {
   color: var(--color-text-muted);
 }
 
+/* ==========================================================================
+   INTERACTIVE 3D JEWELRY CARD STACK (Craftsmanship Section)
+   ========================================================================== */
+.craft-3d-stack-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 480px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.craft-3d-card {
+  position: absolute;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14), 0 2px 10px rgba(197, 160, 89, 0.2);
+  border: 4px solid #FFFFFF;
+  background: #FFFFFF;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.craft-3d-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.card-caption-pill {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  background: rgba(18, 18, 18, 0.88);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  pointer-events: none;
+}
+
+/* Card 1 (Main Focal Showcase: Pedestal Necklace) */
+.craft-3d-card.card-primary {
+  width: 76%;
+  height: 380px;
+  top: 15px;
+  left: 10px;
+  z-index: 3;
+  transform: rotate(-3deg);
+}
+
+/* Card 2 (Top-Right Floating 3D Diamond Solitaire) */
+.craft-3d-card.card-secondary {
+  width: 54%;
+  height: 250px;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  transform: rotate(6deg) translateY(10px);
+  border-color: #F8F5F0;
+}
+
+/* Card 3 (Bottom-Right Floating 3D Royal Choker) */
+.craft-3d-card.card-tertiary {
+  width: 56%;
+  height: 250px;
+  bottom: 10px;
+  right: 15px;
+  z-index: 4;
+  transform: rotate(2deg);
+}
+
+/* Dynamic 3D Fan-out Hover Effects */
+.craft-3d-stack-wrapper:hover .card-primary {
+  transform: rotate(-8deg) translateX(-25px) translateY(-10px) scale(1.03);
+  box-shadow: 0 25px 60px rgba(154, 33, 67, 0.22), 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 5;
+}
+
+.craft-3d-stack-wrapper:hover .card-secondary {
+  transform: rotate(12deg) translateX(30px) translateY(-25px) scale(1.08);
+  box-shadow: 0 22px 50px rgba(197, 160, 89, 0.3);
+  z-index: 6;
+}
+
+.craft-3d-stack-wrapper:hover .card-tertiary {
+  transform: rotate(-2deg) translateX(25px) translateY(20px) scale(1.06);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.22);
+  z-index: 7;
+}
+
+.craft-3d-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Floating Heritage Seal */
+.experience-badge-3d {
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+  background: linear-gradient(135deg, #1A1A1A 0%, #111111 100%);
+  color: #FFFFFF;
+  padding: 1.2rem 1.8rem;
+  border-radius: 14px;
+  text-align: center;
+  border-left: 4px solid #c5a059;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  z-index: 10;
+  transition: transform 0.4s ease;
+}
+
+.craft-3d-stack-wrapper:hover .experience-badge-3d {
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 16px 36px rgba(154, 33, 67, 0.35);
+}
+
+@media (max-width: 768px) {
+  .craft-3d-stack-wrapper {
+    height: 400px;
+  }
+  .craft-3d-card.card-primary {
+    width: 82%;
+    height: 310px;
+  }
+  .craft-3d-card.card-secondary {
+    width: 55%;
+    height: 190px;
+  }
+  .craft-3d-card.card-tertiary {
+    width: 58%;
+    height: 200px;
+  }
+  .experience-badge-3d {
+    padding: 0.9rem 1.2rem;
+    left: 0;
+    bottom: -10px;
+  }
+}
+
 .craft-img-frame {
   position: relative;
   border: 12px solid #ffffff;
@@ -3359,76 +3507,128 @@ h1, h2, h3, h4, h5 {
   padding: 5rem 0;
 }
 
+/* ==========================================================================
+   ENHANCED 3D INSTAGRAM & CLIENT ATELIER GALLERY
+   ========================================================================== */
 .insta-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
+  gap: 1.8rem;
+  margin-top: 3.2rem;
+  perspective: 1000px;
 }
 
 .insta-item {
   position: relative;
-  aspect-ratio: 1/1.2;
+  aspect-ratio: 1/1.25;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-radius: 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(197, 160, 89, 0.08);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-style: preserve-3d;
 }
 
 .insta-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(154, 33, 67, 0.18);
+  transform: translateY(-12px) rotateX(4deg) scale(1.02);
+  border-color: rgba(197, 160, 89, 0.6);
+  box-shadow: 0 24px 50px rgba(154, 33, 67, 0.18), 0 6px 18px rgba(197, 160, 89, 0.2);
 }
 
 .insta-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.insta-item:hover img {
+  transform: scale(1.12);
 }
 
 .insta-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(154, 33, 67, 0.75);
-  backdrop-filter: blur(3px);
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.2) 0%, rgba(154, 33, 67, 0.88) 100%);
+  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  color: #fff;
+  justify-content: flex-end;
+  padding: 2rem 1.4rem;
+  gap: 0.6rem;
+  color: #FFFFFF;
   opacity: 0;
-  transition: all 0.35s ease;
-}
-
-.insta-item:hover img {
-  transform: scale(1.1);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(12px);
 }
 
 .insta-item:hover .insta-overlay {
   opacity: 1;
+  transform: translateY(0);
+}
+
+.insta-brand-tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: #dfc285;
+  text-transform: uppercase;
+}
+
+.insta-handle-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  opacity: 0.9;
+}
+
+.insta-item-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
 }
 
 .shop-look-btn {
-  background: #ffffff;
-  color: #1a1a1a;
+  background: #FFFFFF;
+  color: #1A1A1A;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  padding: 0.6rem 1.4rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.65rem 1.6rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
 }
 
 .shop-look-btn:hover {
-  background: #1a1a1a;
-  color: #ffffff;
-  transform: scale(1.05);
+  background: #1A1A1A;
+  color: #FFFFFF;
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
+
+@media (max-width: 992px) {
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .insta-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* --- Reviews Slider / Grid --- */
@@ -3442,20 +3642,21 @@ h1, h2, h3, h4, h5 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .review-card {
-  background: #ffffff;
-  padding: 2.5rem;
-  border-radius: 12px;
-  border: 1px solid #eee7db;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%);
+  padding: 2.8rem 2.4rem;
+  border-radius: 20px;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  box-shadow: 0 10px 30px rgba(40, 20, 10, 0.04);
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
   overflow: hidden;
+  backdrop-filter: blur(8px);
 }
 
 .review-card::before {
@@ -3463,105 +3664,171 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
-  height: 0;
-  background: #9A2143;
-  transition: height 0.4s ease;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #9A2143 0%, #C5A059 50%, #9A2143 100%);
+  opacity: 0.6;
+  transition: opacity 0.4s ease, height 0.4s ease;
+}
+
+.review-card::after {
+  content: '"';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.8rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 6.5rem;
+  line-height: 1;
+  color: rgba(197, 160, 89, 0.08);
+  pointer-events: none;
+  transition: all 0.45s ease;
 }
 
 .review-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 36px rgba(154, 33, 67, 0.12);
-  border-color: rgba(154, 33, 67, 0.3);
+  transform: translateY(-10px);
+  border-color: rgba(197, 160, 89, 0.65);
+  box-shadow: 0 22px 48px rgba(154, 33, 67, 0.12), 0 6px 18px rgba(197, 160, 89, 0.16);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF5EE 100%);
 }
 
 .review-card:hover::before {
-  height: 100%;
+  opacity: 1;
+  height: 5px;
 }
 
-.review-card .stars {
-  color: #c5a059;
-  font-size: 1.15rem;
-  margin-bottom: 1.2rem;
-  letter-spacing: 2px;
+.review-card:hover::after {
+  color: rgba(154, 33, 67, 0.14);
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.review-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+  gap: 0.8rem;
+}
+
+.stars-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #C5A059;
+}
+
+.stars-gold i,
+.stars-gold .star-fill {
+  width: 17px;
+  height: 17px;
+  fill: #C5A059;
+  stroke: #C5A059;
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover .stars-gold i {
+  transform: scale(1.12);
+}
+
+.review-badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(30, 130, 76, 0.08);
+  color: #1b6b3e;
+  border: 1px solid rgba(30, 130, 76, 0.22);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 .review-text {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   font-weight: 400;
-  color: #444444;
-  line-height: 1.7;
-  margin-bottom: 2rem;
+  color: #4a4a4a;
+  line-height: 1.75;
+  margin-bottom: 2.2rem;
   flex-grow: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .reviewer-meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  border-top: 1px solid #f0ebe1;
-  padding-top: 1.4rem;
+  gap: 1.1rem;
+  border-top: 1px solid rgba(197, 160, 89, 0.22);
+  padding-top: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .reviewer-avatar {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: #FAF6EF;
-  border: 1px solid #e8dfd1;
+  background: linear-gradient(135deg, #FAF6EF 0%, #F5ECE0 100%);
+  border: 1.5px solid rgba(197, 160, 89, 0.4);
   color: #9A2143;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .review-card:hover .reviewer-avatar {
-  background: #9A2143;
+  background: linear-gradient(135deg, #9A2143 0%, #7d1733 100%);
   color: #ffffff;
-  border-color: #9A2143;
-  transform: scale(1.08);
-}
-  font-size: 0.9rem;
-  border: 1px solid var(--color-gold-light);
+  border-color: #C5A059;
+  transform: scale(1.1) rotate(4deg);
+  box-shadow: 0 6px 16px rgba(154, 33, 67, 0.25);
 }
 
 .reviewer-meta h5 {
-  font-size: 1rem;
-  margin-bottom: 0.1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.2rem;
 }
 
 .reviewer-meta span {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  color: #777777;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
-/* --- VIP Club Newsletter (Attractive Modern Luxury UI from Reference) --- */
+/* --- VIP Club Newsletter (Attractive Modern Luxury UI with Background Jewelry Image) --- */
 .newsletter-section {
-  background: radial-gradient(circle at center, #9A2143 0%, #7d1733 50%, #5c0d22 100%);
-  color: #FFFFFF;
-  padding: 6.5rem 0;
   position: relative;
+  padding: 7.5rem 0;
   overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #2b0611;
+  background-image: 
+    linear-gradient(135deg, rgba(43, 6, 17, 0.85) 0%, rgba(92, 13, 34, 0.78) 50%, rgba(26, 3, 10, 0.9) 100%),
+    url('images/3d_luxury_necklace_pedestal.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  color: #FFFFFF;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 2px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 4px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Subtle luxury gold ambient shimmer behind the copy */
 .newsletter-section::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 620px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(223, 194, 133, 0.12) 0%, rgba(197, 160, 89, 0.04) 50%, transparent 75%);
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(197, 160, 89, 0.2) 0%, rgba(0, 0, 0, 0.45) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -3569,232 +3836,138 @@ h1, h2, h3, h4, h5 {
 .newsletter-content {
   position: relative;
   z-index: 2;
-  max-width: 760px;
+  max-width: 820px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 4.2rem 3.5rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), 0 0 50px rgba(197, 160, 89, 0.18);
+  text-align: center;
 }
 
 .newsletter-content .section-tag {
   font-family: 'Poppins', sans-serif;
-  color: #ff9cb7 !important; /* Soft rose gold accent on burgundy */
-  letter-spacing: 0.3em;
+  color: #DFC285 !important;
+  letter-spacing: 0.28em;
   font-size: 0.82rem;
   font-weight: 600;
-  margin-bottom: 0.8rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.2rem;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  background: rgba(197, 160, 89, 0.18);
+  border: 1px solid rgba(197, 160, 89, 0.38);
+  border-radius: 50px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .newsletter-content h2 {
   color: #FFFFFF;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.8rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1.25;
-  letter-spacing: -0.02em;
-  margin: 0 auto 1.1rem;
+  letter-spacing: -0.01em;
+  margin: 0 auto 1.2rem;
   max-width: 720px;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .newsletter-content p {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
   font-family: 'Poppins', sans-serif;
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: 1.05rem;
+  line-height: 1.7;
   font-weight: 300;
-  margin-bottom: 2.6rem;
+  margin-bottom: 2.8rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Newsletter Input & Button Form Group - Integrated Modern Capsule Style */
+/* Newsletter Input & Button Form Group - Luxury Capsule Bar */
 .newsletter-form {
-  display: flex;
+  display: flex !important;
   max-width: 580px;
   margin: 0 auto;
-  background: #FFFFFF;
-  border-radius: 50px;
-  padding: 6px 6px 6px 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  background: #FFFFFF !important;
+  border-radius: 60px !important;
+  padding: 7px 7px 7px 24px !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(223, 194, 133, 0.5) !important;
   transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   align-items: center;
 }
 
 .newsletter-form:focus-within {
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35), 0 0 0 2px #DFC285;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 3px #DFC285 !important;
   transform: translateY(-2px);
 }
 
 .newsletter-form input {
   flex: 1;
-  padding: 0.85rem 0.6rem;
-  border: none;
-  background: transparent;
-  color: #222222;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.92rem;
-  font-weight: 400;
-  outline: none;
+  padding: 0.95rem 0.8rem !important;
+  border: none !important;
+  background: transparent !important;
+  color: #1a1a1a !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 0.96rem !important;
+  font-weight: 400 !important;
+  outline: none !important;
 }
 
 .newsletter-form input::placeholder {
-  color: #888888;
-  font-weight: 300;
+  color: #777777 !important;
+  font-weight: 400 !important;
 }
 
-/* High-Conversion Attractive Button */
+/* Eye-Catching Shimmering Luxury Gold Button */
 .newsletter-form .btn-gold {
-  background: linear-gradient(135deg, #DFC285 0%, #C5A059 100%);
-  color: #1a1a1a;
-  border: none;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.95rem 2rem;
-  border-radius: 40px;
-  white-space: nowrap;
-  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.35);
-  cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  background: linear-gradient(135deg, #ECC880 0%, #D4AF37 50%, #B8860B 100%) !important;
+  color: #1a1a1a !important;
+  border: none !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.86rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 1rem 2.2rem !important;
+  border-radius: 50px !important;
+  white-space: nowrap !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45) !important;
+  cursor: pointer !important;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
 }
 
 .newsletter-form .btn-gold:hover {
-  background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
-  color: #FFFFFF;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #9A2143 0%, #7d1733 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 30px rgba(154, 33, 67, 0.55), 0 0 15px rgba(212, 175, 55, 0.3) !important;
+  transform: scale(1.04) translateY(-1px) !important;
+}
+
+.newsletter-form .btn-gold i {
+  transition: transform 0.3s ease;
+}
+
+.newsletter-form .btn-gold:hover i {
+  transform: translateX(4px);
 }
 
 .small-text {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.65);
-  display: block;
-  margin-top: 1.4rem;
-  font-weight: 300;
-}
-
-/* Subtle luxury ambient glow behind the title */
-.newsletter-section::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 550px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(154, 33, 67, 0.16) 0%, rgba(197, 160, 89, 0.08) 50%, transparent 75%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.newsletter-content {
-  position: relative;
-  z-index: 2;
-  max-width: 740px;
-  margin: 0 auto;
-}
-
-.newsletter-content .section-tag {
-  font-family: 'Poppins', sans-serif;
-  color: #E25C80 !important; /* Elegant rose berry accent */
-  letter-spacing: 0.28em;
   font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-}
-
-.newsletter-content h2 {
-  color: #FFFFFF;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.6rem;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  margin: 0 auto 1rem;
-  max-width: 680px;
-}
-
-.newsletter-content p {
-  color: #b5b5b5;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  font-weight: 300;
-  margin-bottom: 2.4rem;
-  max-width: 580px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Newsletter Input & Button Form Group */
-.newsletter-form {
-  display: flex;
-  gap: 0.75rem;
-  max-width: 540px;
-  margin: 0 auto;
-  background: transparent;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 0.95rem 1.4rem;
-  border: 1px solid #333333;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(8px);
-  color: #FFFFFF;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.88rem;
-  border-radius: 4px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.newsletter-form input::placeholder {
-  color: #777777;
-}
-
-.newsletter-form input:focus {
-  border-color: #9A2143;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 15px rgba(154, 33, 67, 0.3);
-}
-
-.newsletter-form .btn-gold {
-  background: #C5A059;
-  color: #1a1a1a;
-  border: 1px solid #C5A059;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.95rem 1.8rem;
-  border-radius: 4px;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-}
-
-.newsletter-form .btn-gold:hover {
-  background: #9A2143;
-  border-color: #9A2143;
-  color: #FFFFFF;
-  box-shadow: 0 6px 20px rgba(154, 33, 67, 0.4);
-  transform: translateY(-2px);
-}
-
-.small-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.74rem;
-  color: #666666;
+  color: rgba(255, 255, 255, 0.8);
   display: block;
-  margin-top: 1.2rem;
+  margin-top: 1.6rem;
   font-weight: 300;
+}
 }
 
 /* --- Luxury Modern Footer (Ivory / Pure White Luxury Background) --- */
