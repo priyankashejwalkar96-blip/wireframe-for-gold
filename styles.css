@@ -683,7 +683,7 @@ h1, h2, h3, h4, h5 {
   font-weight: 400;
 }
 
-/* Center Horizontal Navigation Links (Clean Poppins 500 Caps) */
+/* Center Horizontal Navigation Links (Clean Poppins Semi-Bold Caps) */
 .center-nav ul {
   display: flex;
   list-style: none;
@@ -695,11 +695,11 @@ h1, h2, h3, h4, h5 {
 
 .center-nav .nav-item-link {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600; /* Little bolder typography as requested */
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #2e2e2e;
+  color: #1a1a1a;
   position: relative;
   transition: color 0.25s ease;
   padding: 1.2rem 0;
@@ -714,7 +714,7 @@ h1, h2, h3, h4, h5 {
 
 .center-nav .nav-item-link.active {
   color: var(--color-maroon);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Dropdown Menu for ALL PRODUCTS (Exact categories from Screenshot) */
@@ -753,15 +753,15 @@ h1, h2, h3, h4, h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.65rem 0.95rem;
+  padding: 0.7rem 0.95rem;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.83rem;
-  font-weight: 400;
-  color: #333333;
+  font-size: 0.82rem;
+  font-weight: 600; /* Bold tag weight matching header */
+  color: #1a1a1a;
   border-bottom: none;
   border-radius: 6px;
-  text-transform: capitalize;
-  letter-spacing: 0.01em;
+  text-transform: uppercase; /* Converted to uppercase */
+  letter-spacing: 0.04em;
   transition: all 0.2s ease;
 }
 
@@ -769,17 +769,18 @@ h1, h2, h3, h4, h5 {
   background: #FAF8F5;
   color: #9A2143;
   padding-left: 1.15rem;
-  font-weight: 500;
+  font-weight: 700;
   box-shadow: 0 2px 6px rgba(154, 33, 67, 0.08);
 }
 
 .dropdown-link-item .count-pill {
   font-size: 0.72rem;
-  color: #888888;
+  font-weight: 600;
+  color: #777777;
   background: #f4efe6;
-  padding: 1px 7px;
+  padding: 2px 8px;
   border-radius: 10px;
-  margin-left: 6px;
+  margin-left: 8px;
   transition: all 0.2s ease;
 }
 
