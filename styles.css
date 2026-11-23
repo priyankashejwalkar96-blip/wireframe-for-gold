@@ -128,6 +128,24 @@ h1, h2, h3, h4, h5 {
   color: var(--color-dark);
 }
 
+.diwali-hero h1,
+.contact-hero h1,
+.policy-hero h1,
+.page-hero-banner h1,
+.page-hero-banner .page-title,
+.page-title {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.policy-hero > .container > p,
+.diwali-hero > .container > p,
+.contact-hero > .container > p,
+.page-hero-banner > .container > p {
+  color: #F0E8DF !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
 .section-header {
   margin-bottom: 3.5rem;
 }
@@ -317,6 +335,147 @@ h1, h2, h3, h4, h5 {
 
 .btn-block {
   width: 100%;
+}
+
+/* --- Editorial Journal & Blog Grid (1 Row 3 Cards - High-End Aesthetic) --- */
+.home-blog-section {
+  background-color: #FFFFFF;
+  padding: 5rem 0 3rem;
+  border-top: 1px solid #f2ede4;
+}
+
+.blog-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+}
+
+.blog-card {
+  background: #FFFFFF;
+  border: 1px solid #ede5d8;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(154, 33, 67, 0.08), 0 6px 18px rgba(197, 160, 89, 0.12);
+  border-color: #dfcaa2;
+}
+
+.blog-card-media {
+  position: relative;
+  height: 270px;
+  overflow: hidden;
+  background: #f7f4ee;
+}
+
+.blog-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.blog-card:hover .blog-card-media img {
+  transform: scale(1.08);
+}
+
+.blog-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%);
+  pointer-events: none;
+}
+
+.blog-tag-pill {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  color: var(--color-maroon);
+  padding: 0.38rem 1rem;
+  border-radius: 30px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(154, 33, 67, 0.15);
+  z-index: 2;
+}
+
+.blog-card-body {
+  padding: 2.2rem 2rem 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.76rem;
+  color: #888888;
+  margin-bottom: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.blog-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  line-height: 1.35;
+  color: #1a1a1a;
+  margin-bottom: 0.9rem;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.blog-card:hover .blog-card-title {
+  color: var(--color-maroon);
+}
+
+.blog-card-excerpt {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: #666666;
+  margin-bottom: 1.8rem;
+  flex-grow: 1;
+}
+
+.blog-card-footer {
+  padding-top: 1.2rem;
+  border-top: 1px solid #f2ede4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-maroon);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+}
+
+.blog-card:hover .blog-read-more-btn {
+  color: #1a1a1a;
+  gap: 0.8rem;
 }
 
 /* --- Continuous Marquee Banner Strip (Placed Below Main Hero Banner) --- */
@@ -920,61 +1079,461 @@ h1, h2, h3, h4, h5 {
   padding-bottom: 0.6rem;
 }
 
-/* Swashaa Luxury Studio Layout Slide Styling */
-.hero-slide.swashaa-layout {
-  background: #FFFFFF;
-  align-items: center;
+/* ==========================================================================
+   RAVIVA-INSPIRED EDITORIAL LUXURY HERO BANNER SLIDER
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  background: #fbf9f5;
   overflow: hidden;
 }
 
-.hero-slide.swashaa-layout .hero-image-wrapper {
-  background: radial-gradient(circle at 45% 50%, #ffffff 0%, #fbf9f6 60%, #f3eee7 100%);
+/* ==========================================================================
+   UNIFIED BANNER HEIGHT SYSTEM (All Website Banners Exact Same Size)
+   ========================================================================== */
+:root {
+  --site-banner-height: clamp(400px, 48vh, 500px);
+}
+
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: var(--site-banner-height);
+  min-height: var(--site-banner-height);
+  max-height: var(--site-banner-height);
+  overflow: hidden;
+  background: #faf7f2;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.raviva-hero-slide {
+  background: linear-gradient(105deg, #FAF7F2 0%, #F5EFE6 55%, #EDE3D4 100%);
+  width: 100%;
+  height: 100%;
+}
+
+.raviva-banner-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  height: 100%;
+  position: relative;
+}
+
+/* Left Content Column */
+.raviva-content-col {
+  padding: 2.2rem 2.5rem 2.2rem clamp(3rem, 5.5vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 3;
+}
+
+.raviva-sub-tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  font-weight: 500;
+  color: #a8947c;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: inline-block;
+}
+
+.raviva-brand-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: clamp(2.6rem, 4.4vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: #7b654a;
+  line-height: 1.05;
+  margin: 0 0 0.9rem 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.raviva-divider-line {
+  width: 80px;
+  height: 2px;
+  background: #a8947c;
+  margin-bottom: 1.2rem;
+  opacity: 0.7;
+}
+
+.raviva-offer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.raviva-sale-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: #2b2b2b;
+  text-transform: uppercase;
+}
+
+.raviva-discount-headline {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.3rem, 3.8vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+  margin: 0.1rem 0;
+}
+
+.raviva-applicability-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #333333;
+  text-transform: uppercase;
+}
+
+.raviva-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 270px;
+}
+
+.raviva-domain-badge {
+  display: block;
+  text-align: center;
+  background: #ba9975;
+  color: #ffffff;
+  padding: 0.6rem 1.4rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(186, 153, 117, 0.25);
+}
+
+.raviva-domain-badge:hover {
+  background: #a3825f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(186, 153, 117, 0.4);
+}
+
+.raviva-cta-btn {
+  display: block;
+  text-align: center;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 0.6rem 1.4rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.raviva-cta-btn:hover {
+  background: #9A2143;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(154, 33, 67, 0.3);
+}
+
+/* Right Visual Column */
+.raviva-visual-col {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.raviva-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-slide.active .raviva-hero-img {
+  transform: scale(1.03);
+}
+
+/* Side Navigation Arrows (Minimal Rounded Dark/Glassy) */
+.hero-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(26, 26, 26, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.hero-nav-arrow:hover {
+  background: #9A2143;
+  transform: translateY(-50%) scale(1.1);
+  color: #ffffff;
+}
+
+.hero-nav-arrow.prev {
+  left: 24px;
+}
+
+.hero-nav-arrow.next {
+  right: 24px;
+}
+
+/* Pagination Dots */
+.hero-slider-pagination {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.hero-slider-dot {
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(26, 26, 26, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-slider-dot.active {
+  width: 44px;
+  background: #ba9975;
+}
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 991px) {
+  .hero-carousel {
+    height: auto;
+    min-height: unset;
+    max-height: unset;
+  }
+  .raviva-banner-wrapper {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .raviva-content-col {
+    padding: 2.5rem 1.8rem 1.8rem 1.8rem;
+    align-items: center;
+    text-align: center;
+  }
+  .raviva-brand-title {
+    font-size: 2.8rem;
+  }
+  .raviva-offer-block {
+    align-items: center;
+    margin-bottom: 1.4rem;
+  }
+  .raviva-action-group {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+  .raviva-visual-col {
+    min-height: 320px;
+    height: 360px;
+  }
+  .hero-nav-arrow.prev { left: 12px; }
+  .hero-nav-arrow.next { right: 12px; }
+}
+
+@media (max-width: 576px) {
+  .raviva-content-col {
+    padding: 2rem 1.2rem 1.4rem 1.2rem;
+  }
+  .raviva-sub-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+  }
+  .raviva-brand-title {
+    font-size: 2.2rem;
+  }
+  .raviva-discount-headline {
+    font-size: 2.2rem;
+  }
+  .raviva-sale-label, .raviva-applicability-text {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+  .raviva-visual-col {
+    min-height: 260px;
+    height: 280px;
+  }
+}
+
+/* Swashaa Luxury Studio Layout Slide Styling */
+.hero-slide.swashaa-layout {
+  background: #fdfbf7;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-slide.swashaa-layout .hero-image-wrapper {
+  background: radial-gradient(circle at 50% 45%, #FFFFFF 0%, #FAF7F2 50%, #F3ECE1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Subtle luxury watermark / ambient silk aura */
+.hero-slide.swashaa-layout .hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, rgba(154, 33, 67, 0.03) 50%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 .swashaa-banner-container {
   position: relative;
   width: 100%;
-  max-width: 1320px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: 2.5rem 2rem;
+  padding: 3rem 2.5rem;
   display: grid;
-  grid-template-columns: 1fr 1.25fr 1fr;
+  grid-template-columns: 1fr 1.35fr 1fr;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   z-index: 5;
 }
 
-/* Left & Center Jewelry Still-Life compositions */
+/* Left Jewelry Cards - Ultra Luxurious High-End Styling */
 .swashaa-left-jewelry {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.6rem;
 }
 
 .swashaa-jewel-item {
   position: relative;
   background: #FFFFFF;
-  border-radius: 16px;
-  padding: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: transform 0.4s ease;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0 14px 34px rgba(40, 20, 10, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
 }
 
 .swashaa-jewel-item:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(154, 33, 67, 0.12), 0 4px 12px rgba(197, 160, 89, 0.15);
+  border-color: rgba(197, 160, 89, 0.5);
+}
+
+.swashaa-jewel-item .jewel-pill-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 3;
+  background: rgba(17, 17, 17, 0.88);
+  backdrop-filter: blur(8px);
+  color: #F8E7C9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(230, 194, 128, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .swashaa-jewel-item img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 14px;
   display: block;
+  transition: transform 0.6s ease;
+}
+
+.swashaa-jewel-item:hover img {
+  transform: scale(1.04);
+}
+
+.swashaa-jewel-item .jewel-item-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px 4px 8px;
+}
+
+.swashaa-jewel-item .jewel-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+}
+
+.swashaa-jewel-item .jewel-price {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #9A2143;
 }
 
 /* Center Coupon Ticket Banner */
@@ -983,110 +1542,224 @@ h1, h2, h3, h4, h5 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.swashaa-exclusive-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(154, 33, 67, 0.08) 0%, rgba(197, 160, 89, 0.15) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  color: #9A2143;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.1);
+}
+
+.swashaa-exclusive-tag .tag-sparkle {
+  color: #c5a059;
+  font-size: 0.85rem;
 }
 
 .swashaa-vibe-tag {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #2D2D2D;
-  margin-bottom: 0.3rem;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
 }
 
 .swashaa-brand-name {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #555555;
-  margin-bottom: 1.2rem;
+  color: #666666;
+  margin-bottom: 1.4rem;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .swashaa-heart {
-  color: #D32F2F;
-  font-size: 0.9rem;
+  color: #9A2143;
+  font-size: 0.95rem;
+  animation: heartPulse 1.8s infinite ease-in-out;
+  display: inline-block;
 }
 
-/* Scalloped Perforated Coupon Box */
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* Luxury Scalloped Coupon Ticket Card */
 .swashaa-coupon-ticket {
   background: #FFFFFF;
-  border: 2px dashed #D32F2F;
-  border-radius: 8px;
-  padding: 2.2rem 2.5rem;
-  box-shadow: 0 12px 35px rgba(211, 47, 47, 0.08);
+  border: 2px dashed #9A2143;
+  border-radius: 20px;
+  padding: 2.2rem 2.6rem 1.8rem 2.6rem;
+  box-shadow: 0 18px 45px rgba(154, 33, 67, 0.1), 0 4px 16px rgba(197, 160, 89, 0.12);
   position: relative;
-  max-width: 420px;
+  max-width: 440px;
   width: 100%;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
+  overflow: visible;
 }
 
 .swashaa-coupon-ticket:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 24px 55px rgba(154, 33, 67, 0.15), 0 6px 20px rgba(197, 160, 89, 0.18);
+}
+
+/* Authentic Ticket Notches (Cutouts) */
+.swashaa-coupon-ticket .ticket-notch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: #F8F5EE;
+  border: 2px dashed #9A2143;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.swashaa-coupon-ticket .ticket-notch-left {
+  left: -12px;
+}
+
+.swashaa-coupon-ticket .ticket-notch-right {
+  right: -12px;
+}
+
+.swashaa-coupon-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #111111 0%, #2b1f1d 100%);
+  color: #F8E7C9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 3px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .swashaa-coupon-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.65rem;
   font-weight: 700;
   color: #111111;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
 }
 
 .swashaa-coupon-discount {
   font-family: 'Poppins', sans-serif;
-  font-size: 2.1rem;
-  font-weight: 800;
-  color: #D32F2F;
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.02em;
+  font-size: 2.35rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #9A2143 0%, #c42954 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-shadow: 0 4px 14px rgba(154, 33, 67, 0.15);
 }
 
 .swashaa-coupon-sub {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  color: #111111;
-  letter-spacing: 0.1em;
+  color: #333333;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 }
 
 .swashaa-coupon-sub span {
-  color: #D32F2F;
-  font-size: 1.15rem;
+  color: #9A2143;
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
 .swashaa-claim-btn {
-  background: #111111;
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #111111 0%, #222222 100%);
+  color: #FFFFFF !important;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  padding: 10px 24px;
+  padding: 12px 28px;
   border-radius: 50px;
   text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 22px rgba(17, 17, 17, 0.25);
+  transition: all 0.35s ease;
+  width: 100%;
+  max-width: 290px;
 }
 
 .swashaa-claim-btn:hover {
-  background: #9A2143;
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(154, 33, 67, 0.3);
+  background: linear-gradient(135deg, #9A2143 0%, #7d1734 100%);
+  color: #FFFFFF !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(154, 33, 67, 0.35);
+  border-color: rgba(197, 160, 89, 0.5);
 }
 
-/* Right Polaroid Model Showcase */
+.swashaa-claim-btn .btn-arrow-icon {
+  width: 17px;
+  height: 17px;
+  stroke-width: 2.5;
+  transition: transform 0.3s ease;
+}
+
+.swashaa-claim-btn:hover .btn-arrow-icon {
+  transform: translateX(4px);
+}
+
+.ticket-code-note {
+  margin-top: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #666666;
+  letter-spacing: 0.04em;
+}
+
+.coupon-code-pill {
+  background: #FFF4E5;
+  color: #9A2143;
+  font-weight: 700;
+  font-family: monospace;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px dashed #c5a059;
+  letter-spacing: 0.1em;
+}
+
+/* Right Polaroid Model Showcase - Hyper-Realistic Luxury Paper Finish */
 .swashaa-right-polaroid {
   position: relative;
   display: flex;
@@ -1095,141 +1768,68 @@ h1, h2, h3, h4, h5 {
 
 .polaroid-frame {
   background: #FFFFFF;
-  padding: 14px 14px 38px 14px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
-  transform: rotate(3deg);
-  border-radius: 4px;
-  max-width: 320px;
+  padding: 14px 14px 30px 14px;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: rotate(2.5deg);
+  border-radius: 8px;
+  max-width: 330px;
   width: 100%;
-  transition: transform 0.4s ease;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .polaroid-frame:hover {
-  transform: rotate(0deg) scale(1.04);
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 28px 60px rgba(154, 33, 67, 0.16), 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Golden luxury decorative pin at the top center of polaroid */
+.polaroid-pin {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFF0D0 0%, #c5a059 55%, #8c6a28 100%);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  z-index: 6;
 }
 
 .polaroid-frame img {
   width: 100%;
-  height: 360px;
+  height: 380px;
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 4px;
   display: block;
 }
 
 .polaroid-caption {
   margin-top: 14px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #777777;
-  letter-spacing: 0.08em;
-}
-
-/* Responsive adjustment for Swashaa Banner */
-@media (max-width: 1024px) {
-  .swashaa-banner-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  .swashaa-right-polaroid {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 768px) {
-  .swashaa-banner-container {
-    grid-template-columns: 1fr;
-    padding: 2rem 1rem;
-  }
-  .swashaa-right-polaroid {
-    grid-column: span 1;
-  }
-  .swashaa-left-jewelry {
-    display: none;
-  }
-  .swashaa-coupon-title {
-    font-size: 1.3rem;
-  }
-  .swashaa-coupon-discount {
-    font-size: 1.7rem;
-  }
-}
-  position: relative;
-  background-color: var(--color-dark);
-  overflow: hidden;
-}
-
-.hero-carousel {
-  position: relative;
-  width: 100%;
-  min-height: 82vh;
-}
-
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  min-height: 82vh;
   display: flex;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s ease;
-  z-index: 1;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.hero-slide.active {
-  position: relative;
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
+.polaroid-caption .caption-tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: 0.06em;
 }
 
-.hero-image-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-  transform: scale(1.02);
-  transition: transform 9s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.hero-slide.active .hero-img {
-  transform: scale(1.08);
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(18, 18, 18, 0.88) 0%, rgba(18, 18, 18, 0.6) 50%, rgba(18, 18, 18, 0.2) 100%);
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 680px;
-  color: #ffffff;
-  padding: 4rem 0;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s, opacity 0.9s ease 0.3s;
-}
-
-.hero-slide.active .hero-content {
-  transform: translateY(0);
-  opacity: 1;
+.polaroid-caption .caption-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #888888;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Hero Carousel Navigation Controls */
@@ -1237,13 +1837,13 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: #FFFFFF;
+  background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: #111111;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1253,9 +1853,11 @@ h1, h2, h3, h4, h5 {
 }
 
 .hero-nav-arrow:hover {
-  background: rgba(154, 33, 67, 0.85);
+  background: #9A2143;
+  color: #FFFFFF;
   border-color: #9A2143;
   transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 8px 24px rgba(154, 33, 67, 0.35);
 }
 
 .hero-nav-arrow.prev {
@@ -1280,9 +1882,9 @@ h1, h2, h3, h4, h5 {
 
 .hero-slider-dot {
   width: 32px;
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.4);
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(17, 17, 17, 0.25);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -1290,8 +1892,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .hero-slider-dot.active {
-  background: #FFFFFF;
-  width: 48px;
+  background: #9A2143;
+  width: 52px;
 }
 
 .hero-slider-dot.active::after {
@@ -1301,7 +1903,7 @@ h1, h2, h3, h4, h5 {
   left: 0;
   height: 100%;
   width: 100%;
-  background: #E6C280;
+  background: #c5a059;
   animation: heroDotProgress 5s linear forwards;
 }
 
@@ -1310,10 +1912,283 @@ h1, h2, h3, h4, h5 {
   to { width: 100%; }
 }
 
+/* ================= FESTIVE DIWALI JEWELLERY BANNER SLIDE ================= */
+.hero-slide.festive-diwali-slide {
+  background: #f7ede2;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slide.festive-diwali-slide .hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: min(84vh, 760px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slide.festive-diwali-slide .festive-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: contrast(102%) brightness(99%);
+}
+
+.festive-center-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 5;
+  width: 100%;
+  max-width: 580px;
+  padding: 1.5rem 1rem;
+}
+
+/* Brand Logo Monogram & Slogan */
+.festive-brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 0.8rem;
+}
+
+.festive-logo-monogram {
+  width: 52px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 4px 16px rgba(154, 33, 67, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.festive-svg-logo {
+  width: 100%;
+  height: 100%;
+}
+
+.festive-brand-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.festive-brand-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #1A1A1A;
+  line-height: 1.15;
+}
+
+.festive-brand-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9A2143;
+  letter-spacing: 0.04em;
+}
+
+/* Diya Icon */
+.festive-diya-icon {
+  font-size: 1.35rem;
+  margin: 0.1rem 0;
+  filter: drop-shadow(0 2px 6px rgba(255, 180, 0, 0.6));
+  animation: diyaGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes diyaGlow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 2px 6px rgba(255, 180, 0, 0.5)); }
+  50% { transform: scale(1.18); filter: drop-shadow(0 4px 14px rgba(255, 150, 0, 0.85)); }
+}
+
+/* Festive Title Typography */
+.festive-hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.3rem, 3.8vw, 3.6rem);
+  font-weight: 700;
+  color: #9A2143;
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+}
+
+.festive-hero-title .diwali-script {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #9A2143;
+  font-size: 1.15em;
+}
+
+.festive-hero-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: #4A3A2A;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7);
+}
+
+/* Trust Perks Row */
+.festive-perks-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  padding: 8px 18px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.festive-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.06em;
+}
+
+.festive-perk-item svg {
+  width: 13px;
+  height: 13px;
+  color: #9A2143;
+}
+
+.perk-divider {
+  color: #c5a059;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* Action Buttons Bar */
+.festive-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.festive-shop-btn {
+  background: #9A2143;
+  color: #FFFFFF !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(154, 33, 67, 0.35);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.festive-shop-btn:hover {
+  background: #7d1734;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(154, 33, 67, 0.45);
+}
+
+.festive-whatsapp-btn {
+  background: #111111;
+  color: #FFFFFF !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.festive-whatsapp-btn svg {
+  width: 15px;
+  height: 15px;
+  color: #25D366;
+}
+
+.festive-whatsapp-btn:hover {
+  background: #25D366;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.4);
+}
+
+.festive-whatsapp-btn:hover svg {
+  color: #FFFFFF;
+}
+
 @media (max-width: 768px) {
-  .hero-nav-arrow {
-    display: none;
+  .festive-center-overlay {
+    padding: 1rem;
+    max-width: 95%;
   }
+  .festive-brand-title {
+    font-size: 1.25rem;
+  }
+  .festive-brand-tagline {
+    font-size: 0.7rem;
+  }
+  .festive-hero-title {
+    font-size: 2rem;
+  }
+  .festive-perks-row {
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  .festive-perk-item {
+    font-size: 0.62rem;
+  }
+}
+
+.hero-pill-tag {
+  display: inline-block;
+  background: rgba(154, 33, 67, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(230, 194, 128, 0.55);
+  color: #F8E7C9;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  padding: 6px 18px;
+  border-radius: 50px;
+  margin-bottom: 1.4rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .hero-subtitle {
@@ -1329,33 +2204,49 @@ h1, h2, h3, h4, h5 {
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: 3.8rem;
-  line-height: 1.15;
+  font-size: 3.6rem;
+  line-height: 1.2;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
   color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
 }
 
 .hero-title em {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
-  color: var(--color-gold-light);
+  color: #F5D394;
 }
 
 .hero-desc {
   font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  color: #e5e5e5;
-  font-weight: 300;
+  font-size: 1.05rem;
+  color: #F3EFE9;
+  font-weight: 400;
   line-height: 1.8;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.2rem;
+  max-width: 580px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .hero-cta-group {
   display: flex;
   gap: 1.2rem;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero-cta-group .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 0.88rem;
+  text-transform: uppercase;
 }
 
 /* Hero Feature / Trust Bar - Luxury Card Design */
@@ -3629,7 +4520,101 @@ h1, h2, h3, h4, h5 {
   gap: 0.6rem;
 }
 
-/* --- WhatsApp Floating Button --- */
+/* --- Floating Contact Hub (WhatsApp & Call Us - Fixed on Right Side) --- */
+.floating-contact-hub {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.floating-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+/* Call Us Button - Royal Deep Maroon Brand Theme */
+.floating-btn.call-float {
+  background: #9A2143;
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(154, 33, 67, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.floating-btn.call-float:hover {
+  background: #7B1828;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 24px rgba(154, 33, 67, 0.65);
+}
+
+/* WhatsApp Floating Button */
+.floating-btn.whatsapp-float-btn {
+  background-color: #25d366;
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.floating-btn.whatsapp-float-btn:hover {
+  background-color: #20ba59;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.65);
+}
+
+/* Interactive Hover Tooltips */
+.hub-tooltip {
+  position: absolute;
+  right: 68px;
+  background: rgba(18, 18, 18, 0.95);
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.floating-btn:hover .hub-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 576px) {
+  .floating-contact-hub {
+    bottom: 18px;
+    right: 18px;
+    gap: 10px;
+  }
+  .floating-btn {
+    width: 48px;
+    height: 48px;
+  }
+  .floating-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* --- WhatsApp Floating Button (Legacy Support) --- */
 .whatsapp-float {
   position: fixed;
   bottom: 25px;
@@ -3677,13 +4662,30 @@ h1, h2, h3, h4, h5 {
   transform: translateX(0);
 }
 
-/* Page Hero Banner for Subpages */
-.page-hero-banner {
-  padding: 5rem 0;
+/* Unified Page Hero Banner for All Subpages & Categories */
+.page-hero-banner,
+.about-hero,
+.contact-hero,
+.diwali-hero,
+.policy-hero,
+.blog-hero,
+.article-hero-banner {
+  min-height: var(--site-banner-height) !important;
+  height: var(--site-banner-height) !important;
+  max-height: var(--site-banner-height) !important;
+  padding: 0 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
   border-bottom: 1px solid var(--color-border);
   color: #fff;
   background-position: center;
   background-size: cover;
+  position: relative;
+  overflow: hidden;
 }
 
 .pdp-gallery-wrap {
@@ -3793,5 +4795,92 @@ h1, h2, h3, h4, h5 {
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .top-bar-content {
+    padding: 0 1rem;
+    justify-content: center;
+    text-align: center;
+  }
+  .top-bar-text {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+  .header-container {
+    height: 72px;
+    padding: 0 1rem;
+  }
+  .logo-symbol-svg {
+    width: 38px;
+    height: 42px;
+  }
+  .logo-brand-name {
+    font-size: 1.45rem;
+  }
+  .logo-ampersand {
+    font-size: 1.35rem;
+  }
+  .logo-subscript-jewellery {
+    font-size: 0.95rem;
+  }
+  .header-actions {
+    gap: 0.75rem;
+  }
+  .header-icon-btn svg, .header-icon-btn i {
+    width: 20px;
+    height: 20px;
+  }
+  .marquee-strip-item {
+    font-size: 0.7rem;
+    padding: 0 1rem;
+  }
+  .marquee-strip-item .marquee-sep {
+    margin-left: 1rem;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .hero-features-bar {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* --- Mobile Specific (max-width: 480px) Extra Polish --- */
+@media (max-width: 480px) {
+  .header-container {
+    height: 66px;
+    padding: 0 0.8rem;
+  }
+  .logo-symbol-svg {
+    width: 32px;
+    height: 36px;
+  }
+  .logo-brand-name {
+    font-size: 1.25rem;
+  }
+  .logo-ampersand {
+    font-size: 1.15rem;
+  }
+  .logo-subscript-jewellery {
+    font-size: 0.82rem;
+  }
+  .header-actions {
+    gap: 0.5rem;
+  }
+  .cart-drawer-panel, .wishlist-drawer-panel {
+    max-width: 100%;
+    width: 100%;
+  }
+  .whatsapp-float {
+    bottom: 18px;
+    right: 18px;
+    width: 48px;
+    height: 48px;
+  }
+  .top-bar-text {
+    font-size: 0.65rem;
+  }
+  .hero-slide {
+    min-height: 60vh;
   }
 }

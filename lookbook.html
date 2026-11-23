@@ -3,34 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editorial Lookbook 2025 | Auro &amp; Jewellary</title>
+  <title>Jewellery Journal &amp; Style Chronicles | Auro &amp; Jewellary</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <style>
+    body.blog-page-body {
+      background-color: #FFFFFF !important;
+      color: #222222;
+    }
+    .blog-hero {
+      background: linear-gradient(rgba(18, 14, 12, 0.72), rgba(18, 14, 12, 0.72)), url('images/banner_jewelry_pure_3.jpg') center center/cover no-repeat;
+      padding: 3.5rem 1.5rem 2.8rem;
+      text-align: center;
+      position: relative;
+    }
+    .blog-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      color: #E6C280;
+      border: 1px solid rgba(230, 194, 128, 0.4);
+      padding: 0.35rem 1.1rem;
+      border-radius: 30px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .blog-hero-title {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: #FFFFFF !important;
+      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.9);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+    .blog-hero-subtitle {
+      font-size: 0.98rem;
+      color: #F0E8DF !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-weight: 300;
+    }
 
-  <!-- Top Announcement Bar (Static Original Layout) -->
+    /* Category Filter Pills */
+    .blog-filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin: 2.2rem 0 3rem;
+    }
+    .blog-filter-btn {
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      border: 1px solid #eee7dc;
+      background: #FFFFFF;
+      color: #555;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .blog-filter-btn:hover, .blog-filter-btn.active {
+      background: var(--color-dark);
+      color: #FFFFFF;
+      border-color: var(--color-dark);
+    }
+
+    /* 1 ROW 3 CARDS GRID - Ultra Attractive Design */
+    .blog-grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-bottom: 5rem;
+    }
+    .blog-card {
+      background: #FFFFFF;
+      border: 1px solid #ede5d8;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(154, 33, 67, 0.08), 0 6px 18px rgba(197, 160, 89, 0.12);
+      border-color: #dfcaa2;
+    }
+    .blog-card-media {
+      position: relative;
+      height: 270px;
+      overflow: hidden;
+      background: #f7f4ee;
+    }
+    .blog-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .blog-card:hover .blog-card-media img {
+      transform: scale(1.08);
+    }
+    .blog-card-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%);
+      pointer-events: none;
+    }
+    .blog-tag-pill {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(6px);
+      color: var(--color-maroon);
+      padding: 0.38rem 1rem;
+      border-radius: 30px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(154, 33, 67, 0.15);
+      z-index: 2;
+    }
+    .blog-card-body {
+      padding: 2.2rem 2rem 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.76rem;
+      color: #888888;
+      margin-bottom: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .blog-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      line-height: 1.35;
+      color: #1a1a1a;
+      margin-bottom: 0.9rem;
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
+    .blog-card:hover .blog-card-title {
+      color: var(--color-maroon);
+    }
+    .blog-card-excerpt {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #666666;
+      margin-bottom: 1.8rem;
+      flex-grow: 1;
+    }
+    .blog-read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-maroon);
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.25s ease;
+    }
+    .blog-card:hover .blog-read-more-btn {
+      color: #1a1a1a;
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 992px) {
+      .blog-grid-3col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 650px) {
+      .blog-grid-3col {
+        grid-template-columns: 1fr;
+      }
+      .blog-hero-title {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="blog-page-body">
+
+  <!-- Top Announcement Bar -->
   <div class="top-bar">
     <div class="container top-bar-content">
       <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
       <div class="top-bar-links">
-        <a href="contact.html">Boutiques</a>
-        <a href="policies.html">Track Order</a>
+        <a href="boutiques.html">Boutiques</a>
+        <a href="track-order.html">Track Order</a>
         <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
       </div>
     </div>
   </div>
 
+  <!-- Header -->
   <header class="header" id="navbar">
     <div class="container header-container">
       <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
         <i data-lucide="menu"></i>
       </button>
 
-      <!-- Left: Auro & Jewellary Luxury Logo (#9A2143 Berry + Black) -->
+      <!-- Logo -->
       <a href="index.html" class="auro-logo-wrap">
         <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
@@ -50,6 +251,7 @@
         </div>
       </a>
 
+      <!-- Center Navigation -->
       <nav class="center-nav desktop-nav">
         <ul>
           <li><a href="index.html" class="nav-item-link">HOME</a></li>
@@ -58,7 +260,7 @@
             <a href="collections.html" class="nav-item-link">
               ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
             </a>
-                                    <div class="custom-dropdown-menu">
+            <div class="custom-dropdown-menu">
               <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
               <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
               <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
@@ -86,7 +288,7 @@
 
       <div class="nav-actions-right">
         <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
-        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">âš¡</span></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
         <a href="#wishlist" class="header-icon-btn"><i data-lucide="heart"></i></a>
         <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">0</span></a>
       </div>
@@ -102,95 +304,107 @@
     <div class="drawer-links">
       <a href="index.html">Home</a>
       <a href="collections.html">All Collections</a>
-      <a href="product-detail.html">Meera Meenakari Kada</a>
-      <a href="lookbook.html">Editorial Lookbook</a>
-      <a href="about.html">Artisan Heritage</a>
-      <a href="contact.html">Contact & Boutiques</a>
+      <a href="boutiques.html">Boutiques</a>
+      <a href="track-order.html">Track Order</a>
+      <a href="lookbook.html">Blogs &amp; Journal</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
     </div>
   </div>
 
-  <!-- Lookbook Hero -->
-  <div class="page-hero-banner" style="background: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.85)), url('images/hero.jpg') center/cover;">
-    <div class="container text-center">
-      <span class="section-tag" style="color: var(--color-gold-light);">Autumn / Festive Campaign 2025</span>
-      <h1 class="page-title" style="color: #fff; font-size: 3.5rem; font-family: var(--font-serif);">The Royal Jaipur SoirÃ©e</h1>
-      <p style="color: #ddd; max-width: 620px; margin: 0.8rem auto 0; font-size: 1.1rem; font-style: italic;">"Inspired by Chahana & Chhail: Explore our editorial model showcase with interactive shoppable tags."</p>
-    </div>
-  </div>
-
-  <!-- Continuous Running Marquee Banner (Under Main Banner / Hero Section) -->
-  <div class="marquee-strip">
-    <div class="marquee-strip-track">
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <!-- Seamless loop duplicate -->
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-    </div>
-  </div>
-
-  <!-- Editorial Gallery with Hotspot Pins -->
-  <section class="container" style="padding: 5rem 0;">
-    <div class="section-header text-center">
-      <span class="section-tag">Interactive Lookbook</span>
-      <h2 class="section-title">Hover & Click The Glowing Jewels</h2>
-      <div class="gold-divider"></div>
-    </div>
-
-    <!-- Editorial Look 1 -->
-    <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; margin-bottom: 5rem; background: #FFFFFF; padding: 2.5rem; border-radius: 4px; border: 1px solid var(--color-border); box-shadow: var(--shadow-subtle);">
-      <div style="position: relative; overflow: hidden; border-radius: 4px; height: 500px;">
-        <img src="images/hero.jpg" alt="Look 1 Bridal" style="width: 100%; height: 100%; object-fit: cover;">
-        <!-- Hotspot Pin -->
-        <div class="lookbook-tag-pin pin-1" onclick="openModal('padmavati-choker')" style="top: 48%; left: 48%;">
-          <span class="pulse"></span>
-          <div class="pin-tooltip">Padmavati Choker â€¢ â‚¹12,850 (Tap to View)</div>
-        </div>
+  <!-- Blog Hero Section (Pure White) -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="blog-hero-badge">
+        <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> The Jewellery Journal
       </div>
-      <div>
-        <span class="section-tag">Look 01 â€¢ The Pheras Ceremony</span>
-        <h3 style="font-size: 2.4rem; font-family: 'Poppins', sans-serif; font-weight: 600; margin-bottom: 1rem;">Maharani Padmavati Emerald Choker</h3>
-        <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
-          Worn here with a crimson Zardozi lehenga, the Padmavati Choker features uncut radiant Polki stones enveloped in Daak foil to bounce ambient candlelight, finished with natural tumble-cut emerald beads.
-        </p>
-        <div style="display: flex; gap: 1rem;">
-          <button class="btn btn-primary" onclick="openModal('padmavati-choker')">Shop This Look (â‚¹12,850)</button>
-          <a href="product-detail.html" class="btn btn-outline-dark">View Product Specs</a>
-        </div>
+      <h1 class="blog-hero-title">Chronicles of Heritage, Style &amp; Craft</h1>
+      <p class="blog-hero-subtitle">
+        Curated perspectives on Rajasthani Jadau heirlooms, bridal styling guides, Meenakari secrets, and contemporary demifine jewellery trends.
+      </p>
+
+      <div class="blog-filters">
+        <a href="#" class="blog-filter-btn active">All Articles</a>
+        <a href="#" class="blog-filter-btn">Bridal Styling</a>
+        <a href="#" class="blog-filter-btn">Artisan Heritage</a>
+        <a href="#" class="blog-filter-btn">Care &amp; Maintenance</a>
+        <a href="#" class="blog-filter-btn">Jewellery Trends</a>
       </div>
     </div>
-
-    <!-- Editorial Look 2 -->
-    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center; margin-bottom: 5rem; background: #FFFFFF; padding: 2.5rem; border-radius: 4px; border: 1px solid var(--color-border); box-shadow: var(--shadow-subtle);">
-      <div>
-        <span class="section-tag">Look 02 â€¢ Sangeet & Mehendi Evening</span>
-        <h3 style="font-size: 2.4rem; font-family: 'Poppins', sans-serif; font-weight: 600; margin-bottom: 1rem;">Meera Peacock Kadas & Chandbalis</h3>
-        <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
-          Paired with bottle green raw silk, this ensemble celebrates the Jaipur court tradition of dual-sided mineral enamelling. As the bride dances, the underside flashes intricate floral creepers.
-        </p>
-        <div style="display: flex; gap: 1rem;">
-          <button class="btn btn-primary" onclick="openModal('meera-bangles')">Shop The Bangles (â‚¹4,499)</button>
-          <button class="btn btn-outline-dark" onclick="openModal('noor-chandbalis')">Shop Chandbalis (â‚¹3,890)</button>
-        </div>
-      </div>
-      <div style="position: relative; overflow: hidden; border-radius: 4px; height: 500px;">
-        <img src="images/lookbook2.jpg" alt="Look 2 Sangeet" style="width: 100%; height: 100%; object-fit: cover;">
-        <div class="lookbook-tag-pin pin-2" onclick="openModal('meera-bangles')" style="top: 70%; left: 45%;">
-          <span class="pulse"></span>
-          <div class="pin-tooltip">Meera Peacock Kada â€¢ â‚¹4,499</div>
-        </div>
-        <div class="lookbook-tag-pin pin-3" onclick="openModal('noor-chandbalis')" style="top: 25%; left: 62%;">
-          <span class="pulse"></span>
-          <div class="pin-tooltip">Noor Chandbalis â€¢ â‚¹3,890</div>
-        </div>
-      </div>
-    </div>
-
   </section>
+
+  <!-- Main Blog Grid: 1 Row 3 Cards -->
+  <main class="container">
+    <div class="blog-grid-3col">
+      
+      <!-- Card 1 -->
+      <article class="blog-card">
+        <div class="blog-card-media">
+          <img src="images/chokers.jpg" alt="Bridal Meenakari Choker Styling Guide">
+          <span class="blog-tag-pill">Bridal Styling</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta-row">
+            <span><i data-lucide="calendar" style="width: 13px; height: 13px;"></i> Nov 20, 2026</span>
+            <span>•</span>
+            <span><i data-lucide="clock" style="width: 13px; height: 13px;"></i> 5 Min Read</span>
+          </div>
+          <h2 class="blog-card-title">How to Style Imperial Meenakari Chokers for Winter Brides</h2>
+          <p class="blog-card-excerpt">
+            From pairing Daak foil Polki with velvet lehengas to balancing neckline depths with dual-sided peacocks, master the art of royal bridal styling.
+          </p>
+          <a href="blog-single.html" class="blog-read-more-btn">
+            Read Full Story <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="blog-card">
+        <div class="blog-card-media">
+          <img src="images/3d_meenakari_jewelry_craft.jpg" alt="Jaipur Meenakari Kiln Enameling Secrets">
+          <span class="blog-tag-pill">Artisan Heritage</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta-row">
+            <span><i data-lucide="calendar" style="width: 13px; height: 13px;"></i> Nov 15, 2026</span>
+            <span>•</span>
+            <span><i data-lucide="clock" style="width: 13px; height: 13px;"></i> 7 Min Read</span>
+          </div>
+          <h2 class="blog-card-title">The Secret Alchemy Behind 850°C Mineral Glass Enameling</h2>
+          <p class="blog-card-excerpt">
+            Go behind the velvet curtains of our Johari Bazaar atelier to witness how raw silica pigments transform into unbreakable Jaipur enamel.
+          </p>
+          <a href="blog-single.html" class="blog-read-more-btn">
+            Read Full Story <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="blog-card">
+        <div class="blog-card-media">
+          <img src="images/bestseller_1.jpg" alt="German Silver Styling and Anti-Tarnish Care">
+          <span class="blog-tag-pill">Care &amp; Trend</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta-row">
+            <span><i data-lucide="calendar" style="width: 13px; height: 13px;"></i> Nov 08, 2026</span>
+            <span>•</span>
+            <span><i data-lucide="clock" style="width: 13px; height: 13px;"></i> 4 Min Read</span>
+          </div>
+          <h2 class="blog-card-title">Caring for German Silver &amp; 22K Micro-Micron Plated Jewels</h2>
+          <p class="blog-card-excerpt">
+            Essential longevity rituals from master polishers to keep your oxidised necklaces and gold-plated kadas sparkling bright without chemical wear.
+          </p>
+          <a href="blog-single.html" class="blog-read-more-btn">
+            Read Full Story <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </main>
 
   <!-- Luxury Modern Footer -->
   <footer class="footer">
@@ -213,97 +427,62 @@
             <span class="logo-subscript-jewellery">Jewellary</span>
           </div>
         </a>
-        <p>Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-            </svg>
-          </a>
-          <a href="#" aria-label="Facebook">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>
-          </a>
-          <a href="#" aria-label="Pinterest">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="12" x2="12" y2="21"></line>
-              <path d="M8 8a4 4 0 1 1 8 0c0 3-2 5-4 5s-2-1-2-1"></path>
-              <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-          </a>
-          <a href="#" aria-label="YouTube">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
-              <polygon points="10 15 15 12 10 9 10 15" fill="currentColor"></polygon>
-            </svg>
-          </a>
-        </div>
+        <p class="brand-desc">Heritage Rajasthani Jadau, Meenakari, and Royal Kundan Jewellery handcrafted in Jaipur and shipped across 45+ countries.</p>
       </div>
+
       <div class="footer-col">
         <h4>Navigation Pages</h4>
         <ul>
           <li><a href="index.html">Home Showroom</a></li>
           <li><a href="collections.html">All Collections Catalogue</a></li>
-          <li><a href="product-detail.html">Meera Meenakari Product Page</a></li>
-          <li><a href="lookbook.html">Editorial Lookbook '25</a></li>
-          <li><a href="about.html">Artisan Legacy &amp; Story</a></li>
-          <li><a href="contact.html">Store Locations &amp; Contact</a></li>
+          <li><a href="boutiques.html">Flagship Boutiques</a></li>
+          <li><a href="track-order.html">Track Order</a></li>
+          <li><a href="about.html">About Us &amp; Heritage</a></li>
+          <li><a href="lookbook.html">Jewellery Blogs</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Client Services</h4>
         <ul>
-          <li><a href="contact.html">Book Video Shopping Call</a></li>
-          <li><a href="contact.html">Bangle Sizing Assistance</a></li>
+          <li><a href="track-order.html">Track Insured Delivery</a></li>
+          <li><a href="boutiques.html">Book Private Boutique Visit</a></li>
+          <li><a href="policies.html">Shipping &amp; Return Policy</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Concierge</h4>
         <p><i data-lucide="phone"></i> +91 (0) 98200 12345</p>
         <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
       </div>
     </div>
-    <div class="footer-bottom"><div class="container text-center"><p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p></div></div>
+    <div class="footer-bottom">
+      <div class="container text-center">
+        <p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Quick View Modal & Cart Drawer -->
-  <div class="modal-backdrop" id="productModal">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" id="modalClose"><i data-lucide="x"></i></button>
-      <div class="modal-body-grid">
-        <div class="modal-image-col"><img id="modalImg" src="" alt="Product"></div>
-        <div class="modal-details-col">
-          <span class="badge" id="modalTag">Heritage</span>
-          <h2 id="modalTitle">Product</h2>
-          <div class="modal-pricing"><span class="current-price" id="modalPrice">â‚¹0</span><span class="original-price" id="modalOldPrice">â‚¹0</span></div>
-          <p id="modalDesc"></p>
-          <div class="modal-btn-row">
-            <button class="btn btn-primary btn-block" id="modalAddToCart">Add To Bag</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- Fixed Floating Quick Action Hub (WhatsApp & Call Us) -->
+  <div class="floating-contact-hub" id="floatingContactHub">
+    <!-- Call Us Floating Button -->
+    <a href="tel:+919820012345" class="floating-btn call-float" aria-label="Call Auro Jewellery Concierge">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="hub-tooltip">Call Concierge (+91 98200 12345)</span>
+    </a>
 
-  <div class="cart-drawer-backdrop" id="cartDrawer">
-    <div class="cart-drawer-panel">
-      <div class="cart-drawer-header"><h3>Shopping Bag (<span id="cartDrawerCount">2</span>)</h3><button class="cart-close" id="cartCloseBtn"><i data-lucide="x"></i></button></div>
-      <div class="cart-items-list" id="cartItemsContainer"></div>
-      <div class="cart-drawer-footer">
-        <div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">â‚¹17,349</span></div>
-        <button class="btn btn-primary btn-block checkout-btn" onclick="alert('Checkout initiated!')">Secure Checkout</button>
-      </div>
-    </div>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20inquire%20about%20your%20jewellery%20collection." target="_blank" class="floating-btn whatsapp-float-btn" aria-label="Chat with Jewellery Stylist on WhatsApp">
+      <!-- Official WhatsApp Brand Icon -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.01 4.54-3.68 8.23-8.22 8.23zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.09s.9 2.43 1.03 2.6c.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.46-.3z"/>
+      </svg>
+      <span class="hub-tooltip">Chat on WhatsApp</span>
+    </a>
   </div>
-
-  <a href="https://wa.me/919820012345" target="_blank" class="whatsapp-float"><i data-lucide="message-circle"></i></a>
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-

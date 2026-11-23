@@ -3,34 +3,397 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Artisan Heritage & Meenakari Story | Auro &amp; Jewellary</title>
+  <title>Our Artisan Heritage &amp; Meenakari Legacy | Auro &amp; Jewellary</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <style>
+    /* Pure Luxury Clean White Aesthetic Theme */
+    body.about-page-body {
+      background-color: #FFFFFF !important;
+      color: #222222;
+    }
+    
+    .about-hero {
+      background: linear-gradient(rgba(18, 14, 12, 0.72), rgba(18, 14, 12, 0.72)), url('images/banner_jewelry_pure_2.jpg') center center/cover no-repeat;
+      padding: 3.8rem 1.5rem 3.2rem;
+      text-align: center;
+      position: relative;
+    }
+    .about-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      color: #E6C280;
+      border: 1px solid rgba(230, 194, 128, 0.4);
+      padding: 0.35rem 1.1rem;
+      border-radius: 30px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .about-hero-title {
+      font-family: var(--font-serif);
+      font-size: 2.9rem;
+      font-weight: 500;
+      line-height: 1.2;
+      color: #FFFFFF !important;
+      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.9);
+      max-width: 900px;
+      margin: 0 auto 1rem;
+    }
+    .about-hero-subtitle {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: #F0E8DF !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      max-width: 720px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+    
+    /* Stats Bar */
+    .about-stats-strip {
+      background: #FFFFFF;
+      border-bottom: 1px solid #f2ede4;
+      padding: 2.5rem 0;
+    }
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--color-maroon);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #555555;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    
+    /* Clean Story Sections */
+    .about-section {
+      padding: 5.5rem 0;
+      background: #FFFFFF;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      align-items: center;
+    }
+    .story-img-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee7dc;
+      background: #fff;
+    }
+    .story-img-card img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .story-img-card:hover img {
+      transform: scale(1.03);
+    }
+    .story-img-floating-tag {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 1.4rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-left: 3px solid var(--color-maroon);
+    }
+    .story-img-floating-tag strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+    }
+    .story-img-floating-tag span {
+      font-size: 0.78rem;
+      color: #777;
+    }
 
-  <!-- Top Announcement Bar (Static Original Layout) -->
+    .story-content-box h2 {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      color: #1a1a1a;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .story-content-box p {
+      color: #555555;
+      font-size: 0.98rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+    
+    /* Value Pillars - Ultra Attractive Floating Gold Aura Design */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 3.8rem;
+    }
+    .value-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF8 100%) !important;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 20px;
+      padding: 3.5rem 2.4rem 2.8rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 32px rgba(40, 20, 10, 0.05), 0 2px 8px rgba(0, 0, 0, 0.02);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .value-card-badge {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9A2143;
+      background: rgba(154, 33, 67, 0.07);
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(154, 33, 67, 0.15);
+    }
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #9A2143 0%, #c5a059 50%, #9A2143 100%);
+      opacity: 0.4;
+      transition: all 0.4s ease;
+    }
+    .value-card:hover {
+      transform: translateY(-10px);
+      border-color: #c5a059;
+      box-shadow: 0 22px 50px rgba(154, 33, 67, 0.12), 0 6px 20px rgba(197, 160, 89, 0.18);
+    }
+    .value-card:hover::before {
+      opacity: 1;
+      height: 5px;
+    }
+    .value-icon-circle {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 1.8rem;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #FFFDF9 0%, #F6ECE0 100%);
+      border: 1.5px solid rgba(197, 160, 89, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9A2143;
+      box-shadow: 0 8px 22px rgba(197, 160, 89, 0.22);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .value-card:hover .value-icon-circle {
+      transform: scale(1.12) rotate(6deg);
+      background: linear-gradient(135deg, #9A2143 0%, #7B1828 100%);
+      color: #FFFFFF;
+      border-color: #9A2143;
+      box-shadow: 0 12px 28px rgba(154, 33, 67, 0.4);
+    }
+    .value-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: #1a1a1a;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .value-card-sep {
+      width: 44px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c5a059, transparent);
+      margin: 0.4rem auto 1.1rem;
+    }
+    .value-card p {
+      font-size: 0.92rem;
+      color: #555555;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Process Flow - Luxury Stepped Cards */
+    .process-box {
+      background: #FFFFFF !important;
+      border: 1px solid #ede5d8;
+      border-radius: 16px;
+      padding: 4.5rem 3.5rem;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.03);
+    }
+    .process-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .step-card {
+      background: #FFFFFF !important;
+      border: 1px solid #ede5d8;
+      border-radius: 12px;
+      padding: 2.4rem 1.8rem;
+      position: relative;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+      transition: all 0.35s ease;
+      overflow: hidden;
+    }
+    .step-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #c5a059, #9A2143);
+      transition: width 0.35s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.07);
+      border-color: #dfcaa2;
+    }
+    .step-card:hover::after {
+      width: 100%;
+    }
+    .step-num {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #c5a059 0%, #9A2143 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .step-card h4 {
+      font-size: 1.2rem;
+      color: #1a1a1a;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+      font-family: var(--font-serif);
+    }
+    .step-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* Quote Banner */
+    .artisan-quote-banner {
+      background: #FFFFFF;
+      border: 1px solid #efeae2;
+      border-radius: 8px;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin: 5rem 0 2rem;
+      position: relative;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.02);
+    }
+    .artisan-quote-banner q {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-style: italic;
+      color: #1a1a1a;
+      max-width: 800px;
+      display: block;
+      margin: 0 auto 1.5rem;
+      line-height: 1.4;
+    }
+    .artisan-quote-author {
+      font-size: 0.88rem;
+      color: var(--color-maroon);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 992px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .process-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .about-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .about-hero-title {
+        font-size: 2.4rem;
+      }
+      .process-steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="about-page-body">
+
+  <!-- Top Announcement Bar -->
   <div class="top-bar">
     <div class="container top-bar-content">
       <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
       <div class="top-bar-links">
-        <a href="contact.html">Boutiques</a>
-        <a href="policies.html">Track Order</a>
+        <a href="boutiques.html">Boutiques</a>
+        <a href="track-order.html">Track Order</a>
         <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
       </div>
     </div>
   </div>
 
+  <!-- Header -->
   <header class="header" id="navbar">
     <div class="container header-container">
       <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
         <i data-lucide="menu"></i>
       </button>
 
-      <!-- Left: Auro & Jewellary Luxury Logo (#9A2143 Berry + Black) -->
+      <!-- Logo -->
       <a href="index.html" class="auro-logo-wrap">
         <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
@@ -50,6 +413,7 @@
         </div>
       </a>
 
+      <!-- Center Navigation -->
       <nav class="center-nav desktop-nav">
         <ul>
           <li><a href="index.html" class="nav-item-link">HOME</a></li>
@@ -58,7 +422,7 @@
             <a href="collections.html" class="nav-item-link">
               ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
             </a>
-                                    <div class="custom-dropdown-menu">
+            <div class="custom-dropdown-menu">
               <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
               <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
               <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
@@ -86,7 +450,7 @@
 
       <div class="nav-actions-right">
         <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
-        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">âš¡</span></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
         <a href="#wishlist" class="header-icon-btn"><i data-lucide="heart"></i></a>
         <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">0</span></a>
       </div>
@@ -102,87 +466,196 @@
     <div class="drawer-links">
       <a href="index.html">Home</a>
       <a href="collections.html">All Collections</a>
-      <a href="product-detail.html">Meera Meenakari Kada</a>
+      <a href="boutiques.html">Boutique Locations</a>
+      <a href="track-order.html">Track Order</a>
       <a href="lookbook.html">Editorial Lookbook</a>
-      <a href="about.html">Artisan Heritage</a>
-      <a href="contact.html">Contact & Boutiques</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
     </div>
   </div>
 
-  <!-- Hero -->
-  <div class="page-hero-banner" style="background: linear-gradient(rgba(18,18,18,0.75), rgba(18,18,18,0.75)), url('https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=1920&q=80') center/cover;">
-    <div class="container text-center">
-      <span class="section-tag" style="color: var(--color-gold-light);">Jewellery Khazana & Sawwaisa Pedigree</span>
-      <h1 class="page-title" style="color: #fff; font-size: 3.5rem; font-family: var(--font-serif);">Four Generations of Jaipur Craftsmanship</h1>
-      <p style="color: #ddd; max-width: 650px; margin: 0.8rem auto 0; font-size: 1.1rem;">Preserving the ancestral secrets of Meenakari, Jadau, and 22K micro-micron gold plating since 1952.</p>
+  <!-- Hero Section with Pure White Background -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="about-hero-badge">
+        <i data-lucide="crown" style="width: 14px; height: 14px;"></i> Master Goldsmiths of Jaipur Since 1952
+      </div>
+      <h1 class="about-hero-title">Preserving Four Generations of Imperial Meenakari &amp; Jadau</h1>
+      <p class="about-hero-subtitle">
+        We bridge the gap between museum-grade royal Rajasthani ornaments and contemporary modern couture, handcrafted by master karigars with 22K micro-micron gold plating and certified anti-allergic metals.
+      </p>
     </div>
-  </div>
+  </section>
 
-  <!-- Continuous Running Marquee Banner (Under Main Banner / Hero Section) -->
-  <div class="marquee-strip">
-    <div class="marquee-strip-track">
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <!-- Seamless loop duplicate -->
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
-    </div>
-  </div>
-
-  <!-- Story Sections -->
-  <section class="container" style="padding: 5rem 0;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 5rem;">
+  <!-- Key Metrics Strip -->
+  <section class="about-stats-strip">
+    <div class="container about-stats-grid">
       <div>
-        <span class="section-tag">The Birthplace of Royalty</span>
-        <h2 style="font-size: 2.6rem; font-family: var(--font-serif); margin-bottom: 1.2rem;">From the Havelis of Johari Bazaar</h2>
-        <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.2rem;">
-          In the 16th century, Raja Man Singh I brought master enamellers from Lahore to the pink walls of Jaipur. Our great-grandfather Shri Radheshyamji was awarded imperial patronage to create royal ceremonial kadas and turban sirpech for the royal house.
-        </p>
-        <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.8;">
-          Today, <strong>Auro &amp; Jewellary</strong> brings these museum-grade techniques to the modern bride worldwide, without the prohibitive real-gold surcharge, using hallmarked allergy-free alloys.
-        </p>
+        <div class="stat-number">72+</div>
+        <div class="stat-label">Years of Heritage Pedigree</div>
       </div>
-      <div style="border-radius: 4px; overflow: hidden; box-shadow: var(--shadow-elevated);">
-        <img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80" alt="Jaipur Artisan handcrafting jewelry" style="width: 100%; height: 100%; object-fit: cover;">
+      <div>
+        <div class="stat-number">120+</div>
+        <div class="stat-label">Master Karigars in Jaipur</div>
+      </div>
+      <div>
+        <div class="stat-number">45k+</div>
+        <div class="stat-label">Global Brides Adorned</div>
+      </div>
+      <div>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Hallmarked Purity Safe</div>
       </div>
     </div>
+  </section>
 
-    <!-- The 4-Step Meenakari Process -->
-    <div style="background: var(--color-cream); padding: 4rem 3rem; border-radius: 4px; border: 1px solid var(--color-border);">
-      <div class="section-header text-center" style="margin-bottom: 2.5rem;">
-        <span class="section-tag">Traditional Methodology</span>
-        <h2 class="section-title">The Anatomy of a Meenakari Bangle</h2>
+  <!-- Story Chapter 1: Johari Bazaar Beginnings -->
+  <section class="about-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-content-box">
+          <span class="section-tag">Chapter I • Johari Bazaar Roots</span>
+          <h2>From the Royal Havelis to Global Runways</h2>
+          <p>
+            In the 16th century, imperial patronage in the pink corridors of Jaipur nurtured the rarest enamelling art on earth: <strong>Meenakari</strong>. Our great-grandfather Shri Radheshyamji was awarded court commendation for creating royal ceremonial kadas, sirpech, and bridal ornaments for Rajasthani dynasties.
+          </p>
+          <p>
+            Today, <strong>Auro &amp; Jewellary</strong> brings these heirloom-grade techniques to the modern bride worldwide, without the prohibitive real-gold surcharge, using hallmarked allergy-free alloys and authentic hand-cut Polki stones.
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+            <a href="collections.html" class="btn btn-primary" style="padding: 0.85rem 1.8rem;">Explore the Collections</a>
+            <a href="boutiques.html" style="color: var(--color-maroon); font-weight: 600; font-size: 0.9rem; text-decoration: underline; margin-left: 0.5rem;">Visit Flagship Boutiques</a>
+          </div>
+        </div>
+
+        <div class="story-img-card">
+          <img src="images/statement_necklace_1.jpg" alt="Auro Masterpiece Handcrafted Heritage Jewellery">
+          <div class="story-img-floating-tag">
+            <strong>Jaipur Atelier</strong>
+            <span>Johari Bazaar, Rajasthan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Chapter 2: The Philosophy of Conscious Luxury -->
+  <section class="about-section" style="padding-top: 0; border-top: 1px solid #f6f2ec;">
+    <div class="container" style="padding-top: 5rem;">
+      <div class="story-grid">
+        <div class="story-img-card" style="order: 1;">
+          <img src="images/3d_luxury_necklace_pedestal.jpg" alt="Auro 3D luxury jewelry design and craftsmanship">
+          <div class="story-img-floating-tag">
+            <strong>22K Micro-Micron Plating</strong>
+            <span>100% Anti-Tarnish &amp; Hypoallergenic</span>
+          </div>
+        </div>
+
+        <div class="story-content-box" style="order: 2;">
+          <span class="section-tag">Chapter II • The Craft Philosophy</span>
+          <h2>Luxury That Honors Both Heritage &amp; Skin</h2>
+          <p>
+            Traditional bridal jewelry often forces a difficult choice between exorbitant pure gold costs or cheap synthetic metals that irritate sensitive skin. We rewrote this standard.
+          </p>
+          <p>
+            Every Auro creation is sculpted in pure brass or certified German silver, encased in triple-layer 22K micro-micron gold plating, and finished with baked mineral glass enameling that never fades or peels under tropical humidity.
+          </p>
+          <p>
+            Each piece is stamped with our emblem of authenticity and passes 4 rigorous quality controls before it is sealed in velvet-lined vault packaging.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Pillars -->
+  <section class="about-section" style="background: #FFFFFF; border-top: 1px solid #f0ece3; border-bottom: 1px solid #f0ece3;">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Our Foundational Values</span>
+        <h2 class="section-title">Why Patrons Trust Auro &amp; Jewellary</h2>
         <div class="gold-divider"></div>
+        <p style="color: #666; max-width: 620px; margin: 0.8rem auto 0; font-size: 0.95rem;">Our commitments ensure every heirloom jewel delivered across 45 countries remains radiant for generations.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
-        <div style="background: #fff; padding: 2rem; border-radius: 4px; border: 1px solid var(--color-border); text-align: center;">
-          <span style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-gold); font-weight: 700;">01</span>
-          <h4 style="font-size: 1.1rem; margin: 0.8rem 0 0.5rem;">Ghaat (Metal Moulding)</h4>
-          <p style="font-size: 0.82rem; color: var(--color-text-muted);">The core form is hand-cast with precision screw joints.</p>
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="value-card-badge">Certified</span>
+          <div class="value-icon-circle">
+            <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
+          </div>
+          <h3>100% Skin Safe &amp; Hallmarked</h3>
+          <div class="value-card-sep"></div>
+          <p>Free from lead, nickel, and cadmium. Certified anti-allergic metals guarantee comfortable, irritation-free wear throughout day-long wedding festivities.</p>
         </div>
 
-        <div style="background: #fff; padding: 2rem; border-radius: 4px; border: 1px solid var(--color-border); text-align: center;">
-          <span style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-gold); font-weight: 700;">02</span>
-          <h4 style="font-size: 1.1rem; margin: 0.8rem 0 0.5rem;">Chitrai (Engraving)</h4>
-          <p style="font-size: 0.82rem; color: var(--color-text-muted);">Master artisans chisel delicate peacocks and floral creepers.</p>
+        <div class="value-card">
+          <span class="value-card-badge">Authentic</span>
+          <div class="value-icon-circle">
+            <i data-lucide="sparkles" style="width: 32px; height: 32px;"></i>
+          </div>
+          <h3>Uncompromising Handcraft</h3>
+          <div class="value-card-sep"></div>
+          <p>We reject hollow machine pressing. Every hinge, screw joint, and pavé setting is hand-calibrated by 4th-generation Jaipur artisan families.</p>
         </div>
 
-        <div style="background: #fff; padding: 2rem; border-radius: 4px; border: 1px solid var(--color-border); text-align: center;">
-          <span style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-gold); font-weight: 700;">03</span>
-          <h4 style="font-size: 1.1rem; margin: 0.8rem 0 0.5rem;">Rangbhari (Kiln Heating)</h4>
-          <p style="font-size: 0.82rem; color: var(--color-text-muted);">Crushed mineral glass colors are applied and baked at 850Â°C.</p>
+        <div class="value-card">
+          <span class="value-card-badge">100% Insured</span>
+          <div class="value-icon-circle">
+            <i data-lucide="truck" style="width: 32px; height: 32px;"></i>
+          </div>
+          <h3>Insured Global Delivery</h3>
+          <div class="value-card-sep"></div>
+          <p>Dispatched in tamper-proof luxury packaging with 100% transit insurance by BlueDart Express &amp; Sequel Logistics right to your doorstep.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Traditional 4-Step Process -->
+  <section class="about-section">
+    <div class="container">
+      <div class="process-box">
+        <div class="section-header text-center">
+          <span class="section-tag">Artisanal Pedigree</span>
+          <h2 class="section-title">The Anatomy of Authentic Meenakari</h2>
+          <div class="gold-divider"></div>
+          <p style="color: #666; max-width: 650px; margin: 0.8rem auto 0; font-size: 0.95rem;">
+            A single bridal bangle takes up to 72 hours of meticulous manual handwork across four specialized guild craftsmen.
+          </p>
         </div>
 
-        <div style="background: #fff; padding: 2rem; border-radius: 4px; border: 1px solid var(--color-border); text-align: center;">
-          <span style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-gold); font-weight: 700;">04</span>
-          <h4 style="font-size: 1.1rem; margin: 0.8rem 0 0.5rem;">Ghothai (Polishing)</h4>
-          <p style="font-size: 0.82rem; color: var(--color-text-muted);">Agate stone burns the gold surface to a mirror imperial sheen.</p>
+        <div class="process-steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h4>Ghaat (Moulding)</h4>
+            <p>The core structural form is hand-cast with precision screw joints, custom calibrated for ergonomic balance.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h4>Chitrai (Engraving)</h4>
+            <p>Master engravers chisel delicate peacocks, lotuses, and floral creepers into the metal surface using steel burins.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h4>Rangbhari (Kiln)</h4>
+            <p>Crushed mineral glass pigments are infused into the grooves and baked in traditional kilns at 850°C for indelible color.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h4>Ghothai (Polishing)</h4>
+            <p>Natural agate stones burnish the gold surface to a mirror-like royal finish without abrasive chemical degradation.</p>
+          </div>
         </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="artisan-quote-banner">
+        <q>Jewellery is not merely adornment; it is ancestral poetry cast in gold, passed with pride from mother to bride.</q>
+        <span class="artisan-quote-author">— The Master Curators of Auro &amp; Jewellary, Jaipur</span>
       </div>
     </div>
   </section>
@@ -208,67 +681,62 @@
             <span class="logo-subscript-jewellery">Jewellary</span>
           </div>
         </a>
-        <p>Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-            </svg>
-          </a>
-          <a href="#" aria-label="Facebook">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>
-          </a>
-          <a href="#" aria-label="Pinterest">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="12" x2="12" y2="21"></line>
-              <path d="M8 8a4 4 0 1 1 8 0c0 3-2 5-4 5s-2-1-2-1"></path>
-              <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-          </a>
-          <a href="#" aria-label="YouTube">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
-              <polygon points="10 15 15 12 10 9 10 15" fill="currentColor"></polygon>
-            </svg>
-          </a>
-        </div>
+        <p class="brand-desc">Heritage Rajasthani Jadau, Meenakari, and Royal Kundan Jewellery handcrafted in Jaipur and shipped across 45+ countries.</p>
       </div>
+
       <div class="footer-col">
         <h4>Navigation Pages</h4>
         <ul>
           <li><a href="index.html">Home Showroom</a></li>
           <li><a href="collections.html">All Collections Catalogue</a></li>
-          <li><a href="product-detail.html">Meera Meenakari Product Page</a></li>
-          <li><a href="lookbook.html">Editorial Lookbook '25</a></li>
-          <li><a href="about.html">Artisan Legacy &amp; Story</a></li>
+          <li><a href="boutiques.html">Flagship Boutiques</a></li>
+          <li><a href="track-order.html">Track Order</a></li>
+          <li><a href="about.html">About Us &amp; Heritage</a></li>
           <li><a href="contact.html">Store Locations &amp; Contact</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Client Services</h4>
         <ul>
-          <li><a href="contact.html">Book Video Shopping Call</a></li>
-          <li><a href="contact.html">Bangle Sizing Assistance</a></li>
+          <li><a href="track-order.html">Track Insured Delivery</a></li>
+          <li><a href="boutiques.html">Book Private Boutique Visit</a></li>
+          <li><a href="policies.html">Shipping &amp; Return Policy</a></li>
         </ul>
       </div>
+
       <div class="footer-col">
         <h4>Concierge</h4>
         <p><i data-lucide="phone"></i> +91 (0) 98200 12345</p>
         <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
       </div>
     </div>
-    <div class="footer-bottom"><div class="container text-center"><p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p></div></div>
+    <div class="footer-bottom">
+      <div class="container text-center">
+        <p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p>
+      </div>
+    </div>
   </footer>
 
-  <a href="https://wa.me/919820012345" target="_blank" class="whatsapp-float"><i data-lucide="message-circle"></i></a>
+    <!-- Fixed Floating Quick Action Hub (WhatsApp & Call Us) -->
+  <div class="floating-contact-hub" id="floatingContactHub">
+    <!-- Call Us Floating Button -->
+    <a href="tel:+919820012345" class="floating-btn call-float" aria-label="Call Auro Jewellery Concierge">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="hub-tooltip">Call Concierge (+91 98200 12345)</span>
+    </a>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20inquire%20about%20your%20jewellery%20collection." target="_blank" class="floating-btn whatsapp-float-btn" aria-label="Chat with Jewellery Stylist on WhatsApp">
+      <!-- Official WhatsApp Brand Icon -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.01 4.54-3.68 8.23-8.22 8.23zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.09s.9 2.43 1.03 2.6c.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.46-.3z"/>
+      </svg>
+      <span class="hub-tooltip">Chat on WhatsApp</span>
+    </a>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-

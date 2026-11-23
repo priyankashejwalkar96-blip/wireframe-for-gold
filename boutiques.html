@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Heritage Boutiques | Auro &amp; Jewellary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .boutiques-section {
+      padding: 4.5rem 0;
+    }
+    .boutiques-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .boutique-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .boutique-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+    }
+    .boutique-img-wrap {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+    .boutique-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .boutique-card:hover .boutique-img-wrap img {
+      transform: scale(1.05);
+    }
+    .boutique-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(26, 26, 26, 0.85);
+      color: var(--color-gold-light);
+      backdrop-filter: blur(4px);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .boutique-content {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .boutique-city {
+      font-size: 0.8rem;
+      color: var(--color-maroon);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .boutique-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+    .boutique-info {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    .boutique-meta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.86rem;
+      color: #444;
+    }
+    .boutique-meta-item i, .boutique-meta-item svg {
+      width: 17px;
+      height: 17px;
+      color: var(--color-gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .boutique-cta-row {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .btn-visit {
+      flex: 1;
+      padding: 0.75rem 0.8rem;
+      background: var(--color-dark);
+      color: #fff;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .btn-visit:hover {
+      background: var(--color-maroon);
+    }
+    .btn-call {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .btn-call:hover {
+      border-color: var(--color-gold);
+      color: var(--color-maroon);
+    }
+    /* Experience Banner */
+    .experience-banner {
+      background: var(--color-cream);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 3.5rem 2.5rem;
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 992px) {
+      .boutiques-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .experience-banner {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .boutiques-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
+      <div class="top-bar-links">
+        <a href="boutiques.html">Boutiques</a>
+        <a href="track-order.html">Track Order</a>
+        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="navbar">
+    <div class="container header-container">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="auro-logo-wrap">
+        <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+          <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+          <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+          <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+
+        <div class="logo-text-block">
+          <div class="logo-title-row">
+            <span class="logo-brand-name">Auro</span>
+            <span class="logo-ampersand">&amp;</span>
+          </div>
+          <span class="logo-subscript-jewellery">Jewellary</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation -->
+      <nav class="center-nav desktop-nav">
+        <ul>
+          <li><a href="index.html" class="nav-item-link">HOME</a></li>
+          
+          <li class="nav-dropdown-wrapper">
+            <a href="collections.html" class="nav-item-link">
+              ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
+            </a>
+            <div class="custom-dropdown-menu">
+              <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
+              <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-below-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Below 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-above-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Above 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="earcuff-bugadi.html" class="dropdown-link-item"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-earrings.html" class="dropdown-link-item"><span>Statement earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-rings.html" class="dropdown-link-item"><span>Statement Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-necklace.html" class="dropdown-link-item"><span>Statement necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="pachi-kundan-necklace.html" class="dropdown-link-item"><span>Pachi Kundan Necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="german-silver-necklaces.html" class="dropdown-link-item"><span>German silver Necklaces</span> <span class="count-pill">(6)</span></a>
+              <a href="rings.html" class="dropdown-link-item"><span>Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="premium-rings.html" class="dropdown-link-item"><span>PREMIUM RINGS</span> <span class="count-pill">(6)</span></a>
+              <a href="nosepin.html" class="dropdown-link-item"><span>Nosepin</span> <span class="count-pill">(6)</span></a>
+            </div>
+          </li>
+
+          <li><a href="diwali-collections.html" class="nav-item-link">DIWALI COLLECTIONS</a></li>
+          <li><a href="policies.html" class="nav-item-link">POLICIES</a></li>
+          <li><a href="about.html" class="nav-item-link">ABOUT US</a></li>
+          <li><a href="contact.html" class="nav-item-link">CONTACT US</a></li>
+          <li><a href="lookbook.html" class="nav-item-link">BLOGS</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions-right">
+        <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
+        <a href="#wishlist" class="header-icon-btn"><i data-lucide="heart"></i></a>
+        <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Auro &amp; Jewellary</span>
+      <button class="drawer-close" id="drawerClose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">Home</a>
+      <a href="collections.html">All Collections</a>
+      <a href="boutiques.html">Boutique Locations</a>
+      <a href="track-order.html">Track Order</a>
+      <a href="lookbook.html">Editorial Lookbook</a>
+      <a href="about.html">Artisan Heritage</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Page Banner -->
+  <div class="page-hero-banner" style="background: linear-gradient(rgba(18,18,18,0.75), rgba(18,18,18,0.75)), url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1920&q=80') center/cover;">
+    <div class="container text-center">
+      <span class="section-tag" style="color: var(--color-gold-light);">Imperial Salons &amp; Flagship Ateliers</span>
+      <h1 class="page-title" style="color: #fff; font-size: 3.2rem; font-family: var(--font-serif);">Our Heritage Boutiques</h1>
+      <p style="color: #ddd; max-width: 620px; margin: 0.8rem auto 0; font-size: 1rem;">Experience the tactile opulence of Jaipur Meenakari, Jadau Polki, and master handcrafted jewelry in person with our jewelry consultants.</p>
+    </div>
+  </div>
+
+  <!-- Boutiques Showroom Section -->
+  <main class="container boutiques-section">
+    <div class="section-header text-center">
+      <span class="section-tag">Destination Salons</span>
+      <h2 class="section-title">Visit Us in Person</h2>
+      <div class="gold-divider"></div>
+      <p style="color: var(--color-text-muted); max-width: 650px; margin: 0.8rem auto 0; font-size: 0.95rem;">
+        Walk in to try bridal trousseau sets, consult on custom bespoke commissions, or enjoy private styling appointments.
+      </p>
+    </div>
+
+    <div class="boutiques-grid">
+      <!-- 1. Jaipur Flagship Atelier -->
+      <div class="boutique-card">
+        <div class="boutique-img-wrap">
+          <img src="https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80" alt="Jaipur Flagship Atelier">
+          <span class="boutique-tag">Original Flagship</span>
+        </div>
+        <div class="boutique-content">
+          <span class="boutique-city">Rajasthan</span>
+          <h3 class="boutique-title">Johari Bazaar Atelier</h3>
+          <div class="boutique-info">
+            <div class="boutique-meta-item">
+              <i data-lucide="map-pin"></i>
+              <span>Haveli No. 44, Johari Bazaar, Jaipur, Rajasthan 302003</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="clock"></i>
+              <span>Mon – Sat: 11:00 AM – 8:30 PM (Sun Closed)</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="phone"></i>
+              <span>+91 (0141) 256 8920 / +91 98200 12345</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="sparkles"></i>
+              <span>Live Artisan Meenakari Bench &amp; Bridal Vault</span>
+            </div>
+          </div>
+          <div class="boutique-cta-row">
+            <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20book%20an%20appointment%20at%20Jaipur%20Boutique" target="_blank" class="btn-visit">Book Appointment</a>
+            <a href="tel:+919820012345" class="btn-call" title="Call Boutique"><i data-lucide="phone"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Mumbai Boutique -->
+      <div class="boutique-card">
+        <div class="boutique-img-wrap">
+          <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=800&q=80" alt="Mumbai Kala Ghoda Boutique">
+          <span class="boutique-tag">Heritage District</span>
+        </div>
+        <div class="boutique-content">
+          <span class="boutique-city">Mumbai</span>
+          <h3 class="boutique-title">Kala Ghoda Art Salon</h3>
+          <div class="boutique-info">
+            <div class="boutique-meta-item">
+              <i data-lucide="map-pin"></i>
+              <span>12/B Forbes Street, Fort, Kala Ghoda, Mumbai 400001</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="clock"></i>
+              <span>Open All 7 Days: 11:00 AM – 9:00 PM</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="phone"></i>
+              <span>+91 (022) 2284 5510 / +91 98200 12345</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="sparkles"></i>
+              <span>Modern Demifine &amp; German Silver Gallery</span>
+            </div>
+          </div>
+          <div class="boutique-cta-row">
+            <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20book%20an%20appointment%20at%20Mumbai%20Boutique" target="_blank" class="btn-visit">Book Appointment</a>
+            <a href="tel:+919820012345" class="btn-call" title="Call Boutique"><i data-lucide="phone"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. New Delhi Gallery -->
+      <div class="boutique-card">
+        <div class="boutique-img-wrap">
+          <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="New Delhi Mehrauli Boutique">
+          <span class="boutique-tag">Bridal Destination</span>
+        </div>
+        <div class="boutique-content">
+          <span class="boutique-city">New Delhi</span>
+          <h3 class="boutique-title">Mehrauli Bridal Lounge</h3>
+          <div class="boutique-info">
+            <div class="boutique-meta-item">
+              <i data-lucide="map-pin"></i>
+              <span>Ambawatta One, Kalka Das Marg, Mehrauli, New Delhi 110030</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="clock"></i>
+              <span>Tue – Sun: 11:30 AM – 8:30 PM (Mon Closed)</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="phone"></i>
+              <span>+91 (011) 4105 8820 / +91 98200 12345</span>
+            </div>
+            <div class="boutique-meta-item">
+              <i data-lucide="sparkles"></i>
+              <span>Trousseau Styling Suite &amp; Video Calling Lounge</span>
+            </div>
+          </div>
+          <div class="boutique-cta-row">
+            <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20book%20an%20appointment%20at%20Delhi%20Boutique" target="_blank" class="btn-visit">Book Appointment</a>
+            <a href="tel:+919820012345" class="btn-call" title="Call Boutique"><i data-lucide="phone"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Private Shopping Experience -->
+    <div class="experience-banner">
+      <div>
+        <span class="section-tag">Bespoke Concierge</span>
+        <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: #1a1a1a; margin: 0.5rem 0 1rem;">Virtual Video Shopping Experience</h3>
+        <p style="color: #666; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          Unable to visit our physical boutiques? Schedule a high-definition private 1-on-1 WhatsApp video appointment. Our Jaipur curators will showcase pieces on mannequins with precision millimeter measurement checks.
+        </p>
+        <a href="https://wa.me/919820012345?text=Hello,%20I%20want%20to%20book%20a%20Video%20Shopping%20Appointment" target="_blank" class="btn-visit" style="display: inline-block; padding: 0.9rem 2rem;">
+          Schedule Virtual Appointment <i data-lucide="arrow-right" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-left: 4px;"></i>
+        </a>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=700&q=80" alt="Bespoke Jewelry Consultation" style="width: 100%; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="auro-logo-wrap">
+          <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+            <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+            <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+            <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text-block">
+            <div class="logo-title-row">
+              <span class="logo-brand-name">Auro</span>
+              <span class="logo-ampersand">&amp;</span>
+            </div>
+            <span class="logo-subscript-jewellery">Jewellary</span>
+          </div>
+        </a>
+        <p class="brand-desc">Heritage Rajasthani Jadau, Meenakari, and Royal Kundan Jewellery handcrafted in Jaipur and shipped across 45+ countries.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home Showroom</a></li>
+          <li><a href="collections.html">All Collections Catalogue</a></li>
+          <li><a href="boutiques.html">Flagship Boutiques</a></li>
+          <li><a href="track-order.html">Track Order</a></li>
+          <li><a href="about.html">Artisan Legacy &amp; Story</a></li>
+          <li><a href="contact.html">Store Locations &amp; Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Client Services</h4>
+        <ul>
+          <li><a href="track-order.html">Track Insured Delivery</a></li>
+          <li><a href="boutiques.html">Book Private Boutique Visit</a></li>
+          <li><a href="policies.html">Shipping &amp; Return Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Concierge</h4>
+        <p><i data-lucide="phone"></i> +91 (0) 98200 12345</p>
+        <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container text-center">
+        <p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Fixed Floating Quick Action Hub (WhatsApp & Call Us) -->
+  <div class="floating-contact-hub" id="floatingContactHub">
+    <!-- Call Us Floating Button -->
+    <a href="tel:+919820012345" class="floating-btn call-float" aria-label="Call Auro Jewellery Concierge">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="hub-tooltip">Call Concierge (+91 98200 12345)</span>
+    </a>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20inquire%20about%20your%20jewellery%20collection." target="_blank" class="floating-btn whatsapp-float-btn" aria-label="Chat with Jewellery Stylist on WhatsApp">
+      <!-- Official WhatsApp Brand Icon -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.01 4.54-3.68 8.23-8.22 8.23zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.09s.9 2.43 1.03 2.6c.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.46-.3z"/>
+      </svg>
+      <span class="hub-tooltip">Chat on WhatsApp</span>
+    </a>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

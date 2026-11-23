@@ -1,0 +1,470 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Order | Auro &amp; Jewellary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .track-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+    .track-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.04);
+      margin-bottom: 2.5rem;
+    }
+    .track-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1.2rem;
+      align-items: end;
+      margin-top: 1.5rem;
+    }
+    .track-field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      color: #333;
+    }
+    .track-field input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .track-field input:focus {
+      border-color: var(--color-gold);
+    }
+    .track-btn {
+      background: var(--color-dark);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.88rem 2rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: 48px;
+    }
+    .track-btn:hover {
+      background: var(--color-maroon);
+    }
+    /* Timeline */
+    .tracking-result-box {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.04);
+      margin-top: 2rem;
+    }
+    .order-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #eef8f1;
+      color: #1e7e34;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .timeline {
+      position: relative;
+      margin: 2.5rem 0 1rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: #e2dbce;
+    }
+    .timeline-step {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .timeline-step:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #b5b5b5;
+    }
+    .timeline-step.completed .timeline-dot {
+      background: var(--color-maroon);
+      border-color: var(--color-maroon);
+    }
+    .timeline-step.active .timeline-dot {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.25);
+    }
+    .timeline-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+    }
+    .timeline-time {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 0.2rem;
+    }
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.35rem;
+    }
+    .order-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 1.2rem;
+      background: var(--color-cream);
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+    .order-meta-item span {
+      display: block;
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .order-meta-item strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-top: 0.2rem;
+    }
+    @media (max-width: 768px) {
+      .track-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .order-meta-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
+      <div class="top-bar-links">
+        <a href="boutiques.html">Boutiques</a>
+        <a href="track-order.html">Track Order</a>
+        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="navbar">
+    <div class="container header-container">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="auro-logo-wrap">
+        <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+          <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+          <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+          <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+
+        <div class="logo-text-block">
+          <div class="logo-title-row">
+            <span class="logo-brand-name">Auro</span>
+            <span class="logo-ampersand">&amp;</span>
+          </div>
+          <span class="logo-subscript-jewellery">Jewellary</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation -->
+      <nav class="center-nav desktop-nav">
+        <ul>
+          <li><a href="index.html" class="nav-item-link">HOME</a></li>
+          
+          <li class="nav-dropdown-wrapper">
+            <a href="collections.html" class="nav-item-link">
+              ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
+            </a>
+            <div class="custom-dropdown-menu">
+              <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
+              <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-below-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Below 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-above-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Above 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="earcuff-bugadi.html" class="dropdown-link-item"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-earrings.html" class="dropdown-link-item"><span>Statement earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-rings.html" class="dropdown-link-item"><span>Statement Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-necklace.html" class="dropdown-link-item"><span>Statement necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="pachi-kundan-necklace.html" class="dropdown-link-item"><span>Pachi Kundan Necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="german-silver-necklaces.html" class="dropdown-link-item"><span>German silver Necklaces</span> <span class="count-pill">(6)</span></a>
+              <a href="rings.html" class="dropdown-link-item"><span>Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="premium-rings.html" class="dropdown-link-item"><span>PREMIUM RINGS</span> <span class="count-pill">(6)</span></a>
+              <a href="nosepin.html" class="dropdown-link-item"><span>Nosepin</span> <span class="count-pill">(6)</span></a>
+            </div>
+          </li>
+
+          <li><a href="diwali-collections.html" class="nav-item-link">DIWALI COLLECTIONS</a></li>
+          <li><a href="policies.html" class="nav-item-link">POLICIES</a></li>
+          <li><a href="about.html" class="nav-item-link">ABOUT US</a></li>
+          <li><a href="contact.html" class="nav-item-link">CONTACT US</a></li>
+          <li><a href="lookbook.html" class="nav-item-link">BLOGS</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions-right">
+        <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
+        <a href="#wishlist" class="header-icon-btn"><i data-lucide="heart"></i></a>
+        <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Auro &amp; Jewellary</span>
+      <button class="drawer-close" id="drawerClose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">Home</a>
+      <a href="collections.html">All Collections</a>
+      <a href="boutiques.html">Boutique Locations</a>
+      <a href="track-order.html">Track Order</a>
+      <a href="lookbook.html">Editorial Lookbook</a>
+      <a href="about.html">Artisan Heritage</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Page Banner -->
+  <div class="page-hero-banner" style="background: linear-gradient(rgba(18,18,18,0.75), rgba(18,18,18,0.75)), url('https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=1920&q=80') center/cover;">
+    <div class="container text-center">
+      <span class="section-tag" style="color: var(--color-gold-light);">Real-Time Shipment Intelligence</span>
+      <h1 class="page-title" style="color: #fff; font-size: 3.2rem; font-family: var(--font-serif);">Track Your Consignment</h1>
+      <p style="color: #ddd; max-width: 600px; margin: 0.8rem auto 0; font-size: 1rem;">Enter your Order ID or AWB Tracking Number to check the live status of your insured express jewelry delivery.</p>
+    </div>
+  </div>
+
+  <!-- Tracking Content -->
+  <main class="track-wrapper">
+    <div class="track-card">
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 0.4rem; color: #1a1a1a;">Track Insured Delivery</h3>
+      <p style="color: #666; font-size: 0.88rem;">Each Auro parcel travels in a tamper-proof high-security vault seal with active GPS tracking by BlueDart Apex &amp; Sequel Logistics.</p>
+
+      <form id="trackOrderForm" class="track-form-grid" onsubmit="event.preventDefault(); simulateTracking();">
+        <div class="track-field">
+          <label for="orderNumber">Order ID / Reference</label>
+          <input type="text" id="orderNumber" placeholder="e.g. AURO-84920" value="AURO-84920" required>
+        </div>
+        <div class="track-field">
+          <label for="trackPhone">Registered Mobile or Email</label>
+          <input type="text" id="trackPhone" placeholder="+91 98200 XXXXX" value="+91 98200 12345" required>
+        </div>
+        <button type="submit" class="track-btn">
+          <i data-lucide="search" style="width: 16px; height: 16px;"></i> Track
+        </button>
+      </form>
+    </div>
+
+    <!-- Active Tracking Result Display -->
+    <div class="tracking-result-box" id="trackingDetails">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: gap;">
+        <div>
+          <span style="font-size: 0.78rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em;">Airway Bill No.</span>
+          <h4 style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a; margin-top: 0.1rem;">BD-884920491-IN</h4>
+        </div>
+        <div>
+          <span class="order-status-badge"><i data-lucide="truck" style="width: 14px; height: 14px;"></i> In Transit — Out for Delivery Today</span>
+        </div>
+      </div>
+
+      <div class="order-meta-grid">
+        <div class="order-meta-item">
+          <span>Estimated Delivery</span>
+          <strong>Today, by 6:00 PM</strong>
+        </div>
+        <div class="order-meta-item">
+          <span>Courier Partner</span>
+          <strong>BlueDart Insured Air Express</strong>
+        </div>
+        <div class="order-meta-item">
+          <span>Insurance Coverage</span>
+          <strong>100% Transit Safe Guarded</strong>
+        </div>
+      </div>
+
+      <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: #1a1a1a; display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="map-pin" style="width: 18px; height: 18px; color: var(--color-gold);"></i> Shipment Progress
+      </h4>
+
+      <div class="timeline">
+        <div class="timeline-step completed">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Handcrafted &amp; Vault Inspected</div>
+          <div class="timeline-time">Nov 21, 2026 — 04:30 PM | Johari Bazaar Atelier, Jaipur</div>
+          <div class="timeline-desc">Piece underwent 4-stage microscopic QC, hallmark verification, and wax vacuum packaging.</div>
+        </div>
+
+        <div class="timeline-step completed">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Dispatched from Jaipur Central Hub</div>
+          <div class="timeline-time">Nov 22, 2026 — 09:15 AM | Jaipur Air Cargo Terminal</div>
+          <div class="timeline-desc">Secured under tamper-evident barcoded luxury gift box.</div>
+        </div>
+
+        <div class="timeline-step active">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Out for Delivery</div>
+          <div class="timeline-time">Nov 23, 2026 — 09:45 AM | Local Courier Hub</div>
+          <div class="timeline-desc">Delivery partner is en route to the shipping destination. OTP verification will be required upon receipt.</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Delivered to Consignee</div>
+          <div class="timeline-time">Estimated: Today by 6:00 PM</div>
+          <div class="timeline-desc">Package handed over with signature and insured warranty card inside.</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <span style="font-size: 0.85rem; color: #666;">Need changes or concierge help?</span>
+        <a href="https://wa.me/919820012345" target="_blank" style="color: var(--color-maroon); font-weight: 600; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+          <i data-lucide="message-circle" style="width: 16px; height: 16px;"></i> Chat with Logistics Concierge
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="auro-logo-wrap">
+          <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+            <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+            <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+            <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text-block">
+            <div class="logo-title-row">
+              <span class="logo-brand-name">Auro</span>
+              <span class="logo-ampersand">&amp;</span>
+            </div>
+            <span class="logo-subscript-jewellery">Jewellary</span>
+          </div>
+        </a>
+        <p class="brand-desc">Heritage Rajasthani Jadau, Meenakari, and Royal Kundan Jewellery handcrafted in Jaipur and shipped across 45+ countries.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home Showroom</a></li>
+          <li><a href="collections.html">All Collections Catalogue</a></li>
+          <li><a href="boutiques.html">Flagship Boutiques</a></li>
+          <li><a href="track-order.html">Track Order</a></li>
+          <li><a href="about.html">Artisan Legacy &amp; Story</a></li>
+          <li><a href="contact.html">Store Locations &amp; Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Client Services</h4>
+        <ul>
+          <li><a href="track-order.html">Track Insured Delivery</a></li>
+          <li><a href="boutiques.html">Book Private Boutique Visit</a></li>
+          <li><a href="policies.html">Shipping &amp; Return Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Concierge</h4>
+        <p><i data-lucide="phone"></i> +91 (0) 98200 12345</p>
+        <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container text-center">
+        <p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Fixed Floating Quick Action Hub (WhatsApp & Call Us) -->
+  <div class="floating-contact-hub" id="floatingContactHub">
+    <!-- Call Us Floating Button -->
+    <a href="tel:+919820012345" class="floating-btn call-float" aria-label="Call Auro Jewellery Concierge">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      <span class="hub-tooltip">Call Concierge (+91 98200 12345)</span>
+    </a>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919820012345?text=Hello%20Auro%20Jewellery,%20I%20would%20like%20to%20inquire%20about%20your%20jewellery%20collection." target="_blank" class="floating-btn whatsapp-float-btn" aria-label="Chat with Jewellery Stylist on WhatsApp">
+      <!-- Official WhatsApp Brand Icon -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.01 4.54-3.68 8.23-8.22 8.23zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.09s.9 2.43 1.03 2.6c.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.46-.3z"/>
+      </svg>
+      <span class="hub-tooltip">Chat on WhatsApp</span>
+    </a>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    function simulateTracking() {
+      const order = document.getElementById('orderNumber').value;
+      const details = document.getElementById('trackingDetails');
+      details.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
