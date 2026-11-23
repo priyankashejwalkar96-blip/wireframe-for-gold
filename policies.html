@@ -1,0 +1,410 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Service Policies &amp; Hallmarking Disclosure | Auro &amp; Jewellary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .policy-hero {
+      background: linear-gradient(rgba(18, 18, 18, 0.75), rgba(18, 18, 18, 0.75)), url('images/hero_slide_2.jpg') center 25%/cover no-repeat;
+      padding: 5rem 0 4.5rem;
+      text-align: center;
+      color: #FFFFFF;
+    }
+    .policy-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      font-weight: 600;
+      margin: 0 0 0.8rem;
+    }
+    .policy-hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: #E2E2E2;
+      line-height: 1.6;
+    }
+
+    .policy-content-section {
+      padding: 4.5rem 0 6rem;
+      background: #FAFAFA;
+    }
+    .policy-grid-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3.5rem;
+      align-items: flex-start;
+    }
+
+    /* Sticky Side Nav */
+    .policy-side-nav {
+      position: sticky;
+      top: 100px;
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid #ECECEC;
+    }
+    .policy-side-nav h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 0 0 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #EEEEEE;
+    }
+    .policy-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .policy-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #555555;
+      transition: all 0.25s ease;
+    }
+    .policy-nav-link:hover,
+    .policy-nav-link.active {
+      background: rgba(154, 33, 67, 0.08);
+      color: #9A2143;
+      font-weight: 600;
+    }
+
+    /* Policy Detail Cards */
+    .policy-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 2.8rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid #EBEBEB;
+      margin-bottom: 2.5rem;
+    }
+    .policy-card h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 0 0 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .policy-card h2 i {
+      color: #9A2143;
+      width: 26px;
+      height: 26px;
+    }
+    .policy-card p {
+      font-size: 0.95rem;
+      color: #555555;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .policy-highlight-box {
+      background: #FFF9FA;
+      border-left: 4px solid #9A2143;
+      padding: 1.2rem 1.6rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+      color: #333333;
+      line-height: 1.6;
+    }
+    .policy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .policy-table th, .policy-table td {
+      padding: 12px 16px;
+      border: 1px solid #E0E0E0;
+      text-align: left;
+    }
+    .policy-table th {
+      background: #F8F8F8;
+      font-weight: 600;
+      color: #222222;
+    }
+
+    @media (max-width: 992px) {
+      .policy-grid-layout {
+        grid-template-columns: 1fr;
+      }
+      .policy-side-nav {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Static Original Layout) -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
+      <div class="top-bar-links">
+        <a href="contact.html">Boutiques</a>
+        <a href="policies.html">Track Order</a>
+        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="navbar">
+    <div class="container header-container">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <a href="index.html" class="auro-logo-wrap">
+        <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+          <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+          <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+          <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-text-block">
+          <div class="logo-title-row">
+            <span class="logo-brand-name">Auro</span>
+            <span class="logo-ampersand">&amp;</span>
+          </div>
+          <span class="logo-subscript-jewellery">Jewellary</span>
+        </div>
+      </a>
+
+      <nav class="center-nav desktop-nav">
+        <ul>
+          <li><a href="index.html" class="nav-item-link">HOME</a></li>
+          <li class="nav-dropdown-wrapper">
+            <a href="collections.html" class="nav-item-link">
+              ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
+            </a>
+            <div class="custom-dropdown-menu">
+              <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
+              <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-below-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Below 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-above-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Above 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="earcuff-bugadi.html" class="dropdown-link-item"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-earrings.html" class="dropdown-link-item"><span>Statement earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-rings.html" class="dropdown-link-item"><span>Statement Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-necklace.html" class="dropdown-link-item"><span>Statement necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="pachi-kundan-necklace.html" class="dropdown-link-item"><span>Pachi Kundan Necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="german-silver-necklaces.html" class="dropdown-link-item"><span>German silver Necklaces</span> <span class="count-pill">(6)</span></a>
+              <a href="rings.html" class="dropdown-link-item"><span>Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="premium-rings.html" class="dropdown-link-item"><span>PREMIUM RINGS</span> <span class="count-pill">(6)</span></a>
+              <a href="nosepin.html" class="dropdown-link-item"><span>Nosepin</span> <span class="count-pill">(6)</span></a>
+            </div>
+          </li>
+          <li><a href="diwali-collections.html" class="nav-item-link">DIWALI COLLECTIONS</a></li>
+          <li><a href="policies.html" class="nav-item-link active">POLICIES</a></li>
+          <li><a href="about.html" class="nav-item-link">ABOUT US</a></li>
+          <li><a href="contact.html" class="nav-item-link">CONTACT US</a></li>
+          <li><a href="lookbook.html" class="nav-item-link">BLOGS</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions-right">
+        <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
+        <a href="#wishlist" class="header-icon-btn wishlist-header-btn" id="wishlistOpenBtn"><i data-lucide="heart"></i><span class="wishlist-count-badge" id="wishlistCount">0</span></a>
+        <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="policy-hero">
+    <div class="container">
+      <span class="section-tag" style="color: #E6C280; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.85rem;">Trust &amp; Transparency</span>
+      <h1>Store Policies &amp; Assurance</h1>
+      <p>Our commitment to uncompromising purity, tamper-proof insured express logistics, and an effortless customer experience for jewellery connoisseurs worldwide.</p>
+    </div>
+  </section>
+
+  <!-- Main Policy Section -->
+  <main class="policy-content-section">
+    <div class="container policy-grid-layout">
+      
+      <!-- Side Nav -->
+      <aside class="policy-side-nav">
+        <h3>Policy Directory</h3>
+        <ul class="policy-nav-list">
+          <li><a href="#shipping" class="policy-nav-link active"><i data-lucide="truck" style="width: 16px;"></i> Shipping &amp; Delivery</a></li>
+          <li><a href="#returns" class="policy-nav-link"><i data-lucide="refresh-cw" style="width: 16px;"></i> 7-Day Exchange</a></li>
+          <li><a href="#hallmarking" class="policy-nav-link"><i data-lucide="award" style="width: 16px;"></i> Hallmarking Purity</a></li>
+          <li><a href="#warranty" class="policy-nav-link"><i data-lucide="shield-check" style="width: 16px;"></i> Lifetime Polish Warranty</a></li>
+          <li><a href="#privacy" class="policy-nav-link"><i data-lucide="lock" style="width: 16px;"></i> Privacy &amp; Security</a></li>
+        </ul>
+      </aside>
+
+      <!-- Detail Cards -->
+      <div class="policy-details-wrap">
+        
+        <!-- Shipping Policy -->
+        <article class="policy-card" id="shipping">
+          <h2><i data-lucide="truck"></i> Insured Express Shipping Policy</h2>
+          <p>Every piece of jewellery leaving our Jaipur studio is packed in velvet-lined luxury keepsake boxes, secured with tamper-evident seals, and tracked with real-time GPS courier logistics.</p>
+          
+          <div class="policy-highlight-box">
+            <strong>Complimentary Domestic Shipping:</strong> All domestic orders above ₹3,999 qualify for free air-express delivery via BlueDart or Delhivery.
+          </div>
+
+          <table class="policy-table">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Courier Partner</th>
+                <th>Delivery Timeframe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Metro Cities (Mumbai, Delhi, Bengaluru)</td>
+                <td>BlueDart Air Express</td>
+                <td>2 – 3 Business Days</td>
+              </tr>
+              <tr>
+                <td>Rest of India (Tier 2 &amp; Tier 3 Cities)</td>
+                <td>Delhivery / SpeedPost</td>
+                <td>3 – 5 Business Days</td>
+              </tr>
+              <tr>
+                <td>International (USA, UK, UAE, Canada, Australia)</td>
+                <td>DHL Express / FedEx</td>
+                <td>4 – 7 Business Days</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- Returns & Exchanges -->
+        <article class="policy-card" id="returns">
+          <h2><i data-lucide="refresh-cw"></i> 7-Day Hassle-Free Exchange Policy</h2>
+          <p>We want you to treasure every heirloom jewellery piece you acquire. If you have an unexpected sizing mismatch on a kada or wish to exchange a design, we make it effortless.</p>
+          
+          <div class="policy-highlight-box">
+            <strong>Easy Doorstep Pickup:</strong> Simply text our concierge on WhatsApp (+91 98200 12345) within 7 days of delivery. We arrange a reverse pickup directly from your doorstep with zero return hassle.
+          </div>
+
+          <p>Items must be unworn, in original velvet packaging with security tag intact. Once inspected, replacement or store credit voucher is issued within 24 hours.</p>
+        </article>
+
+        <!-- Hallmarking & Authenticity -->
+        <article class="policy-card" id="hallmarking">
+          <h2><i data-lucide="award"></i> BIS Hallmarking &amp; Authenticity Guarantee</h2>
+          <p>Auro &amp; Jewellary strictly complies with Bureau of Indian Standards (BIS) hallmarking guidelines. Every piece carries our official laser-engraved hallmark guaranteeing metal purity and genuine gemstone certification.</p>
+          <p>Our traditional Meenakari enamelling is kiln-fired with natural minerals, and uncut Jadau Polki stones are mounted using authentic 22K gold foil setting passed down through royal craft guilds.</p>
+        </article>
+
+        <!-- Lifetime Warranty -->
+        <article class="policy-card" id="warranty">
+          <h2><i data-lucide="shield-check"></i> Lifetime Re-Polishing &amp; Craft Care</h2>
+          <p>Heirloom jewellery is meant to be passed down through generations. Auro &amp; Jewellary provides lifetime re-polishing and stone re-tightening support for all our bespoke clients at any of our flagship boutiques in Jaipur and Mumbai.</p>
+        </article>
+
+        <!-- Privacy & Security -->
+        <article class="policy-card" id="privacy">
+          <h2><i data-lucide="lock"></i> 256-Bit SSL Encrypted Luxury Checkout</h2>
+          <p>Your payment credentials and personal information are guarded with bank-grade 256-bit SSL encryption. We support all major UPI gateways, Visa, MasterCard, American Express, and PayPal with zero card storage.</p>
+        </article>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Luxury Modern Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="auro-logo-wrap">
+          <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+            <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+            <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+            <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text-block">
+            <div class="logo-title-row">
+              <span class="logo-brand-name">Auro</span>
+              <span class="logo-ampersand">&amp;</span>
+            </div>
+            <span class="logo-subscript-jewellery">Jewellary</span>
+          </div>
+        </a>
+        <p>Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collections.html">All Jewellery Collections</a></li>
+          <li><a href="diwali-collections.html">Diwali Collections</a></li>
+          <li><a href="policies.html">Store Policies &amp; Shipping</a></li>
+          <li><a href="contact.html">Contact Us &amp; Salons</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Jewellery Categories</h4>
+        <ul>
+          <li><a href="pachi-kundan-necklace.html">Pachi Kundan Necklaces</a></li>
+          <li><a href="statement-earrings.html">Meenakari Chandbalis</a></li>
+          <li><a href="rings.html">Demifine Stacking Rings</a></li>
+          <li><a href="hair-accessories.html">Royal Hair Brooches</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Concierge</h4>
+        <p><i data-lucide="map-pin"></i> Johari Bazaar, Pink City, Jaipur, RJ</p>
+        <p><i data-lucide="phone"></i> +91 98200 12345</p>
+        <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-flex">
+        <p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p>
+        <div class="bottom-policy-links">
+          <a href="policies.html">Privacy Policy</a>
+          <a href="policies.html">Terms of Service</a>
+          <a href="policies.html">Hallmarking Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

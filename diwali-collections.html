@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diwali Shubh Labh Festive Edit 2025 | Auro &amp; Jewellary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .diwali-hero {
+      background: linear-gradient(rgba(18, 12, 10, 0.78), rgba(18, 12, 10, 0.78)), url('images/banner_jewelry_pure_1.jpg') center 35%/cover no-repeat;
+      padding: 5.5rem 0 5rem;
+      text-align: center;
+      color: #FFFFFF;
+      position: relative;
+    }
+    .diwali-hero .festive-tag {
+      background: rgba(230, 194, 128, 0.18);
+      color: #E6C280;
+      border: 1px solid rgba(230, 194, 128, 0.4);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+    .diwali-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.4rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      letter-spacing: 0.03em;
+    }
+    .diwali-hero p {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      font-size: 1.05rem;
+      color: #F0E8DF;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .diwali-offer-banner {
+      background: #FFFFFF;
+      border: 2px dashed #D32F2F;
+      border-radius: 12px;
+      padding: 1.4rem 2rem;
+      max-width: 620px;
+      margin: 0 auto;
+      color: #1A1A1A;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+    .diwali-offer-banner h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #D32F2F;
+      margin: 0 0 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .diwali-offer-banner p {
+      color: #4A4A4A;
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    /* Product Grid */
+    .festive-section {
+      padding: 4.5rem 0 6rem;
+      background: #FAFAFA;
+    }
+    .festive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .festive-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+      border: 1px solid #ECECEC;
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .festive-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 36px rgba(154, 33, 67, 0.12);
+      border-color: rgba(154, 33, 67, 0.3);
+    }
+    .festive-img-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #fbf9f6;
+    }
+    .festive-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .festive-card:hover .festive-img-wrap img {
+      transform: scale(1.06);
+    }
+    .festive-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #9A2143;
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+    .festive-card-body {
+      padding: 1.5rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .festive-card-body .cat-tag {
+      font-size: 0.78rem;
+      color: #9A2143;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .festive-card-body h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 0 0 0.8rem;
+      line-height: 1.4;
+      min-height: 2.8em;
+    }
+    .festive-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 1.2rem;
+      margin-top: auto;
+    }
+    .festive-current-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111111;
+    }
+    .festive-original-price {
+      font-size: 0.92rem;
+      color: #8C8C8C;
+      text-decoration: line-through;
+    }
+    .festive-discount-text {
+      color: #2E7D32;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .festive-btn-wrap {
+      display: flex;
+      gap: 8px;
+    }
+    .festive-add-btn {
+      flex-grow: 1;
+      background: #111111;
+      color: #FFFFFF;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+    .festive-add-btn:hover {
+      background: #9A2143;
+    }
+
+    @media (max-width: 992px) {
+      .festive-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 576px) {
+      .diwali-hero h1 { font-size: 2.2rem; }
+      .festive-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Static Original Layout) -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
+      <div class="top-bar-links">
+        <a href="contact.html">Boutiques</a>
+        <a href="policies.html">Track Order</a>
+        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="navbar">
+    <div class="container header-container">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <a href="index.html" class="auro-logo-wrap">
+        <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+          <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+          <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+          <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-text-block">
+          <div class="logo-title-row">
+            <span class="logo-brand-name">Auro</span>
+            <span class="logo-ampersand">&amp;</span>
+          </div>
+          <span class="logo-subscript-jewellery">Jewellary</span>
+        </div>
+      </a>
+
+      <nav class="center-nav desktop-nav">
+        <ul>
+          <li><a href="index.html" class="nav-item-link">HOME</a></li>
+          <li class="nav-dropdown-wrapper">
+            <a href="collections.html" class="nav-item-link">
+              ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
+            </a>
+            <div class="custom-dropdown-menu">
+              <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
+              <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-below-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Below 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-above-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Above 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="earcuff-bugadi.html" class="dropdown-link-item"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-earrings.html" class="dropdown-link-item"><span>Statement earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-rings.html" class="dropdown-link-item"><span>Statement Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-necklace.html" class="dropdown-link-item"><span>Statement necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="pachi-kundan-necklace.html" class="dropdown-link-item"><span>Pachi Kundan Necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="german-silver-necklaces.html" class="dropdown-link-item"><span>German silver Necklaces</span> <span class="count-pill">(6)</span></a>
+              <a href="rings.html" class="dropdown-link-item"><span>Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="premium-rings.html" class="dropdown-link-item"><span>PREMIUM RINGS</span> <span class="count-pill">(6)</span></a>
+              <a href="nosepin.html" class="dropdown-link-item"><span>Nosepin</span> <span class="count-pill">(6)</span></a>
+            </div>
+          </li>
+          <li><a href="diwali-collections.html" class="nav-item-link active">DIWALI COLLECTIONS</a></li>
+          <li><a href="policies.html" class="nav-item-link">POLICIES</a></li>
+          <li><a href="about.html" class="nav-item-link">ABOUT US</a></li>
+          <li><a href="contact.html" class="nav-item-link">CONTACT US</a></li>
+          <li><a href="lookbook.html" class="nav-item-link">BLOGS</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions-right">
+        <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
+        <a href="#wishlist" class="header-icon-btn wishlist-header-btn" id="wishlistOpenBtn"><i data-lucide="heart"></i><span class="wishlist-count-badge" id="wishlistCount">0</span></a>
+        <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Diwali Hero -->
+  <section class="diwali-hero">
+    <div class="container">
+      <span class="festive-tag">✨ Shubh Deepavali Exclusive Edit 2025 ✨</span>
+      <h1>Shubh Labh Diwali Vault</h1>
+      <p>Celebrate the festival of radiant lights with imperial Meenakari, 22K gold foil setting, and uncut Polki gemstone jewels designed to invite auspicious abundance.</p>
+      
+      <div class="diwali-offer-banner">
+        <h3>Diwali Festive Mahotsav Offer</h3>
+        <p>Buy Any 2 Jewels &bull; Get 1 Free + Complimentary Silver Coin on orders above ₹4,999</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Festive Catalog Grid -->
+  <section class="festive-section">
+    <div class="container">
+      <div class="text-center" style="max-width: 620px; margin: 0 auto;">
+        <span class="section-tag" style="color: #9A2143; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em;">Auspicious Handcrafted Jewels</span>
+        <h2 style="font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 600; margin: 0.5rem 0 0.8rem; color: #1A1A1A;">The Festive Sparkle Collection</h2>
+        <p style="color: #666; font-size: 0.95rem;">Curated master designs crafted specially for Lakshmi Pujan, Diwali Soirees, and Bhai Dooj gifting.</p>
+      </div>
+
+      <div class="festive-grid">
+        
+        <!-- Product 1 -->
+        <div class="festive-card">
+          <div class="festive-img-wrap">
+            <span class="festive-badge">Bestseller</span>
+            <img src="images/chokers.jpg" alt="Padmavati Emerald Meenakari Choker" loading="lazy">
+          </div>
+          <div class="festive-card-body">
+            <span class="cat-tag">Bridal Choker</span>
+            <h3>Padmavati 22K Royal Emerald Choker Set</h3>
+            <div class="festive-price-row">
+              <span class="festive-current-price">₹12,850</span>
+              <span class="festive-original-price">₹18,500</span>
+              <span class="festive-discount-text">30% OFF</span>
+            </div>
+            <div class="festive-btn-wrap">
+              <button class="festive-add-btn" onclick="addToCart('Padmavati 22K Royal Emerald Choker Set', 12850, 'images/chokers.jpg')">
+                <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="festive-card">
+          <div class="festive-img-wrap">
+            <span class="festive-badge">Diwali Special</span>
+            <img src="images/jhumkas.jpg" alt="Noor Jahan Ruby Chandbalis" loading="lazy">
+          </div>
+          <div class="festive-card-body">
+            <span class="cat-tag">Heritage Earrings</span>
+            <h3>Noor Jahan Ruby Reversible Chandbalis</h3>
+            <div class="festive-price-row">
+              <span class="festive-current-price">₹3,890</span>
+              <span class="festive-original-price">₹5,400</span>
+              <span class="festive-discount-text">28% OFF</span>
+            </div>
+            <div class="festive-btn-wrap">
+              <button class="festive-add-btn" onclick="addToCart('Noor Jahan Ruby Reversible Chandbalis', 3890, 'images/jhumkas.jpg')">
+                <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="festive-card">
+          <div class="festive-img-wrap">
+            <span class="festive-badge">Limited Edition</span>
+            <img src="images/kadas.jpg" alt="Rajputana Gajraj Motif Kada" loading="lazy">
+          </div>
+          <div class="festive-card-body">
+            <span class="cat-tag">Imperial Kada</span>
+            <h3>Rajputana Carved Gajraj Motif Kada Pair</h3>
+            <div class="festive-price-row">
+              <span class="festive-current-price">₹5,999</span>
+              <span class="festive-original-price">₹8,500</span>
+              <span class="festive-discount-text">29% OFF</span>
+            </div>
+            <div class="festive-btn-wrap">
+              <button class="festive-add-btn" onclick="addToCart('Rajputana Carved Gajraj Motif Kada Pair', 5999, 'images/kadas.jpg')">
+                <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="festive-card">
+          <div class="festive-img-wrap">
+            <span class="festive-badge">Pure Silver</span>
+            <img src="images/bestseller_1.jpg" alt="German Silver Aad Choker" loading="lazy">
+          </div>
+          <div class="festive-card-body">
+            <span class="cat-tag">Tribal Choker</span>
+            <h3>German Silver Hand-Embossed Aad Choker</h3>
+            <div class="festive-price-row">
+              <span class="festive-current-price">₹2,080</span>
+              <span class="festive-original-price">₹2,999</span>
+              <span class="festive-discount-text">30% OFF</span>
+            </div>
+            <div class="festive-btn-wrap">
+              <button class="festive-add-btn" onclick="addToCart('German Silver Hand-Embossed Aad Choker', 2080, 'images/bestseller_1.jpg')">
+                <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="festive-card">
+          <div class="festive-img-wrap">
+            <span class="festive-badge">Trending</span>
+            <img src="images/bestseller_2.jpg" alt="Polki Emerald Necklace" loading="lazy">
+          </div>
+          <div class="festive-card-body">
+            <span class="cat-tag">Festive Necklace</span>
+            <h3>Royal Jadau Polki Emerald Festive Necklace</h3>
+            <div class="festive-price-row">
+              <span class="festive-current-price">₹2,999</span>
+              <span class="festive-original-price">₹4,200</span>
+              <span class="festive-discount-text">28% OFF</span>
+            </div>
+            <div class="festive-btn-wrap">
+              <button class="festive-add-btn" onclick="addToCart('Royal Jadau Polki Emerald Festive Necklace', 2999, 'images/bestseller_2.jpg')">
+                <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="festive-card">
+          <div class="festive-img-wrap">
+            <span class="festive-badge">Hand-Painted</span>
+            <img src="images/bestseller_4.jpg" alt="Cow Kundan Festive Earrings" loading="lazy">
+          </div>
+          <div class="festive-card-body">
+            <span class="cat-tag">Pichwai Earrings</span>
+            <h3>Kamdhenu Cow Motif Kundan Drop Earrings</h3>
+            <div class="festive-price-row">
+              <span class="festive-current-price">₹1,150</span>
+              <span class="festive-original-price">₹1,650</span>
+              <span class="festive-discount-text">30% OFF</span>
+            </div>
+            <div class="festive-btn-wrap">
+              <button class="festive-add-btn" onclick="addToCart('Kamdhenu Cow Motif Kundan Drop Earrings', 1150, 'images/bestseller_4.jpg')">
+                <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Modern Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="auro-logo-wrap">
+          <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+            <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+            <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+            <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text-block">
+            <div class="logo-title-row">
+              <span class="logo-brand-name">Auro</span>
+              <span class="logo-ampersand">&amp;</span>
+            </div>
+            <span class="logo-subscript-jewellery">Jewellary</span>
+          </div>
+        </a>
+        <p>Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collections.html">All Jewellery Collections</a></li>
+          <li><a href="diwali-collections.html">Diwali Collections</a></li>
+          <li><a href="policies.html">Store Policies &amp; Shipping</a></li>
+          <li><a href="contact.html">Contact Us &amp; Salons</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Jewellery Categories</h4>
+        <ul>
+          <li><a href="pachi-kundan-necklace.html">Pachi Kundan Necklaces</a></li>
+          <li><a href="statement-earrings.html">Meenakari Chandbalis</a></li>
+          <li><a href="rings.html">Demifine Stacking Rings</a></li>
+          <li><a href="hair-accessories.html">Royal Hair Brooches</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Concierge</h4>
+        <p><i data-lucide="map-pin"></i> Johari Bazaar, Pink City, Jaipur, RJ</p>
+        <p><i data-lucide="phone"></i> +91 98200 12345</p>
+        <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-flex">
+        <p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p>
+        <div class="bottom-policy-links">
+          <a href="policies.html">Privacy Policy</a>
+          <a href="policies.html">Terms of Service</a>
+          <a href="policies.html">Hallmarking Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

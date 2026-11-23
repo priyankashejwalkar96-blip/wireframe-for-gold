@@ -1,0 +1,2664 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products & Artisan Catalogue | Auro & Jewellary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Rozha+One&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Specific Redesign Styles for ALL PRODUCTS Page */
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 2.8rem;
+      padding: 3rem 0 6rem;
+    }
+    .category-filter-sidebar {
+      background: #FFFFFF;
+      border: 1px solid #eee7db;
+      border-radius: 12px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+    }
+    .sidebar-section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      border-bottom: 2px solid #9A2143;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .category-list-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+    }
+    .category-list-menu li {
+      margin-bottom: 0.35rem;
+    }
+    .category-list-menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.86rem;
+      color: #444;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .category-list-menu a:hover, .category-list-menu a.active {
+      background: #FAF8F5;
+      color: #9A2143;
+      font-weight: 600;
+      padding-left: 1.2rem;
+      box-shadow: 0 2px 8px rgba(154, 33, 67, 0.08);
+    }
+    .category-list-menu a:hover .count, .category-list-menu a.active .count {
+      background: #9A2143;
+      color: #ffffff;
+    }
+    .category-list-menu .count {
+      font-size: 0.75rem;
+      color: #888;
+      background: #f4efe6;
+      padding: 2px 8px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .catalog-top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FAF8F5;
+      padding: 1.1rem 1.8rem;
+      border-radius: 10px;
+      border: 1px solid #ebdcc5;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+    }
+    .active-tag-pill {
+      background: #9A2143;
+      color: #fff;
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    /* Luxury Pagination Bar & Page Item Styling */
+    .catalog-pagination-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3.8rem;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid #ebdcc5;
+      background: #FFFFFF;
+      color: #333333;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .page-btn:hover {
+      border-color: #9A2143;
+      color: #9A2143;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(154, 33, 67, 0.15);
+    }
+    .page-btn.active {
+      background: #9A2143;
+      color: #FFFFFF;
+      border-color: #9A2143;
+      font-weight: 600;
+      box-shadow: 0 6px 16px rgba(154, 33, 67, 0.28);
+    }
+    .page-btn.nav-text-btn {
+      width: auto;
+      padding: 0 1.2rem;
+      border-radius: 24px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .page-ellipsis {
+      padding: 0 0.4rem;
+      color: #888888;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 992px) {
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Static Original Layout) -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
+      <div class="top-bar-links">
+        <a href="contact.html">Boutiques</a>
+        <a href="policies.html">Track Order</a>
+        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="navbar">
+    <div class="container header-container">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="auro-logo-wrap">
+        <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+          <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+          <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+          <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+
+        <div class="logo-text-block">
+          <div class="logo-title-row">
+            <span class="logo-brand-name">Auro</span>
+            <span class="logo-ampersand">&amp;</span>
+          </div>
+          <span class="logo-subscript-jewellery">Jewellary</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation with ALL PRODUCTS Dropdown -->
+      <nav class="center-nav desktop-nav">
+        <ul>
+          <li><a href="index.html" class="nav-item-link">HOME</a></li>
+          
+          <li class="nav-dropdown-wrapper">
+            <a href="collections.html" class="nav-item-link active">
+              ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
+            </a>
+            <!-- Dropdown categories -->
+                                    <div class="custom-dropdown-menu">
+              <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
+              <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-below-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Below 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-above-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Above 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="earcuff-bugadi.html" class="dropdown-link-item"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-earrings.html" class="dropdown-link-item"><span>Statement earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-rings.html" class="dropdown-link-item"><span>Statement Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-necklace.html" class="dropdown-link-item"><span>Statement necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="pachi-kundan-necklace.html" class="dropdown-link-item"><span>Pachi Kundan Necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="german-silver-necklaces.html" class="dropdown-link-item"><span>German silver Necklaces</span> <span class="count-pill">(6)</span></a>
+              <a href="rings.html" class="dropdown-link-item"><span>Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="premium-rings.html" class="dropdown-link-item"><span>PREMIUM RINGS</span> <span class="count-pill">(6)</span></a>
+              <a href="nosepin.html" class="dropdown-link-item"><span>Nosepin</span> <span class="count-pill">(6)</span></a>
+            </div>
+          </li>
+
+          <li><a href="diwali-collections.html" class="nav-item-link">DIWALI COLLECTIONS</a></li>
+          <li><a href="policies.html" class="nav-item-link">POLICIES</a></li>
+          <li><a href="about.html" class="nav-item-link">ABOUT US</a></li>
+          <li><a href="contact.html" class="nav-item-link">CONTACT US</a></li>
+          <li><a href="lookbook.html" class="nav-item-link">BLOGS</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="nav-actions-right">
+        <a href="#search" class="header-icon-btn"><i data-lucide="search"></i></a>
+        <a href="contact.html" class="header-icon-btn"><i data-lucide="user"></i><span class="lightning-badge">âš¡</span></a>
+        <a href="#wishlist" class="header-icon-btn"><i data-lucide="heart"></i></a>
+        <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span class="cart-count-badge" id="cartCount">2</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Auro &amp; Jewellary</span>
+      <button class="drawer-close" id="drawerClose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">Home</a>
+      <a href="collections.html">All Products</a>
+      <a href="product-detail.html">Meera Kada</a>
+      <a href="lookbook.html">Lookbook '25</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Page Banner -->
+  <div class="page-hero-banner" style="background: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)), url('images/hero.jpg') center/cover;">
+    <div class="container text-center">
+      <span class="section-tag" style="color: #DFC285 !important;">Curated Jewellery Catalogue</span>
+      <h1 class="page-title" style="color: #fff; font-size: 3rem; font-family: 'Poppins', sans-serif; font-weight: 600;">All Handcrafted Jewellery</h1>
+      <p style="color: #ddd; max-width: 650px; margin: 0.8rem auto 0; font-size: 0.95rem;">Explore our comprehensive collection of Kundan sets, Meenakari kadas, German silver earrings, statement necklaces and premium rings.</p>
+    </div>
+  </div>
+
+  <!-- Continuous Running Marquee Banner (Under Main Banner / Hero Section) -->
+  <div class="marquee-strip">
+    <div class="marquee-strip-track">
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <!-- Seamless loop duplicate -->
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+    </div>
+  </div>
+
+  <!-- Breadcrumbs & Quick Filters -->
+  <div class="container" style="padding: 1.2rem 0; font-size: 0.84rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
+    <div>
+      <a href="index.html" style="color: #777;">Home</a> &nbsp;/&nbsp; 
+      <strong style="color: #1a1a1a;">All Products Catalogue</strong>
+    </div>
+    <div>
+      <span class="active-tag-pill">Showing 86 Artisan Items <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i></span>
+    </div>
+  </div>
+
+  <!-- Main Redesigned Layout: Sidebar + Product Grid -->
+  <div class="container catalog-layout">
+    
+    <!-- Left Sidebar: Direct Categories from Screenshot -->
+    <aside class="category-filter-sidebar">
+      <div class="sidebar-section-title">
+        <span>Categories</span>
+        <i data-lucide="filter" style="width: 16px; height: 16px; color: #9A2143;"></i>
+      </div>
+
+      <ul class="category-list-menu">
+        <li><a href="collections.html" class="active"><span>All Categories</span> <span class="count">86</span></a></li>
+        <li><a href="hair-accessories.html"><span>Hair Accesories</span> <span class="count">8</span></a></li>
+        <li><a href="pachi-kundan-earrings.html"><span>Pachi kundan earrings</span> <span class="count">6</span></a></li>
+        <li><a href="kashmiri-earrings.html"><span>Kashmiri earrings</span> <span class="count">6</span></a></li>
+        <li><a href="silver-earrings-below-300.html"><span>German Silver (Below 300 Rs)</span> <span class="count">6</span></a></li>
+        <li><a href="silver-earrings-above-300.html"><span>German Silver (Above 300 Rs)</span> <span class="count">6</span></a></li>
+        <li><a href="earcuff-bugadi.html"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count">6</span></a></li>
+        <li><a href="statement-earrings.html"><span>Statement earrings</span> <span class="count">6</span></a></li>
+        <li><a href="statement-rings.html"><span>Statement Rings</span> <span class="count">6</span></a></li>
+        <li><a href="statement-necklace.html"><span>Statement necklace</span> <span class="count">6</span></a></li>
+        <li><a href="pachi-kundan-necklace.html"><span>Pachi Kundan Necklace</span> <span class="count">6</span></a></li>
+        <li><a href="german-silver-necklaces.html"><span>German silver Necklaces</span> <span class="count">6</span></a></li>
+        <li><a href="rings.html"><span>Rings</span> <span class="count">6</span></a></li>
+        <li><a href="premium-rings.html"><span>PREMIUM RINGS</span> <span class="count">6</span></a></li>
+        <li><a href="nosepin.html"><span>Nosepin</span> <span class="count">6</span></a></li>
+      </ul>
+
+      <!-- Price & Sizing Filter -->
+      <div class="sidebar-section-title">
+        <span>Price Range</span>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-direction: column; margin-bottom: 1.5rem; font-size: 0.84rem;">
+        <label><input type="checkbox" checked> Under â‚¹499</label>
+        <label><input type="checkbox" checked> â‚¹500 - â‚¹1,499</label>
+        <label><input type="checkbox" checked> â‚¹1,500 - â‚¹4,999</label>
+        <label><input type="checkbox"> â‚¹5,000 &amp; Above</label>
+      </div>
+
+      <div class="sidebar-help-box" style="background: #faf7f2; padding: 1.4rem; border: 1px solid #ebdcc5; border-radius: 6px; text-align: center;">
+        <i data-lucide="help-circle" style="color: #9A2143; width: 28px; height: 28px; margin-bottom: 0.4rem;"></i>
+        <h4 style="font-size: 0.95rem; margin-bottom: 0.2rem; font-weight: 600;">Custom Design?</h4>
+        <p style="font-size: 0.78rem; color: #666; margin-bottom: 0.8rem;">Send any jewelry photo on WhatsApp for instant price estimate.</p>
+        <a href="https://wa.me/919820012345" class="btn btn-outline-dark btn-block" style="padding: 0.5rem; font-size: 0.76rem; border-color: #9A2143; color: #9A2143;">WhatsApp Concierge</a>
+      </div>
+    </aside>
+
+    <!-- Right Side: Top Controls + Product Grid -->
+    <main>
+      <div class="catalog-top-controls">
+        <div style="font-size: 0.86rem; color: #555;" id="showingCountText">
+          Showing <strong>1 - 9</strong> of 86 Designs
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <label style="font-size: 0.82rem; font-weight: 500; text-transform: uppercase;">Sort by:</label>
+          <select style="padding: 0.45rem 1rem; border: 1px solid #dcd5c7; border-radius: 4px; background: #fff; font-family: 'Poppins', sans-serif; font-size: 0.82rem;">
+            <option>Featured Masterpieces</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Customer Popularity</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="catalogProductsGrid" style="margin-top: 0; grid-template-columns: repeat(3, 1fr); gap: 1.8rem;">
+        <div class="product-card" data-category="hair">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/hair_1.jpg" alt="Pachi Kundan hair brooch" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Jaipuri Juda Brooch</span>
+            <h3 class="product-title"><a href="product-detail.html">Pachi Kundan Hair Brooch</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹899.00 INR</span>
+              <span class="original-price">â‚¹1,299</span>
+              <span class="discount-percent">30% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pachi Kundan Hair Brooch', 899, 'images/hair_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/hair_2.jpg" alt="Hair boorch" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Crescent Ruby-Emerald</span>
+            <h3 class="product-title"><a href="product-detail.html">Handcrafted Hair Boorch</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(32 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹700.00 INR</span>
+              <span class="original-price">â‚¹950</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Handcrafted Hair Boorch', 700, 'images/hair_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/hair_3.jpg" alt="German silver borla maangtika" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Tribal Rajputi Borla</span>
+            <h3 class="product-title"><a href="product-detail.html">German Silver Borla Maangtika</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(64 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹820.00 INR</span>
+              <span class="original-price">â‚¹1,150</span>
+              <span class="discount-percent">28% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('German Silver Borla Maangtika', 820, 'images/hair_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge heritage">Hand-carved</div>
+          <div class="product-media">
+            <img src="images/hair_4.jpg" alt="Fusion magtika" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pearl String Forehead Jewel</span>
+            <h3 class="product-title"><a href="product-detail.html">Imperial Fusion Magtika</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹600.00 INR</span>
+              <span class="original-price">â‚¹850</span>
+              <span class="discount-percent">29% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Imperial Fusion Magtika', 600, 'images/hair_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge royal">Temple Heritage</div>
+          <div class="product-media">
+            <img src="images/hair_5.jpg" alt="Two tone nandi hair pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Matte Gold Antique Motif</span>
+            <h3 class="product-title"><a href="product-detail.html">Two Tone Nandi Hair Pin</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(51 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹750.00 INR</span>
+              <span class="original-price">â‚¹1,100</span>
+              <span class="discount-percent">31% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Two Tone Nandi Hair Pin', 750, 'images/hair_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge heritage">Antique Silver</div>
+          <div class="product-media">
+            <img src="images/hair_6.jpg" alt="Two tone elephant hair pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Sculpted</span>
+            <h3 class="product-title"><a href="product-detail.html">Two Tone Elephant Hair Pin</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(39 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹780.00 INR</span>
+              <span class="original-price">â‚¹1,050</span>
+              <span class="discount-percent">25% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Two Tone Elephant Hair Pin', 780, 'images/hair_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge new">New Launch</div>
+          <div class="product-media">
+            <img src="images/hair_7.jpg" alt="Navratan Geometric Kundan Brooch" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-7')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Multicolor Stone Inlay</span>
+            <h3 class="product-title"><a href="product-detail.html">Geometric Kundan Hair Ornament</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(19 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹850.00 INR</span>
+              <span class="original-price">â‚¹1,200</span>
+              <span class="discount-percent">29% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Geometric Kundan Hair Ornament', 850, 'images/hair_7.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="hair">
+          <div class="product-badge royal">Bridal Must-Have</div>
+          <div class="product-media">
+            <img src="images/hair_8.jpg" alt="Meenakari Chandra Hair Ornament" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('hair-8')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Enamelled Chand Brooch</span>
+            <h3 class="product-title"><a href="product-detail.html">Meenakari Chandra Juda Brooch</a></h3>
+            <div class="rating-stars">â˜…â˜…â˜…â˜…â˜… <span class="count">(44 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">â‚¹920.00 INR</span>
+              <span class="original-price">â‚¹1,350</span>
+              <span class="discount-percent">31% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Meenakari Chandra Juda Brooch', 920, 'images/hair_8.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="kashmiri">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/kashmiri_1.jpg" alt="ILLUMINATE ETHNIC EMERALD STONE EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">ILLUMINATE ETHNIC EMERALD STONE EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1150.00 INR</span>
+              <span class="original-price">₹1552</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('ILLUMINATE ETHNIC EMERALD STONE EARINGS', 1150, 'images/kashmiri_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="kashmiri">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/kashmiri_2.jpg" alt="golden earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">golden earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹899.00 INR</span>
+              <span class="original-price">₹1214</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('golden earrings', 899, 'images/kashmiri_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="kashmiri">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/kashmiri_3.jpg" alt="Kashmiri earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Kashmiri earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1550.00 INR</span>
+              <span class="original-price">₹2092</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kashmiri earrings', 1550, 'images/kashmiri_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="kashmiri">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/kashmiri_4.jpg" alt="Golden dazzling kashmiri earings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Golden dazzling kashmiri earings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹900.00 INR</span>
+              <span class="original-price">₹1215</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Golden dazzling kashmiri earings', 900, 'images/kashmiri_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="kashmiri">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/kashmiri_5.jpg" alt="Elephant Kashmiri jhumkas" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Elephant Kashmiri jhumkas</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1050.00 INR</span>
+              <span class="original-price">₹1418</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Elephant Kashmiri jhumkas', 1050, 'images/kashmiri_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="kashmiri">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/kashmiri_6.jpg" alt="Elephant Kashmiri jhumkas" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Elephant Kashmiri jhumkas</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1050.00 INR</span>
+              <span class="original-price">₹1418</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Elephant Kashmiri jhumkas', 1050, 'images/kashmiri_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-earrings">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/pachi_earrings_1.jpg" alt="Pachi Kundan earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_earrings-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Pachi Kundan earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2800.00 INR</span>
+              <span class="original-price">₹3780</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pachi Kundan earrings', 2800, 'images/pachi_earrings_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-earrings">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/pachi_earrings_2.jpg" alt="Pachi Kundan earrr" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_earrings-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Pachi Kundan earrr</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2600.00 INR</span>
+              <span class="original-price">₹3510</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pachi Kundan earrr', 2600, 'images/pachi_earrings_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-earrings">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/pachi_earrings_3.jpg" alt="Mirror earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_earrings-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Mirror earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹650.00 INR</span>
+              <span class="original-price">₹878</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Mirror earrings', 650, 'images/pachi_earrings_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-earrings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/pachi_earrings_4.jpg" alt="Kundan jhumka" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_earrings-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Kundan jhumka</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1600.00 INR</span>
+              <span class="original-price">₹2160</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kundan jhumka', 1600, 'images/pachi_earrings_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-earrings">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/pachi_earrings_5.jpg" alt="Chand earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_earrings-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Chand earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1900.00 INR</span>
+              <span class="original-price">₹2565</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Chand earrings', 1900, 'images/pachi_earrings_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-earrings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/pachi_earrings_6.jpg" alt="Chand earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_earrings-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Chand earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1300.00 INR</span>
+              <span class="original-price">₹1755</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Chand earrings', 1300, 'images/pachi_earrings_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="earcuff">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/earcuff_1.jpg" alt="Kashmiri Ghungroo ear cuff" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('earcuff-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Earcuff (Bugadi-Kundan-Needle)</span>
+            <h3 class="product-title"><a href="product-detail.html">Kashmiri Ghungroo ear cuff</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1050.00 INR</span>
+              <span class="original-price">₹1418</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kashmiri Ghungroo ear cuff', 1050, 'images/earcuff_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="earcuff">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/earcuff_2.jpg" alt="Two in one earrings and bugadi" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('earcuff-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Earcuff (Bugadi-Kundan-Needle)</span>
+            <h3 class="product-title"><a href="product-detail.html">Two in one earrings and bugadi</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹499.00 INR</span>
+              <span class="original-price">₹674</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Two in one earrings and bugadi', 499, 'images/earcuff_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="earcuff">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/earcuff_3.jpg" alt="polki needle" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('earcuff-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Earcuff (Bugadi-Kundan-Needle)</span>
+            <h3 class="product-title"><a href="product-detail.html">polki needle</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹650.00 INR</span>
+              <span class="original-price">₹878</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('polki needle', 650, 'images/earcuff_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="earcuff">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/earcuff_4.jpg" alt="Kashmiri Ghungroo ear cuff" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('earcuff-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Earcuff (Bugadi-Kundan-Needle)</span>
+            <h3 class="product-title"><a href="product-detail.html">Kashmiri Ghungroo ear cuff</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1050.00 INR</span>
+              <span class="original-price">₹1418</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kashmiri Ghungroo ear cuff', 1050, 'images/earcuff_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="earcuff">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/earcuff_5.jpg" alt="Chand needle" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('earcuff-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Earcuff (Bugadi-Kundan-Needle)</span>
+            <h3 class="product-title"><a href="product-detail.html">Chand needle</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Chand needle', 800, 'images/earcuff_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="earcuff">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/earcuff_6.jpg" alt="bird bugadi" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('earcuff-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Earcuff (Bugadi-Kundan-Needle)</span>
+            <h3 class="product-title"><a href="product-detail.html">bird bugadi</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹700.00 INR</span>
+              <span class="original-price">₹945</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('bird bugadi', 700, 'images/earcuff_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-necklace">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/pachi_necklace_1.jpg" alt="Aarohi Kundan Elephant Necklace Set - Dark Edition" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_necklace-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">Aarohi Kundan Elephant Necklace Set - Dark Edition</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2300.00 INR</span>
+              <span class="original-price">₹3105</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Aarohi Kundan Elephant Necklace Set - Dark Edition', 2300, 'images/pachi_necklace_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-necklace">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/pachi_necklace_2.jpg" alt="Adaa Kundan Haar" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_necklace-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">Adaa Kundan Haar</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹3250.00 INR</span>
+              <span class="original-price">₹4388</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Adaa Kundan Haar', 3250, 'images/pachi_necklace_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-necklace">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/pachi_necklace_3.jpg" alt="Afghani mirror necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_necklace-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">Afghani mirror necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2600.00 INR</span>
+              <span class="original-price">₹3510</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Afghani mirror necklace', 2600, 'images/pachi_necklace_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-necklace">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/pachi_necklace_4.jpg" alt="Afghani mirror necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_necklace-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">Afghani mirror necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2500.00 INR</span>
+              <span class="original-price">₹3375</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Afghani mirror necklace', 2500, 'images/pachi_necklace_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-necklace">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/pachi_necklace_5.jpg" alt="Afghani Necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_necklace-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">Afghani Necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1100.00 INR</span>
+              <span class="original-price">₹1485</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Afghani Necklace', 1100, 'images/pachi_necklace_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="pachi-necklace">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/pachi_necklace_6.jpg" alt="Afghani necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('pachi_necklace-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Pachi Kundan Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">Afghani necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2200.00 INR</span>
+              <span class="original-price">₹2970</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Afghani necklace', 2200, 'images/pachi_necklace_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="german-silver-necklace">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/silver_necklace_1.jpg" alt="golden hasli" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_necklace-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Necklaces</span>
+            <h3 class="product-title"><a href="product-detail.html">golden hasli</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹550.00 INR</span>
+              <span class="original-price">₹742</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('golden hasli', 550, 'images/silver_necklace_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="german-silver-necklace">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/silver_necklace_2.jpg" alt="silver hasli" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_necklace-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Necklaces</span>
+            <h3 class="product-title"><a href="product-detail.html">silver hasli</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹999.00 INR</span>
+              <span class="original-price">₹1349</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('silver hasli', 999, 'images/silver_necklace_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="german-silver-necklace">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/silver_necklace_3.jpg" alt="lotus choker" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_necklace-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Necklaces</span>
+            <h3 class="product-title"><a href="product-detail.html">lotus choker</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹350.00 INR</span>
+              <span class="original-price">₹473</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('lotus choker', 350, 'images/silver_necklace_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="german-silver-necklace">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_necklace_4.jpg" alt="Coin necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_necklace-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Necklaces</span>
+            <h3 class="product-title"><a href="product-detail.html">Coin necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1500.00 INR</span>
+              <span class="original-price">₹2025</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Coin necklace', 1500, 'images/silver_necklace_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="german-silver-necklace">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_necklace_5.jpg" alt="lotus choker" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_necklace-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Necklaces</span>
+            <h3 class="product-title"><a href="product-detail.html">lotus choker</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹400.00 INR</span>
+              <span class="original-price">₹540</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('lotus choker', 400, 'images/silver_necklace_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="german-silver-necklace">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_necklace_6.jpg" alt="silver hasli" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_necklace-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Necklaces</span>
+            <h3 class="product-title"><a href="product-detail.html">silver hasli</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹550.00 INR</span>
+              <span class="original-price">₹742</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('silver hasli', 550, 'images/silver_necklace_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rings">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/rings_1.jpg" alt="DUALTONE HATHI RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('rings-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Handcrafted Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">DUALTONE HATHI RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹200.00 INR</span>
+              <span class="original-price">₹270</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('DUALTONE HATHI RING', 200, 'images/rings_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rings">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/rings_2.jpg" alt="HATHI KUNDAN RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('rings-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Handcrafted Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">HATHI KUNDAN RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹450.00 INR</span>
+              <span class="original-price">₹608</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('HATHI KUNDAN RING', 450, 'images/rings_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rings">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/rings_3.jpg" alt="BANJARA RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('rings-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Handcrafted Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">BANJARA RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹249.00 INR</span>
+              <span class="original-price">₹336</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('BANJARA RING', 249, 'images/rings_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/rings_4.jpg" alt="TEJ RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('rings-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Handcrafted Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">TEJ RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹270.00 INR</span>
+              <span class="original-price">₹364</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('TEJ RING', 270, 'images/rings_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rings">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/rings_5.jpg" alt="RAJWADI RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('rings-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Handcrafted Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">RAJWADI RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹550.00 INR</span>
+              <span class="original-price">₹742</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('RAJWADI RING', 550, 'images/rings_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="rings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/rings_6.jpg" alt="PREMIUM NANDI RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('rings-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Handcrafted Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">PREMIUM NANDI RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹599.00 INR</span>
+              <span class="original-price">₹809</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('PREMIUM NANDI RING', 599, 'images/rings_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="premium-rings">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/premium_rings_1.jpg" alt="adjustable mint ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('premium_rings-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">PREMIUM RINGS</span>
+            <h3 class="product-title"><a href="product-detail.html">adjustable mint ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹650.00 INR</span>
+              <span class="original-price">₹878</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('adjustable mint ring', 650, 'images/premium_rings_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="premium-rings">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/premium_rings_2.jpg" alt="RAKSHA PACHI KUNDAN RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('premium_rings-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">PREMIUM RINGS</span>
+            <h3 class="product-title"><a href="product-detail.html">RAKSHA PACHI KUNDAN RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('RAKSHA PACHI KUNDAN RING', 800, 'images/premium_rings_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="premium-rings">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/premium_rings_3.jpg" alt="CHAKRA 3 RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('premium_rings-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">PREMIUM RINGS</span>
+            <h3 class="product-title"><a href="product-detail.html">CHAKRA 3 RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹350.00 INR</span>
+              <span class="original-price">₹473</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('CHAKRA 3 RING', 350, 'images/premium_rings_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="premium-rings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/premium_rings_4.jpg" alt="BEPANAH RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('premium_rings-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">PREMIUM RINGS</span>
+            <h3 class="product-title"><a href="product-detail.html">BEPANAH RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹550.00 INR</span>
+              <span class="original-price">₹742</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('BEPANAH RING', 550, 'images/premium_rings_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="premium-rings">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/premium_rings_5.jpg" alt="BUBBLE KUNDAN RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('premium_rings-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">PREMIUM RINGS</span>
+            <h3 class="product-title"><a href="product-detail.html">BUBBLE KUNDAN RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹550.00 INR</span>
+              <span class="original-price">₹742</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('BUBBLE KUNDAN RING', 550, 'images/premium_rings_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="premium-rings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/premium_rings_6.jpg" alt="RAJWADI RING" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('premium_rings-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">PREMIUM RINGS</span>
+            <h3 class="product-title"><a href="product-detail.html">RAJWADI RING</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹550.00 INR</span>
+              <span class="original-price">₹742</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('RAJWADI RING', 550, 'images/premium_rings_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="nosepin">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/nosepin_1.jpg" alt="Nose pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('nosepin-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Nosepin Collection</span>
+            <h3 class="product-title"><a href="product-detail.html">Nose pin</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹299.00 INR</span>
+              <span class="original-price">₹404</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Nose pin', 299, 'images/nosepin_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="nosepin">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/nosepin_2.jpg" alt="Nose pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('nosepin-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Nosepin Collection</span>
+            <h3 class="product-title"><a href="product-detail.html">Nose pin</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹299.00 INR</span>
+              <span class="original-price">₹404</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Nose pin', 299, 'images/nosepin_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="nosepin">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/nosepin_3.jpg" alt="Kundan nose pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('nosepin-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Nosepin Collection</span>
+            <h3 class="product-title"><a href="product-detail.html">Kundan nose pin</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹350.00 INR</span>
+              <span class="original-price">₹473</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kundan nose pin', 350, 'images/nosepin_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="nosepin">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/nosepin_4.jpg" alt="Product" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('nosepin-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Nosepin Collection</span>
+            <h3 class="product-title"><a href="product-detail.html">Product</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹120.00 INR</span>
+              <span class="original-price">₹162</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Product', 120, 'images/nosepin_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="nosepin">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/nosepin_5.jpg" alt="Kundan nose pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('nosepin-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Nosepin Collection</span>
+            <h3 class="product-title"><a href="product-detail.html">Kundan nose pin</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹350.00 INR</span>
+              <span class="original-price">₹473</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kundan nose pin', 350, 'images/nosepin_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="nosepin">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/nosepin_6.jpg" alt="Nose pin" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('nosepin-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Nosepin Collection</span>
+            <h3 class="product-title"><a href="product-detail.html">Nose pin</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹350.00 INR</span>
+              <span class="original-price">₹473</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Nose pin', 350, 'images/nosepin_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-earrings">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/statement_earrings_1.jpg" alt="AURA  EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_earrings-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">AURA  EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹750.00 INR</span>
+              <span class="original-price">₹1013</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('AURA  EARINGS', 750, 'images/statement_earrings_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-earrings">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/statement_earrings_2.jpg" alt="Luxe Pearl Drops" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_earrings-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Luxe Pearl Drops</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹950.00 INR</span>
+              <span class="original-price">₹1282</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Luxe Pearl Drops', 950, 'images/statement_earrings_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-earrings">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/statement_earrings_3.jpg" alt="Bali earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_earrings-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Bali earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹999.00 INR</span>
+              <span class="original-price">₹1349</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Bali earrings', 999, 'images/statement_earrings_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-earrings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_earrings_4.jpg" alt="Regal Glow Earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_earrings-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Regal Glow Earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Regal Glow Earrings', 800, 'images/statement_earrings_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-earrings">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_earrings_5.jpg" alt="STATEMENT EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_earrings-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">STATEMENT EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹340.00 INR</span>
+              <span class="original-price">₹459</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('STATEMENT EARINGS', 340, 'images/statement_earrings_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-earrings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_earrings_6.jpg" alt="Handmade Bali earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_earrings-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Handmade Bali earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹999.00 INR</span>
+              <span class="original-price">₹1349</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Handmade Bali earrings', 999, 'images/statement_earrings_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-rings">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/statement_rings_1.jpg" alt="Peacock ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_rings-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">Peacock ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹899.00 INR</span>
+              <span class="original-price">₹1214</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Peacock ring', 899, 'images/statement_rings_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-rings">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/statement_rings_2.jpg" alt="Blue stone ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_rings-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">Blue stone ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Blue stone ring', 800, 'images/statement_rings_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-rings">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/statement_rings_3.jpg" alt="￼ Maroon stone ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_rings-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">￼ Maroon stone ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('￼ Maroon stone ring', 800, 'images/statement_rings_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-rings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_rings_4.jpg" alt="Green stone ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_rings-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">Green stone ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Green stone ring', 800, 'images/statement_rings_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-rings">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_rings_5.jpg" alt="Green stone ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_rings-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">Green stone ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹600.00 INR</span>
+              <span class="original-price">₹810</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Green stone ring', 600, 'images/statement_rings_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-rings">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_rings_6.jpg" alt="Pink stone ring" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_rings-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Rings</span>
+            <h3 class="product-title"><a href="product-detail.html">Pink stone ring</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹600.00 INR</span>
+              <span class="original-price">₹810</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pink stone ring', 600, 'images/statement_rings_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-necklace">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/statement_necklace_1.jpg" alt="INDRIYA OCEAN STONE NECKLACE" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_necklace-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">INDRIYA OCEAN STONE NECKLACE</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹2900.00 INR</span>
+              <span class="original-price">₹3915</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('INDRIYA OCEAN STONE NECKLACE', 2900, 'images/statement_necklace_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-necklace">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/statement_necklace_2.jpg" alt="premium quality hasli" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_necklace-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">premium quality hasli</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹4500.00 INR</span>
+              <span class="original-price">₹6075</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('premium quality hasli', 4500, 'images/statement_necklace_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-necklace">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/statement_necklace_3.jpg" alt="statement necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_necklace-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">statement necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1350.00 INR</span>
+              <span class="original-price">₹1823</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('statement necklace', 1350, 'images/statement_necklace_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-necklace">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_necklace_4.jpg" alt="statement necklace" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_necklace-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">statement necklace</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1350.00 INR</span>
+              <span class="original-price">₹1823</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('statement necklace', 1350, 'images/statement_necklace_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-necklace">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_necklace_5.jpg" alt="statement choker" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_necklace-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">statement choker</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹3700.00 INR</span>
+              <span class="original-price">₹4995</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('statement choker', 3700, 'images/statement_necklace_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="statement-necklace">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/statement_necklace_6.jpg" alt="statement  choker" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('statement_necklace-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Statement Necklace</span>
+            <h3 class="product-title"><a href="product-detail.html">statement  choker</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1999.00 INR</span>
+              <span class="original-price">₹2699</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('statement  choker', 1999, 'images/statement_necklace_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-below-300">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/silver_below_300_1.jpg" alt="TEAL STONE EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_below_300-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Below 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">TEAL STONE EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹400.00 INR</span>
+              <span class="original-price">₹540</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('TEAL STONE EARINGS', 400, 'images/silver_below_300_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-below-300">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/silver_below_300_2.jpg" alt="STATEMENT EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_below_300-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Below 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">STATEMENT EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹340.00 INR</span>
+              <span class="original-price">₹459</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('STATEMENT EARINGS', 340, 'images/silver_below_300_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-below-300">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/silver_below_300_3.jpg" alt="PENDI PREMIUM EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_below_300-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Below 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">PENDI PREMIUM EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹650.00 INR</span>
+              <span class="original-price">₹878</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('PENDI PREMIUM EARINGS', 650, 'images/silver_below_300_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-below-300">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_below_300_4.jpg" alt="Noor Jhumka" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_below_300-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Below 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">Noor Jhumka</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹200.00 INR</span>
+              <span class="original-price">₹270</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Noor Jhumka', 200, 'images/silver_below_300_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-below-300">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_below_300_5.jpg" alt="MARUTI EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_below_300-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Below 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">MARUTI EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹410.00 INR</span>
+              <span class="original-price">₹554</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('MARUTI EARINGS', 410, 'images/silver_below_300_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-below-300">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_below_300_6.jpg" alt="Earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_below_300-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Below 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">Earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹500.00 INR</span>
+              <span class="original-price">₹675</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Earrings', 500, 'images/silver_below_300_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-above-300">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/silver_above_300_1.jpg" alt="PAKSHI EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_above_300-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Above 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">PAKSHI EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹299.00 INR</span>
+              <span class="original-price">₹404</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('PAKSHI EARINGS', 299, 'images/silver_above_300_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-above-300">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/silver_above_300_2.jpg" alt="TRENDING EARCUFF" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_above_300-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Above 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">TRENDING EARCUFF</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹210.00 INR</span>
+              <span class="original-price">₹284</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('TRENDING EARCUFF', 210, 'images/silver_above_300_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-above-300">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/silver_above_300_3.jpg" alt="bird earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_above_300-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Above 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">bird earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹800.00 INR</span>
+              <span class="original-price">₹1080</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('bird earrings', 800, 'images/silver_above_300_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-above-300">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_above_300_4.jpg" alt="German silver bird earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_above_300-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Above 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">German silver bird earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹250.00 INR</span>
+              <span class="original-price">₹338</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('German silver bird earrings', 250, 'images/silver_above_300_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-above-300">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_above_300_5.jpg" alt="Tops" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_above_300-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Above 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">Tops</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹299.00 INR</span>
+              <span class="original-price">₹404</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Tops', 299, 'images/silver_above_300_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+
+        <div class="product-card" data-category="silver-above-300">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/silver_above_300_6.jpg" alt="TELEPHONE EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('silver_above_300-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">German Silver Earrings (Above 300 Rs)</span>
+            <h3 class="product-title"><a href="product-detail.html">TELEPHONE EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹299.00 INR</span>
+              <span class="original-price">₹404</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('TELEPHONE EARINGS', 299, 'images/silver_above_300_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination Controls Container -->
+      <div class="catalog-pagination-wrap" id="paginationControls"></div>
+    </main>
+  </div>
+
+  <!-- Luxury Modern Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="auro-logo-wrap">
+          <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+            <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+            <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+            <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text-block">
+            <div class="logo-title-row">
+              <span class="logo-brand-name">Auro</span>
+              <span class="logo-ampersand">&amp;</span>
+            </div>
+            <span class="logo-subscript-jewellery">Jewellary</span>
+          </div>
+        </a>
+        <p>Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</p>
+        <div class="social-links">
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <!-- Pinterest -->
+          <a href="#" aria-label="Pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="12" x2="12" y2="21"></line>
+              <path d="M8 8a4 4 0 1 1 8 0c0 3-2 5-4 5s-2-1-2-1"></path>
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+              <polygon points="10 15 15 12 10 9 10 15" fill="currentColor"></polygon>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home Showroom</a></li>
+          <li><a href="collections.html">All Products Catalogue</a></li>
+          <li><a href="product-detail.html">Meera Meenakari Product Page</a></li>
+          <li><a href="lookbook.html">Editorial Lookbook '25</a></li>
+          <li><a href="about.html">Artisan Legacy &amp; Story</a></li>
+          <li><a href="contact.html">Store Locations &amp; Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Client Services</h4>
+        <ul>
+          <li><a href="contact.html">Book Video Shopping Call</a></li>
+          <li><a href="contact.html">Bangle Sizing Assistance</a></li>
+          <li><a href="contact.html">Track Shipment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Boutique Concierge</h4>
+        <p><i data-lucide="map-pin"></i> Johari Bazaar, Jaipur, RJ</p>
+        <p><i data-lucide="phone"></i> +91 (0) 98200 12345</p>
+        <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container text-center"><p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p></div></div>
+  </footer>
+
+  <!-- Quick View Modal & Cart Drawer -->
+  <div class="modal-backdrop" id="productModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="modalClose"><i data-lucide="x"></i></button>
+      <div class="modal-body-grid">
+        <div class="modal-image-col"><img id="modalImg" src="" alt="Product"></div>
+        <div class="modal-details-col">
+          <span class="badge" id="modalTag">Heritage</span>
+          <h2 id="modalTitle">Product</h2>
+          <div class="modal-pricing">
+            <span class="current-price" id="modalPrice">â‚¹0</span>
+            <span class="original-price" id="modalOldPrice">â‚¹0</span>
+          </div>
+          <p id="modalDesc"></p>
+          <div class="modal-btn-row">
+            <button class="btn btn-primary btn-block" id="modalAddToCart">Add To Bag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-drawer-backdrop" id="cartDrawer">
+    <div class="cart-drawer-panel">
+      <div class="cart-drawer-header">
+        <h3>Shopping Bag (<span id="cartDrawerCount">2</span>)</h3>
+        <button class="cart-close" id="cartCloseBtn"><i data-lucide="x"></i></button>
+      </div>
+      <div class="cart-items-list" id="cartItemsContainer"></div>
+      <div class="cart-drawer-footer">
+        <div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">â‚¹17,349</span></div>
+        <button class="btn btn-primary btn-block checkout-btn" onclick="alert('Checkout initiated!')">Secure Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919820012345" target="_blank" class="whatsapp-float"><i data-lucide="message-circle"></i></a>
+
+  <script src="script.js"></script>
+  <script>
+    // Client-Side Pagination: Exactly 3 cards per row (9 cards per page = 3 full rows)
+    document.addEventListener("DOMContentLoaded", function () {
+      const itemsPerPage = 9; // 3 items per row * 3 rows = 9 items per page
+      let currentPage = 1;
+      const grid = document.getElementById("catalogProductsGrid");
+      if (!grid) return;
+
+      const cards = Array.from(grid.querySelectorAll(".product-card"));
+      const totalItems = cards.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const paginationContainer = document.getElementById("paginationControls");
+      const showingText = document.getElementById("showingCountText");
+
+      function renderPage(page) {
+        currentPage = page;
+        const start = (page - 1) * itemsPerPage;
+        const end = Math.min(start + itemsPerPage, totalItems);
+
+        cards.forEach((card, index) => {
+          if (index >= start && index < end) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (showingText) {
+          showingText.innerHTML = `Showing <strong>${start + 1} - ${end}</strong> of ${totalItems} Designs`;
+        }
+
+        renderPaginationButtons();
+      }
+
+      function renderPaginationButtons() {
+        if (!paginationContainer) return;
+        paginationContainer.innerHTML = "";
+
+        // Prev Button
+        const prevBtn = document.createElement("button");
+        prevBtn.className = "page-btn nav-text-btn";
+        prevBtn.innerHTML = "&larr; Prev";
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => {
+          if (currentPage > 1) {
+            renderPage(currentPage - 1);
+            window.scrollTo({ top: grid.offsetTop - 120, behavior: "smooth" });
+          }
+        };
+        paginationContainer.appendChild(prevBtn);
+
+        // Page Numbers
+        let pageNumbers = [];
+        if (totalPages <= 7) {
+          for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+        } else {
+          if (currentPage <= 4) {
+            pageNumbers = [1, 2, 3, 4, 5, "...", totalPages];
+          } else if (currentPage >= totalPages - 3) {
+            pageNumbers = [1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+          } else {
+            pageNumbers = [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
+          }
+        }
+
+        pageNumbers.forEach(p => {
+          if (p === "...") {
+            const span = document.createElement("span");
+            span.className = "page-ellipsis";
+            span.textContent = "...";
+            paginationContainer.appendChild(span);
+          } else {
+            const btn = document.createElement("button");
+            btn.className = `page-btn ${p === currentPage ? "active" : ""}`;
+            btn.textContent = p;
+            btn.onclick = () => {
+              renderPage(p);
+              window.scrollTo({ top: grid.offsetTop - 120, behavior: "smooth" });
+            };
+            paginationContainer.appendChild(btn);
+          }
+        });
+
+        // Next Button
+        const nextBtn = document.createElement("button");
+        nextBtn.className = "page-btn nav-text-btn";
+        nextBtn.innerHTML = "Next &rarr;";
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => {
+          if (currentPage < totalPages) {
+            renderPage(currentPage + 1);
+            window.scrollTo({ top: grid.offsetTop - 120, behavior: "smooth" });
+          }
+        };
+        paginationContainer.appendChild(nextBtn);
+      }
+
+      // Initialize First Page
+      renderPage(1);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

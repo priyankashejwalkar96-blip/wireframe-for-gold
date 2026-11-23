@@ -1,0 +1,596 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kashmiri Earrings | Auro &amp; Jewellary</title>
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 2.8rem;
+      padding: 3rem 0 6rem;
+    }
+    .category-filter-sidebar {
+      background: #FFFFFF;
+      border: 1px solid #eee7db;
+      border-radius: 12px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+    }
+    .sidebar-section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      border-bottom: 2px solid #9A2143;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .category-list-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+    }
+    .category-list-menu li {
+      margin-bottom: 0.35rem;
+    }
+    .category-list-menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.86rem;
+      color: #444;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .category-list-menu a:hover, .category-list-menu a.active {
+      background: #FAF8F5;
+      color: #9A2143;
+      font-weight: 600;
+      padding-left: 1.2rem;
+      box-shadow: 0 2px 8px rgba(154, 33, 67, 0.08);
+    }
+    .category-list-menu a:hover .count, .category-list-menu a.active .count {
+      background: #9A2143;
+      color: #ffffff;
+    }
+    .category-list-menu .count {
+      font-size: 0.75rem;
+      color: #888;
+      background: #f4efe6;
+      padding: 2px 8px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .catalog-top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FAF8F5;
+      padding: 1.1rem 1.8rem;
+      border-radius: 10px;
+      border: 1px solid #ebdcc5;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+    }
+    .active-tag-pill {
+      background: #9A2143;
+      color: #fff;
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    @media (max-width: 992px) {
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="luxury-gold-theme">
+
+  <!-- Top Announcement Bar (Static Original Layout) -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
+      <div class="top-bar-links">
+        <a href="contact.html">Boutiques</a>
+        <a href="policies.html">Track Order</a>
+        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="navbar">
+    <div class="container header-container">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu" style="display: none;">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- Royal Logo Emblem in #9A2143 & Poppins Typography -->
+      <a href="index.html" class="auro-logo-wrap">
+        <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+          <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+          <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+          <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+
+        <div class="logo-text-block">
+          <div class="logo-title-row">
+            <span class="logo-brand-name">Auro</span>
+            <span class="logo-ampersand">&amp;</span>
+          </div>
+          <span class="logo-subscript-jewellery">Jewellary</span>
+        </div>
+      </a>
+
+      <!-- Desktop Center Navigation Bar with 2-Column Mega Dropdown -->
+      <nav class="center-nav desktop-nav">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item-link">HOME</a></li>
+          
+          <!-- ALL PRODUCTS Dropdown Menu -->
+          <li class="nav-dropdown-wrapper">
+            <a href="collections.html" class="nav-item-link active">
+              ALL PRODUCTS <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 2px;"></i>
+            </a>
+            
+                                    <div class="custom-dropdown-menu">
+              <a href="hair-accessories.html" class="dropdown-link-item"><span>Hair Accesories</span> <span class="count-pill">(8)</span></a>
+              <a href="pachi-kundan-earrings.html" class="dropdown-link-item"><span>Pachi kundan earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="kashmiri-earrings.html" class="dropdown-link-item"><span>Kashmiri earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-below-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Below 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="silver-earrings-above-300.html" class="dropdown-link-item"><span>Premium &amp; German Silver Earings (Above 300 Rs)</span> <span class="count-pill">(6)</span></a>
+              <a href="earcuff-bugadi.html" class="dropdown-link-item"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-earrings.html" class="dropdown-link-item"><span>Statement earrings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-rings.html" class="dropdown-link-item"><span>Statement Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="statement-necklace.html" class="dropdown-link-item"><span>Statement necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="pachi-kundan-necklace.html" class="dropdown-link-item"><span>Pachi Kundan Necklace</span> <span class="count-pill">(6)</span></a>
+              <a href="german-silver-necklaces.html" class="dropdown-link-item"><span>German silver Necklaces</span> <span class="count-pill">(6)</span></a>
+              <a href="rings.html" class="dropdown-link-item"><span>Rings</span> <span class="count-pill">(6)</span></a>
+              <a href="premium-rings.html" class="dropdown-link-item"><span>PREMIUM RINGS</span> <span class="count-pill">(6)</span></a>
+              <a href="nosepin.html" class="dropdown-link-item"><span>Nosepin</span> <span class="count-pill">(6)</span></a>
+            </div>
+          </li>
+
+          <li><a href="diwali-collections.html" class="nav-item-link">DIWALI COLLECTIONS</a></li>
+          <li><a href="policies.html" class="nav-item-link">POLICIES</a></li>
+          <li><a href="about.html" class="nav-item-link">ABOUT US</a></li>
+          <li><a href="contact.html" class="nav-item-link">CONTACT US</a></li>
+          <li><a href="lookbook.html" class="nav-item-link">BLOGS</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="nav-actions-right">
+        <a href="#search" class="header-icon-btn" aria-label="Search Catalog"><i data-lucide="search"></i></a>
+        <a href="contact.html" class="header-icon-btn" aria-label="VIP Account"><i data-lucide="user"></i><span class="lightning-badge">⚡</span></a>
+        <a href="#wishlist" class="header-icon-btn" aria-label="Wishlist"><i data-lucide="heart"></i></a>
+        <a href="#cart" class="header-icon-btn cart-btn" id="cartOpenBtn" aria-label="Shopping Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="cart-count-badge" id="cartCount">2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Auro &amp; Jewellary</span>
+      <button class="drawer-close" id="drawerClose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">HOME</a>
+      <a href="collections.html">ALL PRODUCTS</a>
+      <a href="hair-accessories.html">HAIR ACCESSORIES</a>
+      <a href="kashmiri-earrings.html" style="color: #9A2143; font-weight: 600;">Kashmiri Earrings</a>
+      <a href="about.html">POLICIES</a>
+      <a href="about.html">ABOUT US</a>
+      <a href="contact.html">CONTACT US</a>
+    </div>
+  </div>
+
+  <!-- Hero Header Banner -->
+  <div class="page-hero-banner" style="background: linear-gradient(rgba(18,18,18,0.72), rgba(18,18,18,0.72)), url('images/hero.jpg') center/cover;">
+    <div class="container text-center">
+      <span class="section-tag" style="color: #DFC285 !important;">Imperial Royal Collection</span>
+      <h1 class="page-title" style="color: #fff; font-size: 3rem; font-family: 'Poppins', sans-serif; font-weight: 600;">Kashmiri Earrings</h1>
+      <p style="color: #e0e0e0; max-width: 650px; margin: 0.8rem auto 0; font-size: 0.95rem;">Royal Jhumkas & Kashmiri Dejhoor Earrings. Curated with imperial Mughal artistry and hallmarked hypoallergenic finish.</p>
+    </div>
+  </div>
+
+  <!-- Continuous Running Marquee Banner (Under Main Banner / Hero Section) -->
+  <div class="marquee-strip">
+    <div class="marquee-strip-track">
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <!-- Seamless loop duplicate -->
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+      <span class="marquee-strip-item">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999 <span class="marquee-sep">✦</span></span>
+    </div>
+  </div>
+
+  <!-- Breadcrumbs & Stats Bar -->
+  <div class="container" style="padding: 1.2rem 0; font-size: 0.84rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
+    <div class="breadcrumb" style="color: #666;">
+      <a href="index.html" style="color: #666;">Home</a> / <a href="collections.html" style="color: #666;">All Products</a> / <strong style="color: #9A2143;">Kashmiri Earrings</strong>
+    </div>
+    <div class="active-filters">
+      <span class="active-tag-pill">Showing 6 Curated Designs <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i></span>
+    </div>
+  </div>
+
+  <!-- Main Layout: Sidebar + Product Grid -->
+  <div class="container catalog-layout">
+    
+    <!-- Left Sidebar Categories -->
+    <aside class="category-filter-sidebar">
+      <div class="sidebar-section-title">
+        <span>Categories</span>
+        <i data-lucide="filter" style="width: 16px; height: 16px; color: #9A2143;"></i>
+      </div>
+
+      <ul class="category-list-menu">
+        <li><a href="collections.html"><span>All Categories</span> <span class="count">86</span></a></li>
+        <li><a href="hair-accessories.html"><span>Hair Accesories</span> <span class="count">8</span></a></li>
+        <li><a href="pachi-kundan-earrings.html"><span>Pachi kundan earrings</span> <span class="count">6</span></a></li>
+        <li><a href="kashmiri-earrings.html" class="active"><span>Kashmiri earrings</span> <span class="count">6</span></a></li>
+        <li><a href="silver-earrings-below-300.html"><span>German Silver (Below 300 Rs)</span> <span class="count">6</span></a></li>
+        <li><a href="silver-earrings-above-300.html"><span>German Silver (Above 300 Rs)</span> <span class="count">6</span></a></li>
+        <li><a href="earcuff-bugadi.html"><span>Earcuff (Bugadi-Kundan-Needle)</span> <span class="count">6</span></a></li>
+        <li><a href="statement-earrings.html"><span>Statement earrings</span> <span class="count">6</span></a></li>
+        <li><a href="statement-rings.html"><span>Statement Rings</span> <span class="count">6</span></a></li>
+        <li><a href="statement-necklace.html"><span>Statement necklace</span> <span class="count">6</span></a></li>
+        <li><a href="pachi-kundan-necklace.html"><span>Pachi Kundan Necklace</span> <span class="count">6</span></a></li>
+        <li><a href="german-silver-necklaces.html"><span>German silver Necklaces</span> <span class="count">6</span></a></li>
+        <li><a href="rings.html"><span>Rings</span> <span class="count">6</span></a></li>
+        <li><a href="premium-rings.html"><span>PREMIUM RINGS</span> <span class="count">6</span></a></li>
+        <li><a href="nosepin.html"><span>Nosepin</span> <span class="count">6</span></a></li>
+      </ul>
+
+      <!-- Price & Sizing Filter -->
+      <div class="sidebar-section-title">
+        <span>Price Range</span>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-direction: column; margin-bottom: 1.5rem; font-size: 0.84rem;">
+        <label><input type="checkbox" checked> Under ₹499</label>
+        <label><input type="checkbox" checked> ₹500 - ₹1,499</label>
+        <label><input type="checkbox"> ₹1,500 &amp; Above</label>
+      </div>
+
+      <div class="sidebar-help-box" style="background: #FAF8F5; padding: 1.4rem; border: 1px solid #ebdcc5; border-radius: 8px; text-align: center;">
+        <i data-lucide="help-circle" style="color: #9A2143; width: 28px; height: 28px; margin-bottom: 0.4rem;"></i>
+        <h4 style="font-size: 0.95rem; margin-bottom: 0.2rem; font-weight: 600;">Custom Styling?</h4>
+        <p style="font-size: 0.78rem; color: #666; margin-bottom: 0.8rem;">Chat directly with our Jaipur jewellery concierge on WhatsApp.</p>
+        <a href="https://wa.me/919820012345" class="btn btn-outline-dark btn-block" style="padding: 0.5rem; font-size: 0.76rem; border-color: #9A2143; color: #9A2143;">WhatsApp Concierge</a>
+      </div>
+    </aside>
+
+    <!-- Right Side: Product Grid -->
+    <main class="catalog-products-main">
+      
+      <!-- Top Controls -->
+      <div class="catalog-top-controls">
+        <div>
+          <span style="font-weight: 500; font-size: 0.9rem;">Sort by:</span>
+          <select style="border: 1px solid #ddd; padding: 6px 12px; border-radius: 4px; font-family: 'Poppins', sans-serif; font-size: 0.85rem; background: #fff;">
+            <option>Featured Designs</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Bestseller Rating</option>
+          </select>
+        </div>
+        <div style="font-size: 0.85rem; color: #666;">
+          Showing 6 Items
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" style="margin-top: 0;">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <div class="product-badge royal">Bestseller</div>
+          <div class="product-media">
+            <img src="images/kashmiri_1.jpg" alt="ILLUMINATE ETHNIC EMERALD STONE EARINGS" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-1')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">ILLUMINATE ETHNIC EMERALD STONE EARINGS</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(27 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1150.00 INR</span>
+              <span class="original-price">₹1552</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('ILLUMINATE ETHNIC EMERALD STONE EARINGS', 1150, 'images/kashmiri_1.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>        <!-- Product 2 -->
+        <div class="product-card">
+          <div class="product-badge heritage">Artisan Choice</div>
+          <div class="product-media">
+            <img src="images/kashmiri_2.jpg" alt="golden earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-2')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">golden earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(34 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹899.00 INR</span>
+              <span class="original-price">₹1214</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('golden earrings', 899, 'images/kashmiri_2.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="product-badge royal">Trending</div>
+          <div class="product-media">
+            <img src="images/kashmiri_3.jpg" alt="Kashmiri earrings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-3')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Kashmiri earrings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(41 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1550.00 INR</span>
+              <span class="original-price">₹2092</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Kashmiri earrings', 1550, 'images/kashmiri_3.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>        <!-- Product 4 -->
+        <div class="product-card">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/kashmiri_4.jpg" alt="Golden dazzling kashmiri earings" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-4')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Golden dazzling kashmiri earings</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(48 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹900.00 INR</span>
+              <span class="original-price">₹1215</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Golden dazzling kashmiri earings', 900, 'images/kashmiri_4.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>        <!-- Product 5 -->
+        <div class="product-card">
+          <div class="product-badge royal">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/kashmiri_5.jpg" alt="Elephant Kashmiri jhumkas" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-5')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Elephant Kashmiri jhumkas</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(55 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1050.00 INR</span>
+              <span class="original-price">₹1418</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Elephant Kashmiri jhumkas', 1050, 'images/kashmiri_5.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>        <!-- Product 6 -->
+        <div class="product-card">
+          <div class="product-badge heritage">Handcrafted</div>
+          <div class="product-media">
+            <img src="images/kashmiri_6.jpg" alt="Elephant Kashmiri jhumkas" class="primary-img">
+            <div class="product-actions-overlay">
+              <button class="quick-view-btn" onclick="openModal('kashmiri-6')"><i data-lucide="eye"></i> Quick View</button>
+              <button class="wishlist-icon-btn" aria-label="Add to wishlist"><i data-lucide="heart"></i></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Kashmiri Earrings</span>
+            <h3 class="product-title"><a href="product-detail.html">Elephant Kashmiri jhumkas</a></h3>
+            <div class="rating-stars">★★★★★ <span class="count">(62 reviews)</span></div>
+            <div class="price-row">
+              <span class="current-price">₹1050.00 INR</span>
+              <span class="original-price">₹1418</span>
+              <span class="discount-percent">26% OFF</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Elephant Kashmiri jhumkas', 1050, 'images/kashmiri_6.jpg')">
+              <i data-lucide="shopping-bag"></i> Add to Bag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination Wrap -->
+      <div class="text-center" style="margin-top: 3.5rem;">
+        <div style="display: inline-flex; gap: 0.5rem; align-items: center;">
+          <span style="width: 36px; height: 36px; background: #9A2143; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem;">1</span>
+          <a href="#" style="width: 36px; height: 36px; border: 1px solid #ddd; color: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">2</a>
+          <span style="color: #888; margin-left: 0.5rem;">Next &rarr;</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Luxury Modern Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="auro-logo-wrap">
+          <svg class="logo-symbol-svg" viewBox="0 0 64 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="34" r="30" stroke="#9A2143" stroke-width="1.8" stroke-dasharray="2 2" opacity="0.45"/>
+            <polygon points="32,6 38,13 32,20 26,13" fill="#9A2143" stroke="#1A1A1A" stroke-width="0.8"/>
+            <circle cx="32" cy="13" r="2.2" fill="#FFFFFF"/>
+            <path d="M22 48 L32 24 L42 48" stroke="#1A1A1A" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 41 L39 41" stroke="#9A2143" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M16 42 C16 54, 32 58, 48 50 C50 49, 52 46, 50 44 C48 42, 45 44, 43 46" stroke="#9A2143" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <div class="logo-text-block">
+            <div class="logo-title-row">
+              <span class="logo-brand-name">Auro</span>
+              <span class="logo-ampersand">&amp;</span>
+            </div>
+            <span class="logo-subscript-jewellery">Jewellary</span>
+          </div>
+        </a>
+        <p>Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="#" aria-label="Pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="12" x2="12" y2="21"></line>
+              <path d="M8 8a4 4 0 1 1 8 0c0 3-2 5-4 5s-2-1-2-1"></path>
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+              <polygon points="10 15 15 12 10 9 10 15" fill="currentColor"></polygon>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home Showroom</a></li>
+          <li><a href="collections.html">All Products Catalogue</a></li>
+          <li><a href="hair-accessories.html">Hair Accessories</a></li>
+          <li><a href="kashmiri-earrings.html">Kashmiri Earrings</a></li>
+          <li><a href="pachi-kundan-necklace.html">Pachi Kundan Necklace</a></li>
+          <li><a href="product-detail.html">Meera Meenakari Product Page</a></li>
+          <li><a href="lookbook.html">Editorial Lookbook '25</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Client Services</h4>
+        <ul>
+          <li><a href="contact.html">Book Video Shopping Call</a></li>
+          <li><a href="contact.html">Bangle Sizing Assistance</a></li>
+          <li><a href="contact.html">Track Shipment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Boutique Concierge</h4>
+        <p><i data-lucide="map-pin"></i> Johari Bazaar, Jaipur, RJ</p>
+        <p><i data-lucide="phone"></i> +91 (0) 98200 12345</p>
+        <p><i data-lucide="mail"></i> concierge@aurojewels.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container text-center"><p>&copy; 2025 Auro &amp; Jewellary. All Rights Reserved.</p></div></div>
+  </footer>
+
+  <!-- Quick View Modal & Cart Drawer -->
+  <div class="modal-backdrop" id="productModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="modalClose"><i data-lucide="x"></i></button>
+      <div class="modal-body-grid">
+        <div class="modal-image-col"><img id="modalImg" src="" alt="Product"></div>
+        <div class="modal-details-col">
+          <span class="badge" id="modalTag">Kashmiri Earrings</span>
+          <h2 id="modalTitle">Product Title</h2>
+          <div class="modal-pricing">
+            <span class="current-price" id="modalPrice">₹799.00 INR</span>
+          </div>
+          <p id="modalDesc">Authentic handcrafted Jaipur jewellery crafted with uncut stones, imperial micro-finish, and hallmarked anti-allergic alloys.</p>
+          <div class="modal-actions">
+            <button class="btn btn-primary" onclick="alert('Item added to your shopping bag!')">Add to Shopping Bag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cartDrawerBackdrop">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>Shopping Bag (<span id="cartCountHeader">2</span>)</h3>
+        <button class="cart-close" id="cartCloseBtn"><i data-lucide="x"></i></button>
+      </div>
+      <div class="cart-drawer-items" id="cartItemsList"></div>
+      <div class="cart-drawer-footer">
+        <div class="subtotal-row">
+          <span>Subtotal</span>
+          <span class="subtotal-amount" id="cartSubtotal">₹17,349</span>
+        </div>
+        <p class="taxes-note">Taxes &amp; Insured Courier calculated at checkout.</p>
+        <button class="btn btn-primary btn-block checkout-btn" onclick="alert('Proceeding to Luxury Secure Checkout!')">Proceed to Secure Checkout</button>
+        <button class="btn btn-outline-dark btn-block continue-btn" id="continueShopping">Continue Exploring</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Concierge Floating Action Button -->
+  <a href="https://wa.me/919820012345" target="_blank" class="whatsapp-float"><i data-lucide="message-circle"></i></a>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
