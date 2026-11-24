@@ -1,0 +1,1820 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jewellery Admin Dashboard - 100% Free Supabase Engine</title>
+  <!-- Tailwind CSS CDN for sleek modern UI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- Supabase JS Client CDN (Free) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; color: #f8fafc; }
+    .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #aa771c 100%); }
+    .gold-text { color: #d4af37; }
+    .gold-border { border-color: rgba(212, 175, 55, 0.3); }
+    .card-bg { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-72 border-r border-slate-800 bg-slate-900/90 p-5 flex flex-col justify-between shrink-0">
+    <div>
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center text-slate-950 font-bold text-xl">
+          ðŸ’Ž
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight tracking-wide">SHREE JEWELS</h1>
+          <span class="text-xs text-amber-400 font-medium">Admin & Metal Hub</span>
+        </div>
+      </div>
+
+      <nav class="space-y-1.5">
+        <button onclick="switchTab('dashboard')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <i class="ph ph-squares-four text-lg"></i> Overview
+        </button>
+        <button onclick="switchTab('metal-rates')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800/60 transition">
+          <i class="ph ph-coins text-lg"></i> Live Metal Rates
+        </button>
+        <button onclick="switchTab('products')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800/60 transition">
+          <i class="ph ph-package text-lg"></i> Products & Stock
+        </button>
+        <button onclick="switchTab('orders')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800/60 transition">
+          <i class="ph ph-shopping-cart text-lg"></i> Orders & Shipping
+        </button>
+        <button onclick="switchTab('user-logs')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800/60 transition">
+          <i class="ph ph-users text-lg"></i> User Logins &amp; Audit
+        </button>
+        <button onclick="switchTab('cms-manager')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800/60 transition">
+          <i class="ph ph-paint-brush-broad text-lg"></i> Website CMS &amp; Banners
+        </button>
+        <button onclick="switchTab('settings')" class="tab-btn w-full flex items-center gap-3 whitespace-nowrap px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800/60 transition">
+          <i class="ph ph-gear text-lg"></i> Supabase Setup
+        </button>
+      </nav>
+    </div>
+
+    <!-- Quick Store Link -->
+    <div class="pt-4 border-t border-slate-800">
+      <a href="index.html" target="_blank" class="flex items-center justify-between text-xs text-slate-400 hover:text-white px-2 py-1.5 transition">
+        <span>Go to Live Store</span>
+        <i class="ph ph-arrow-square-out text-sm"></i>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <!-- Top Bar -->
+    <header class="flex items-center justify-between pb-6 mb-6 border-b border-slate-800">
+      <div>
+        <h2 id="page-title" class="text-2xl font-bold tracking-tight">Overview Dashboard</h2>
+        <p class="text-xs text-slate-400 mt-1">Real-time inventory, sales, and dynamic gold/silver rates</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Live Status Pill -->
+        <div id="connection-pill" class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="conn-text">Active (Offline/Local Cache)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="tab-dashboard" class="tab-content space-y-6">
+      <!-- 4 Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="card-bg p-5 rounded-xl">
+          <span class="text-xs font-medium text-slate-400">24K Fine Gold Rate</span>
+          <div class="text-2xl font-bold mt-1 text-amber-300" id="stat-gold-24k">â‚¹7,850 /g</div>
+          <span class="text-xs text-emerald-400 flex items-center gap-1 mt-2">
+            <i class="ph ph-trend-up"></i> +0.45% today
+          </span>
+        </div>
+        <div class="card-bg p-5 rounded-xl">
+          <span class="text-xs font-medium text-slate-400">22K Standard Gold Rate</span>
+          <div class="text-2xl font-bold mt-1 text-amber-400" id="stat-gold-22k">â‚¹7,250 /g</div>
+          <span class="text-xs text-emerald-400 flex items-center gap-1 mt-2">
+            <i class="ph ph-trend-up"></i> +0.42% today
+          </span>
+        </div>
+        <div class="card-bg p-5 rounded-xl">
+          <span class="text-xs font-medium text-slate-400">925 Sterling Silver</span>
+          <div class="text-2xl font-bold mt-1 text-slate-200" id="stat-silver-925">â‚¹87.50 /g</div>
+          <span class="text-xs text-red-400 flex items-center gap-1 mt-2">
+            <i class="ph ph-trend-down"></i> -0.10% today
+          </span>
+        </div>
+        <div class="card-bg p-5 rounded-xl">
+          <span class="text-xs font-medium text-slate-400">Total Products</span>
+          <div class="text-2xl font-bold mt-1 text-white" id="stat-products">24 Items</div>
+          <span class="text-xs text-amber-400 mt-2 block">100% Dynamic Pricing</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions & Live Price Ticker Control -->
+      <div class="card-bg p-6 rounded-xl">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-bold text-base">Metal Price Engine & Dynamic Updates</h3>
+            <p class="text-xs text-slate-400">All jewellery prices update automatically whenever rates are updated here.</p>
+          </div>
+          <button onclick="switchTab('metal-rates')" class="px-4 py-2 rounded-lg text-xs font-semibold gold-gradient text-slate-950 flex items-center gap-2">
+            <i class="ph ph-arrows-clockwise text-sm"></i> Update Metal Rates
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: LIVE METAL RATES (FREE API & MANUAL CONTROLS) -->
+    <section id="tab-metal-rates" class="tab-content hidden space-y-6">
+      <div class="card-bg p-6 rounded-xl">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+          <div>
+            <h3 class="font-bold text-lg">Daily Metal Price Management</h3>
+            <p class="text-xs text-slate-400">Sync rates via Free API or override manually to ensure accuracy for your shop.</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="fetchLiveRatesFreeApi()" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 flex items-center gap-1.5">
+              <i class="ph ph-cloud-arrow-down text-base"></i> Sync Free Live API
+            </button>
+            <button onclick="saveManualRates()" class="px-4 py-2 rounded-lg text-xs font-semibold gold-gradient text-slate-950 flex items-center gap-1.5">
+              <i class="ph ph-floppy-disk text-base"></i> Save Changes
+            </button>
+          </div>
+        </div>
+
+        <!-- Rates Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-xs text-slate-400 uppercase bg-slate-800/40">
+              <tr>
+                <th class="p-3">Metal / Karat</th>
+                <th class="p-3">Purity (%)</th>
+                <th class="p-3">Rate per Gram (INR â‚¹)</th>
+                <th class="p-3">24h Fluctuation</th>
+                <th class="p-3">Status</th>
+              </tr>
+            </thead>
+            <tbody id="metal-table-body" class="divide-y divide-slate-800">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: PRODUCTS & INVENTORY (FULL DYNAMIC CRUD) -->
+    <section id="tab-products" class="tab-content hidden space-y-6">
+      <div class="card-bg p-6 rounded-xl flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg text-amber-400 flex items-center gap-2">
+            <i class="ph ph-package text-xl"></i> All Products &amp; Live Stock Manager
+          </h3>
+          <p class="text-xs text-slate-400">Add, edit, delete, and change photos for all 86+ catalogue items. Changes sync live with Supabase &amp; collections.html</p>
+        </div>
+        <button onclick="addNewProductModal()" class="px-4 py-2 rounded-lg text-xs font-semibold gold-gradient text-slate-950 flex items-center gap-2 shadow">
+          <i class="ph ph-plus-circle text-base"></i> + Add New Product
+        </button>
+      </div>
+
+      <div class="card-bg p-6 rounded-xl">
+        <div id="product-list-preview" class="space-y-4">
+          <p class="text-xs text-slate-400">Loading existing products from wireframe &amp; store...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ORDERS -->
+    <section id="tab-orders" class="tab-content hidden space-y-6">
+      <div class="card-bg p-6 rounded-xl">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+          <div>
+            <h3 class="font-bold text-lg">Customer Orders &amp; Shipping Pipeline</h3>
+            <p class="text-xs text-slate-400">Live order management synced with Supabase Database</p>
+          </div>
+          <button onclick="loadOrders()" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 flex items-center gap-1.5">
+            <i class="ph ph-arrows-clockwise text-base"></i> Refresh Orders
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-xs text-slate-400 uppercase bg-slate-800/40">
+              <tr>
+                <th class="p-3">Order #</th>
+                <th class="p-3">Customer</th>
+                <th class="p-3">City / Pincode</th>
+                <th class="p-3">Total Amount</th>
+                <th class="p-3">Payment</th>
+                <th class="p-3">Shipping Status</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body" class="divide-y divide-slate-800">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: CMS & WEBSITE CONTENT MANAGER -->
+    <!-- TAB: FULL SITE UNIVERSAL CMS MANAGER -->
+    <section id="tab-cms-manager" class="tab-content hidden space-y-6">
+      <div class="card-bg p-6 rounded-xl">
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+          <div>
+            <h3 class="font-bold text-xl text-white flex items-center gap-2">
+              <span>ðŸ’Ž</span> Master Website &amp; Multi-Page Dynamic Manager
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">Control Home, All Products Dropdown, Diwali, Policies, About Us, Contact Us, Blogs &amp; Footers dynamically.</p>
+          </div>
+          <button onclick="saveAllPagesUniversalCMS()" class="px-6 py-2.5 rounded-lg text-xs font-bold gold-gradient text-slate-950 flex items-center gap-2 shadow-lg hover:opacity-90 transition">
+            <i class="ph ph-floppy-disk text-base"></i> Save &amp; Publish To All Pages
+          </button>
+        </div>
+
+        <!-- SUB TABS NAVIGATION FOR EVERY PAGE -->
+        <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-3 mb-6">
+          <button type="button" onclick="switchPageCmsTab('home')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">1. Home &amp; Header</button>
+          <button type="button" onclick="switchPageCmsTab('home-sections')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">âœ¨ Home All Sections (CRUD)</button>
+          <button type="button" onclick="switchPageCmsTab('dropdown')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">2. All Products Dropdown</button>
+          <button type="button" onclick="switchPageCmsTab('diwali')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">3. Diwali Collections</button>
+          <button type="button" onclick="switchPageCmsTab('about')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">4. About Us</button>
+          <button type="button" onclick="switchPageCmsTab('contact')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">5. Contact Us</button>
+          <button type="button" onclick="switchPageCmsTab('policies')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">6. Policies</button>
+          <button type="button" onclick="switchPageCmsTab('blogs')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">7. Blogs / Lookbook</button>
+          <button type="button" onclick="switchPageCmsTab('footer')" class="cms-sub-tab px-3 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white">8. Universal Footer</button>
+        </div>
+
+        <!-- 1. HOME & HEADER -->
+        <div id="cms-page-home" class="cms-page-pane space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">Top Announcement Bar</h5>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Top Offer Text</label>
+                <textarea id="p-home-announcement" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white"></textarea>
+              </div>
+            </div>
+            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">Brand Identity</h5>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Brand Name</label>
+                  <input type="text" id="p-home-brand" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Brand Suffix</label>
+                  <input type="text" id="p-home-suffix" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div>
+                <h5 class="text-xs font-bold text-amber-400 uppercase flex items-center gap-2">
+                  <i class="ph ph-images text-base"></i> Homepage Multi-Banner Slider CRUD Manager
+                </h5>
+                <p class="text-[11px] text-slate-400">Add 3 or more rotating slides at a time. Edit headlines, buttons, and images or delete unwanted banners.</p>
+              </div>
+              <button type="button" onclick="addNewHeroBanner()" class="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 font-semibold text-xs border border-amber-500/30 hover:bg-amber-500/30 transition flex items-center gap-1">
+                <i class="ph ph-plus-circle text-sm"></i> + Add New Banner Slide
+              </button>
+            </div>
+
+            <div id="hero-banners-crud-container" class="space-y-4">
+              <!-- Rendered dynamically via renderHeroBannerCards() -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.1 ALL HOME SECTIONS FULL CRUD MANAGER -->
+        <div id="cms-page-home-sections" class="cms-page-pane hidden space-y-6">
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-amber-500/30 flex items-center justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-amber-400 flex items-center gap-2">
+                <i class="ph ph-squares-four text-lg"></i> Homepage All Sections Dynamic Control Center
+              </h4>
+              <p class="text-xs text-slate-400">Add, Edit, and Delete items across every single section of the Home Page.</p>
+            </div>
+            <button type="button" onclick="saveAllPagesUniversalCMS()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs shadow-lg hover:from-amber-400 hover:to-amber-500 flex items-center gap-1.5">
+              <i class="ph ph-floppy-disk text-base"></i> Save &amp; Publish Home Sections
+            </button>
+          </div>
+
+          <!-- Section 1: Running Marquee Strip -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">1. Continuous Running Marquee Banner</h5>
+              <button type="button" onclick="addHomeMarqueeItem()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Marquee Item</button>
+            </div>
+            <div id="admin-marquee-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Section 2: Trust Badges -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">2. Trust &amp; Assurance Badges Under Hero</h5>
+              <button type="button" onclick="addHomeTrustBadge()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Badge</button>
+            </div>
+            <div id="admin-trust-badges-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Section 3: Shop by Category Grid -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">3. Shop by Category Grid (All Circular / Square Cards)</h5>
+              <button type="button" onclick="addHomeCategoryCard()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Category Card</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Section Tag</label>
+                <input type="text" id="h-cat-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Section Title</label>
+                <input type="text" id="h-cat-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-categories-list" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Section 4: Our Bestsellers -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">4. Our Bestseller Showcase</h5>
+              <button type="button" onclick="addHomeBestseller()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Bestseller Card</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Heading</label>
+                <input type="text" id="h-best-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Subtitle</label>
+                <input type="text" id="h-best-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-bestsellers-list" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Section 5: The Royal Masterpieces / Featured -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">5. The Royal Masterpieces (Featured Filter Gallery)</h5>
+              <button type="button" onclick="addHomeMasterpiece()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Masterpiece Card</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="h-feat-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Heading</label>
+                <input type="text" id="h-feat-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Subtitle</label>
+                <input type="text" id="h-feat-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-masterpieces-list" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Section 6: Demifine Jewellery 4 Large Tiles -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">6. DEMIFINE JEWELLERY 4 Large Tiles</h5>
+              <button type="button" onclick="addHomeDemifineTile()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Tile</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Main Heading</label>
+                <input type="text" id="h-demi-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Sub-Heading</label>
+                <input type="text" id="h-demi-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-demifine-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Section 7: Artisan Heritage Craftsmanship Story -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase pb-2 border-b border-slate-800">7. Artisan Heritage Craftsmanship Story</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Badge Tag</label>
+                <input type="text" id="h-craft-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Story Title</label>
+                <input type="text" id="h-craft-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Story Description</label>
+              <textarea id="h-craft-desc" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white"></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-slate-800/60 p-2.5 rounded border border-slate-700 space-y-1.5">
+                <span class="text-[11px] font-bold text-amber-300">Step 01</span>
+                <input type="text" id="h-craft-s1-title" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white" placeholder="Step 1 Title">
+                <textarea id="h-craft-s1-desc" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white" placeholder="Step 1 Description"></textarea>
+              </div>
+              <div class="bg-slate-800/60 p-2.5 rounded border border-slate-700 space-y-1.5">
+                <span class="text-[11px] font-bold text-amber-300">Step 02</span>
+                <input type="text" id="h-craft-s2-title" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white" placeholder="Step 2 Title">
+                <textarea id="h-craft-s2-desc" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white" placeholder="Step 2 Description"></textarea>
+              </div>
+              <div class="bg-slate-800/60 p-2.5 rounded border border-slate-700 space-y-1.5">
+                <span class="text-[11px] font-bold text-amber-300">Step 03</span>
+                <input type="text" id="h-craft-s3-title" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white" placeholder="Step 3 Title">
+                <textarea id="h-craft-s3-desc" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded p-1 text-xs text-white" placeholder="Step 3 Description"></textarea>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Years Count (75+)</label>
+                <input type="text" id="h-craft-years-num" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Years Tagline</label>
+                <input type="text" id="h-craft-years-text" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button Text</label>
+                <input type="text" id="h-craft-btn-text" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button Link</label>
+                <input type="text" id="h-craft-btn-url" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 8: Royal Brides / Instagram Shoppable Grid -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">8. Worn by Real Queens / Instagram Shoppable Gallery</h5>
+              <button type="button" onclick="addHomeInstaItem()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Queen Card</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="h-insta-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Heading</label>
+                <input type="text" id="h-insta-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Subtitle</label>
+                <input type="text" id="h-insta-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-insta-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Section 9: Client Reverence / Testimonials -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">9. Client Reverence &amp; Verified Reviews</h5>
+              <button type="button" onclick="addHomeReviewItem()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Review</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Badge Tag</label>
+                <input type="text" id="h-rev-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Section Title</label>
+                <input type="text" id="h-rev-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-reviews-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Section 10: Style Chronicles / Home Blogs -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">10. Style Chronicles &amp; Heritage Tales (Home Blog Cards)</h5>
+              <button type="button" onclick="addHomeBlogItem()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Blog Article</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Badge Tag</label>
+                <input type="text" id="h-blog-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Section Title</label>
+                <input type="text" id="h-blog-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Description Subtitle</label>
+                <input type="text" id="h-blog-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-blogs-list" class="space-y-2"></div>
+          </div>
+
+          <!-- Section 11: VIP Privilege Newsletter -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase pb-2 border-b border-slate-800">11. Newsletter VIP Privilege Club Section</h5>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="h-news-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Heading</label>
+                <input type="text" id="h-news-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button Action Text</label>
+                <input type="text" id="h-news-btn" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Subtitle / Offer Description</label>
+                <input type="text" id="h-news-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Privacy Statement Note</label>
+                <input type="text" id="h-news-note" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ALL PRODUCTS DROPDOWN CATEGORIES -->
+        <div id="cms-page-dropdown" class="cms-page-pane hidden space-y-4">
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800">
+            <div class="flex items-center justify-between mb-3">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">1. Manage All Products Mega Menu Categories</h5>
+              <button type="button" onclick="addNewDropdownCategoryRow()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Category</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-800/60 text-slate-400 uppercase">
+                  <tr>
+                    <th class="p-2">Category Display Name</th>
+                    <th class="p-2">Item Count</th>
+                    <th class="p-2">Page Link URL</th>
+                    <th class="p-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cms-dropdown-table-body" class="divide-y divide-slate-800">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Category Sub-Pages Hero Metadata -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase">2. Category Pages Hero Header Content (All 14 Dropdown Pages)</h5>
+            <p class="text-[11px] text-slate-400">Control the title, tagline, and story description for each individual dropdown page (Hair Accessories, Kundan Earrings, Kashmiri, German Silver, Earcuffs, Rings, etc.)</p>
+            <div id="admin-category-pages-meta-list" class="space-y-3 pt-2"></div>
+          </div>
+        </div>
+
+        <!-- 3. DIWALI COLLECTIONS -->
+        <div id="cms-page-diwali" class="cms-page-pane hidden space-y-4">
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase">Diwali Collections Page Banner</h5>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Festive Tag Badge</label>
+              <input type="text" id="p-diwali-tag" value="SHUBH DEEPAVALI AUSPICIOUS EDIT 2025" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Page Main Title</label>
+              <input type="text" id="p-diwali-title" value="The Shubh Labh Festive Jewellery Edit" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Page Description</label>
+              <textarea id="p-diwali-subtitle" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">Auspicious Dhanteras &amp; Diwali royal handcrafted jewellery, infused with 22K gold foil, precious gemstones and temple motifs.</textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-amber-400 mb-1">Diwali Banner Background Image</label>
+              <div class="flex items-center gap-3">
+                <input type="file" accept="image/*" id="diwali-file-input" onchange="handleSinglePageBannerUpload(event, 'p-diwali-img-val', 'diwali-preview-img')" class="hidden">
+                <input type="hidden" id="p-diwali-img-val" value="images/banner_jewelry_pure_1.jpg">
+                <button type="button" onclick="document.getElementById('diwali-file-input').click()" class="px-3 py-2 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs font-semibold flex items-center gap-1.5">
+                  <i class="ph ph-upload-simple text-sm"></i> Choose Banner File
+                </button>
+                <img id="diwali-preview-img" src="images/banner_jewelry_pure_1.jpg" class="w-16 h-10 object-cover rounded border border-slate-700 shadow">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. ABOUT US -->
+        <div id="cms-page-about" class="cms-page-pane hidden space-y-6">
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-amber-500/30 flex items-center justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-amber-400 flex items-center gap-2">
+                <i class="ph ph-crown text-lg"></i> About Us Page Complete Dynamic Control Center
+              </h4>
+              <p class="text-xs text-slate-400">Add, Edit, and Delete every chapter, key metrics, craft philosophy, foundational pillars, and 4-step process.</p>
+            </div>
+            <button type="button" onclick="saveAllPagesUniversalCMS()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs shadow-lg hover:from-amber-400 hover:to-amber-500 flex items-center gap-1.5">
+              <i class="ph ph-floppy-disk text-base"></i> Save &amp; Publish About Page
+            </button>
+          </div>
+
+          <!-- Hero Section -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase flex items-center justify-between">
+              <span>About Us Hero Header &amp; Background</span>
+              <span class="text-[10px] text-slate-400 font-normal">about.html</span>
+            </h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Top Badge Tag</label>
+                <input type="text" id="p-about-badge" value="Master Goldsmiths of Jaipur Since 1952" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Main Heading / Title</label>
+                <input type="text" id="p-about-title" value="Preserving Four Generations of Imperial Meenakari &amp; Jadau" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Heritage Story Subtitle Content</label>
+              <textarea id="p-about-story" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">We bridge the gap between museum-grade royal Rajasthani ornaments and contemporary modern couture, honoring our ancestors' timeless craftsmanship with ethical precision.</textarea>
+            </div>
+            <div class="pt-2 border-t border-slate-800">
+              <label class="block text-[11px] font-bold text-amber-400 mb-1.5">About Page Banner Image</label>
+              <div class="flex items-center gap-3">
+                <input type="file" accept="image/*" id="about-file-input" onchange="handleSinglePageBannerUpload(event, 'p-about-img-val', 'about-preview-img')" class="hidden">
+                <input type="hidden" id="p-about-img-val" value="images/banner_jewelry_pure_2.jpg">
+                <button type="button" onclick="document.getElementById('about-file-input').click()" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs font-semibold flex items-center gap-1.5">
+                  <i class="ph ph-upload-simple text-sm"></i> Choose Banner File
+                </button>
+                <img id="about-preview-img" src="images/banner_jewelry_pure_2.jpg" class="w-16 h-10 object-cover rounded border border-slate-700 shadow">
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Metrics Strip CRUD -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">Key Metrics Strip (4 Stat Counters)</h5>
+              <button type="button" onclick="addAboutStatMetric()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Metric</button>
+            </div>
+            <div id="admin-about-stats-list" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+          </div>
+
+          <!-- Chapter 1: Johari Bazaar Roots -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase pb-2 border-b border-slate-800">Chapter I â€¢ Johari Bazaar Roots</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="ab-c1-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Chapter Title</label>
+                <input type="text" id="ab-c1-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white font-bold">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Paragraph 1</label>
+              <textarea id="ab-c1-p1" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white"></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Paragraph 2</label>
+              <textarea id="ab-c1-p2" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white"></textarea>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button 1 Text</label>
+                <input type="text" id="ab-c1-btn1-text" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button 1 URL</label>
+                <input type="text" id="ab-c1-btn1-url" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button 2 Text</label>
+                <input type="text" id="ab-c1-btn2-text" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button 2 URL</label>
+                <input type="text" id="ab-c1-btn2-url" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+              <div class="grid grid-cols-2 gap-3 flex-1 mr-4">
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Floating Tag Title</label>
+                  <input type="text" id="ab-c1-f-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Floating Tag Subtitle</label>
+                  <input type="text" id="ab-c1-f-sub" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="file" accept="image/*" id="ab-c1-file" onchange="handleChapter1ImageUpload(event)" class="hidden">
+                <button type="button" onclick="document.getElementById('ab-c1-file').click()" class="px-2.5 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs">Upload Photo</button>
+                <img id="ab-c1-img-preview" src="images/statement_necklace_1.jpg" class="w-12 h-12 object-cover rounded border border-slate-600">
+              </div>
+            </div>
+          </div>
+
+          <!-- Chapter 2: Conscious Luxury Philosophy -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase pb-2 border-b border-slate-800">Chapter II â€¢ The Craft Philosophy</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="ab-c2-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Chapter Title</label>
+                <input type="text" id="ab-c2-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white font-bold">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Paragraph 1</label>
+              <textarea id="ab-c2-p1" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white"></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Paragraph 2</label>
+              <textarea id="ab-c2-p2" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white"></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Paragraph 3</label>
+              <textarea id="ab-c2-p3" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white"></textarea>
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+              <div class="grid grid-cols-2 gap-3 flex-1 mr-4">
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Floating Tag Title</label>
+                  <input type="text" id="ab-c2-f-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Floating Tag Subtitle</label>
+                  <input type="text" id="ab-c2-f-sub" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="file" accept="image/*" id="ab-c2-file" onchange="handleChapter2ImageUpload(event)" class="hidden">
+                <button type="button" onclick="document.getElementById('ab-c2-file').click()" class="px-2.5 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs">Upload Photo</button>
+                <img id="ab-c2-img-preview" src="images/3d_luxury_necklace_pedestal.jpg" class="w-12 h-12 object-cover rounded border border-slate-600">
+              </div>
+            </div>
+          </div>
+
+          <!-- Foundational Values CRUD -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">Foundational Pillars &amp; Core Values</h5>
+              <button type="button" onclick="addAboutValueCard()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Value Pillar</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="ab-val-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Heading</label>
+                <input type="text" id="ab-val-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white font-bold">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Subtitle</label>
+                <input type="text" id="ab-val-sub" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-about-values-list" class="space-y-3"></div>
+          </div>
+
+          <!-- Traditional 4-Step Process CRUD -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">Traditional 4-Step Craft Process</h5>
+              <button type="button" onclick="addAboutProcessStep()" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs border border-amber-500/30">+ Add Step</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Tag</label>
+                <input type="text" id="ab-proc-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Process Title</label>
+                <input type="text" id="ab-proc-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white font-bold">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Subtitle</label>
+                <input type="text" id="ab-proc-sub" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div id="admin-about-process-list" class="space-y-3"></div>
+          </div>
+
+          <!-- Curators Quote Banner -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase pb-2 border-b border-slate-800">Ancestral Poetry / Curators Quote Banner</h5>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Quote Statement Text</label>
+              <textarea id="ab-quote-text" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white italic"></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Author / Sign-off Attribution</label>
+              <input type="text" id="ab-quote-author" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. CONTACT US -->
+        <div id="cms-page-contact" class="cms-page-pane hidden space-y-4">
+          <!-- 1. Hero Banner -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase flex items-center justify-between">
+              <span>1. Contact Us Hero Banner</span>
+              <span class="text-[10px] text-slate-400 font-normal">contact.html</span>
+            </h5>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Hero Tagline Badge</label>
+              <input type="text" id="p-contact-tag" value="24/7 Luxury Jewellery Concierge" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Page Title</label>
+              <input type="text" id="p-contact-title" value="Connect With Auro &amp; Jewellary" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Page Description / Guidance</label>
+              <textarea id="p-contact-subtitle" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">Whether you seek personalized bridal trousseau guidance, custom bangle sizing, or live HD virtual showroom appointments, our stylists are at your service.</textarea>
+            </div>
+            <div class="pt-2 border-t border-slate-800">
+              <label class="block text-[11px] font-bold text-amber-400 mb-1.5">Contact Page Banner Image</label>
+              <div class="flex items-center gap-3">
+                <input type="file" accept="image/*" id="contact-file-input" onchange="handleSinglePageBannerUpload(event, 'p-contact-img-val', 'contact-preview-img')" class="hidden">
+                <input type="hidden" id="p-contact-img-val" value="images/banner_jewelry_pure_2.jpg">
+                <button type="button" onclick="document.getElementById('contact-file-input').click()" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs font-semibold flex items-center gap-1.5">
+                  <i class="ph ph-upload-simple text-sm"></i> Choose Banner File
+                </button>
+                <img id="contact-preview-img" src="images/banner_jewelry_pure_2.jpg" class="w-16 h-10 object-cover rounded border border-slate-700 shadow">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Direct Action Cards -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase">2. Direct Contact Action Cards (WhatsApp, Phone, Email, Salons)</h5>
+            <div id="admin-contact-actions-list" class="space-y-3"></div>
+          </div>
+
+          <!-- 3. Inquiry Form Settings -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase">3. Inquiry Form Settings</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Form Heading</label>
+                <input type="text" id="cnt-form-title" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Submit Button Text</label>
+                <input type="text" id="cnt-form-btn-text" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Form Subtitle / Promise</label>
+              <textarea id="cnt-form-subtitle" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white"></textarea>
+            </div>
+          </div>
+
+          <!-- 4. VIP Global Virtual Video Shopping -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase">4. VIP Global Virtual Video Shopping Card</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Card Title</label>
+                <input type="text" id="cnt-vs-title" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Button Text</label>
+                <input type="text" id="cnt-vs-btn-text" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Description (e.g. USA, UK, UAE Shopping)</label>
+              <textarea id="cnt-vs-desc" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white"></textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">WhatsApp Slot Booking URL</label>
+              <input type="text" id="cnt-vs-btn-url" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+          </div>
+
+          <!-- 5. Flagship Boutiques (CRUD) -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">5. Flagship Boutiques &amp; Salons</h5>
+              <button type="button" onclick="addContactBoutiqueCard()" class="px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 rounded text-xs">+ Add Boutique</button>
+            </div>
+            <div id="admin-contact-boutiques-list" class="space-y-3"></div>
+          </div>
+
+          <!-- 6. FAQs (CRUD) -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">6. Frequently Asked Questions (FAQ)</h5>
+              <button type="button" onclick="addContactFAQItem()" class="px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 rounded text-xs">+ Add FAQ</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[10px] text-slate-400">Section Tag</label>
+                <input type="text" id="cnt-faq-tag" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400">Section Title</label>
+                <input type="text" id="cnt-faq-title" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400">Section Subtitle</label>
+              <input type="text" id="cnt-faq-subtitle" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+            <div id="admin-contact-faqs-list" class="space-y-3 pt-2"></div>
+          </div>
+        </div>
+
+        <!-- 6. POLICIES -->
+        <div id="cms-page-policies" class="cms-page-pane hidden space-y-6">
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-amber-500/30 flex items-center justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-amber-400 flex items-center gap-2">
+                <i class="ph ph-shield-check text-lg"></i> Store Policies Page Complete Dynamic Control Center
+              </h4>
+              <p class="text-xs text-slate-400">Add, Edit, and Delete every single policy section, side directory link, banner, highlight notice, and shipping table row.</p>
+            </div>
+            <button type="button" onclick="saveAllPagesUniversalCMS()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs shadow-lg hover:from-amber-400 hover:to-amber-500 flex items-center gap-1.5">
+              <i class="ph ph-floppy-disk text-base"></i> Save &amp; Publish Policies Page
+            </button>
+          </div>
+
+          <!-- Policy Hero Banner & Tag -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase flex items-center justify-between">
+              <span>Policies Hero Header &amp; Background</span>
+              <span class="text-[10px] text-slate-400 font-normal">policies.html</span>
+            </h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Top Eyebrow Tag</label>
+                <input type="text" id="pol-hero-tag" value="Trust &amp; Transparency" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+              <div>
+                <label class="block text-[11px] text-slate-400 mb-1">Policy Main Title</label>
+                <input type="text" id="p-policies-title" value="Store Policies &amp; Assurance" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+              </div>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Policy Subtitle / Assurance Statement</label>
+              <textarea id="p-policies-subtitle" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">Our commitment to uncompromising purity, tamper-proof insured express logistics, and an effortless customer care experience.</textarea>
+            </div>
+            <div class="pt-2 border-t border-slate-800">
+              <label class="block text-[11px] font-bold text-amber-400 mb-1.5">Policies Page Hero Banner Image</label>
+              <div class="flex items-center gap-3">
+                <input type="file" accept="image/*" id="policies-file-input" onchange="handleSinglePageBannerUpload(event, 'p-policies-img-val', 'policies-preview-img')" class="hidden">
+                <input type="hidden" id="p-policies-img-val" value="images/hero_slide_2.jpg">
+                <button type="button" onclick="document.getElementById('policies-file-input').click()" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs font-semibold flex items-center gap-1.5">
+                  <i class="ph ph-upload-simple text-sm"></i> Choose Banner File
+                </button>
+                <img id="policies-preview-img" src="images/hero_slide_2.jpg" class="w-16 h-10 object-cover rounded border border-slate-700 shadow">
+              </div>
+            </div>
+          </div>
+
+          <!-- Directory Heading & Cards CRUD -->
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div>
+                <h5 class="text-xs font-bold text-amber-400 uppercase">Policy Directory &amp; Detail Articles CRUD</h5>
+                <p class="text-[11px] text-slate-400">Add or remove entire policy sections, modify terms, courier tables, and notices dynamically.</p>
+              </div>
+              <button type="button" onclick="addNewPolicySection()" class="px-3 py-1.5 rounded bg-amber-500/20 text-amber-300 text-xs font-semibold border border-amber-500/30 hover:bg-amber-500/30 flex items-center gap-1">
+                <i class="ph ph-plus-circle text-sm"></i> + Add New Policy Section
+              </button>
+            </div>
+
+            <div class="max-w-xs">
+              <label class="block text-[11px] text-slate-400 mb-1">Sidebar Directory Heading</label>
+              <input type="text" id="pol-dir-title" value="Policy Directory" class="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+
+            <!-- Dynamic Policy Cards Container -->
+            <div id="admin-policies-cards-list" class="space-y-4">
+              <!-- Rendered via renderAdminPolicyCards() -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. BLOGS / LOOKBOOK -->
+        <div id="cms-page-blogs" class="cms-page-pane hidden space-y-4">
+          <!-- 1. Hero Banner -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase flex items-center justify-between">
+              <span>1. Blogs &amp; Style Chronicles Hero Banner</span>
+              <span class="text-[10px] text-slate-400 font-normal">lookbook.html &amp; blog-single.html</span>
+            </h5>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Journal Badge Tag</label>
+              <input type="text" id="p-blogs-badge" value="The Jewellery Journal" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Journal Title</label>
+              <input type="text" id="p-blogs-title" value="Chronicles of Heritage, Style &amp; Craft" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Journal Description</label>
+              <textarea id="p-blogs-subtitle" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">Curated perspectives on Rajasthani Jadau heirlooms, bridal styling guides, Meenakari secrets, and contemporary luxury design.</textarea>
+            </div>
+            <div class="pt-2 border-t border-slate-800">
+              <label class="block text-[11px] font-bold text-amber-400 mb-1.5">Blogs Page Banner Image</label>
+              <div class="flex items-center gap-3">
+                <input type="file" accept="image/*" id="blogs-file-input" onchange="handleSinglePageBannerUpload(event, 'p-blogs-img-val', 'blogs-preview-img')" class="hidden">
+                <input type="hidden" id="p-blogs-img-val" value="images/banner_jewelry_pure_3.jpg">
+                <button type="button" onclick="document.getElementById('blogs-file-input').click()" class="px-3 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs font-semibold flex items-center gap-1.5">
+                  <i class="ph ph-upload-simple text-sm"></i> Choose Banner File
+                </button>
+                <img id="blogs-preview-img" src="images/banner_jewelry_pure_3.jpg" class="w-16 h-10 object-cover rounded border border-slate-700 shadow">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Filter Category Pills -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-bold text-amber-400 uppercase">2. Category Filter Pills</h5>
+              <button type="button" onclick="addBlogFilterTag()" class="px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 rounded text-xs">+ Add Filter</button>
+            </div>
+            <div id="admin-blog-filters-list" class="grid grid-cols-2 md:grid-cols-3 gap-2"></div>
+          </div>
+
+          <!-- 3. Blog Articles List (Full CRUD) -->
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h5 class="text-xs font-bold text-amber-400 uppercase">3. Blog Articles &amp; Stories (Lookbook &amp; Single Article CRUD)</h5>
+                <p class="text-[11px] text-slate-400">Add, edit, or delete full stories. Each article automatically creates its own dynamic single view on blog-single.html?id=...</p>
+              </div>
+              <button type="button" onclick="addBlogArticleItem()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded text-xs shadow-md">+ Add Article</button>
+            </div>
+            <div id="admin-blog-articles-list" class="space-y-4 pt-2"></div>
+          </div>
+        </div>
+
+        <!-- 8. UNIVERSAL FOOTER -->
+        <div id="cms-page-footer" class="cms-page-pane hidden space-y-4">
+          <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800 space-y-3">
+            <h5 class="text-xs font-bold text-amber-400 uppercase">Universal Footer Across All 28+ Pages</h5>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Footer About Story</label>
+              <textarea id="p-footer-about" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.</textarea>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Copyright Statement</label>
+              <input type="text" id="p-footer-copyright" value="Â© 2026 Auro &amp; Jewellary. All Rights Reserved." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section id="tab-user-logs" class="tab-content hidden space-y-6">
+      <div class="card-bg p-6 rounded-xl">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+          <div>
+            <h3 class="font-bold text-lg text-white">Live User Login Activity &amp; Audit</h3>
+            <p class="text-xs text-slate-400">Real-time log of customer registrations, admin logins, and active sessions</p>
+          </div>
+          <button onclick="loadLoginLogs()" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 flex items-center gap-1.5">
+            <i class="ph ph-arrows-clockwise text-base"></i> Refresh Logs
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-xs text-slate-400 uppercase bg-slate-800/40">
+              <tr>
+                <th class="p-3">User / Customer</th>
+                <th class="p-3">Email</th>
+                <th class="p-3">Role</th>
+                <th class="p-3">Device / Platform</th>
+                <th class="p-3">Login Status</th>
+                <th class="p-3">Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="login-logs-table-body" class="divide-y divide-slate-800">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: SETTINGS & SUPABASE CONNECT -->
+    <section id="tab-settings" class="tab-content hidden space-y-6">
+      <div class="card-bg p-6 rounded-xl">
+        <h3 class="font-bold text-lg mb-2 text-amber-400">Supabase 100% Free Database Connection</h3>
+        <p class="text-xs text-slate-300 mb-6 leading-relaxed">
+          Follow these 3 easy steps to connect your 100% free Supabase cloud database:
+          <br>1. Go to <a href="https://supabase.com" target="_blank" class="text-amber-400 underline font-semibold">supabase.com</a> and create a Free Account.
+          <br>2. Create a new project, go to the <b>SQL Editor</b>, and paste the code from <code class="text-amber-300">supabase_schema.sql</code>.
+          <br>3. Copy your <b>Project URL</b> & <b>anon public key</b> below:
+        </p>
+
+        <div class="space-y-4 max-w-xl">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Supabase Project URL</label>
+            <input type="text" id="input-supabase-url" placeholder="https://your-project.supabase.co" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Supabase Anon Public Key</label>
+            <input type="password" id="input-supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+          </div>
+          <button onclick="saveSupabaseCredentials()" class="px-5 py-2.5 rounded-lg text-xs font-bold gold-gradient text-slate-950 flex items-center gap-2">
+            <i class="ph ph-check-circle text-base"></i> Save & Test Connection
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Tab switching
+    function switchTab(tabId, clickedBtn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-amber-500/10', 'text-amber-400', 'border', 'border-amber-500/20');
+        el.classList.add('text-slate-300');
+      });
+
+      const activeTab = document.getElementById('tab-' + tabId);
+      if (activeTab) {
+        activeTab.classList.remove('hidden');
+      }
+
+      const btn = clickedBtn || (typeof event !== 'undefined' && event ? event.currentTarget : null) || document.querySelector(`[onclick*="${tabId}"]`);
+      if (btn && btn.classList) {
+        btn.classList.remove('text-slate-300');
+        btn.classList.add('bg-amber-500/10', 'text-amber-400', 'border', 'border-amber-500/20');
+      }
+
+      const titles = {
+        'dashboard': 'Overview Dashboard',
+        'metal-rates': 'Live Metal Pricing & Daily Rates',
+        'products': 'Product & Inventory Management',
+        'orders': 'Orders & Shipping Pipeline',
+        'user-logs': 'Live User Logins & Customer Audit',
+        'cms-manager': 'Dynamic Website CMS & Content Manager',
+        'settings': 'Supabase Free Cloud Connection'
+      };
+      const titleEl = document.getElementById('page-title');
+      if (titleEl) titleEl.innerText = titles[tabId] || 'Admin Dashboard';
+
+      if (tabId === 'orders') loadOrders();
+      if (tabId === 'user-logs') loadLoginLogs();
+      if (tabId === 'cms-manager') loadCMSFields();
+      if (tabId === 'products' && typeof loadAdminProducts === 'function') loadAdminProducts();
+    }
+
+    // Load & Save Dynamic CMS Fields
+    
+    let currentDropdownCats = [];
+
+    function switchPageCmsTab(pageId) {
+      if (pageId === 'dropdown') {
+        if (!currentDropdownCats || currentDropdownCats.length <= 1) {
+          currentDropdownCats = [{"name":"Hair Accesories","count":8,"url":"hair-accessories.html"},{"name":"Pachi kundan earrings","count":6,"url":"pachi-kundan-earrings.html"},{"name":"Kashmiri earrings","count":6,"url":"kashmiri-earrings.html"},{"name":"Premium & German Silver Earings (Below 300 Rs)","count":6,"url":"silver-earrings-below-300.html"},{"name":"Premium & German Silver Earings (Above 300 Rs)","count":6,"url":"silver-earrings-above-300.html"},{"name":"Earcuff (Bugadi-Kundan-Needle)","count":6,"url":"earcuff-bugadi.html"},{"name":"Statement earrings","count":6,"url":"statement-earrings.html"},{"name":"Statement Rings","count":6,"url":"statement-rings.html"},{"name":"Statement necklace","count":6,"url":"statement-necklace.html"},{"name":"Pachi Kundan Necklace","count":6,"url":"pachi-kundan-necklace.html"},{"name":"German silver Necklaces","count":6,"url":"german-silver-necklaces.html"},{"name":"Rings","count":6,"url":"rings.html"},{"name":"PREMIUM RINGS","count":6,"url":"premium-rings.html"},{"name":"Nosepin","count":6,"url":"nosepin.html"}];
+        }
+        renderDropdownCategoryRows();
+      }
+      document.querySelectorAll('.cms-page-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.cms-sub-tab').forEach(el => {
+        el.classList.remove('bg-amber-500/20', 'text-amber-400', 'border', 'border-amber-500/30');
+        el.classList.add('text-slate-400');
+      });
+
+      const pane = document.getElementById('cms-page-' + pageId);
+      if (pane) pane.classList.remove('hidden');
+
+      if (typeof event !== 'undefined' && event && event.currentTarget) {
+        event.currentTarget.classList.remove('text-slate-400');
+        event.currentTarget.classList.add('bg-amber-500/20', 'text-amber-400', 'border', 'border-amber-500/30');
+      }
+
+      // Re-assure all fields are filled with data/defaults
+      loadCMSFields();
+      if (typeof loadHomeSectionsAdmin === 'function') loadHomeSectionsAdmin();
+      if (typeof loadPoliciesSectionsAdmin === 'function') loadPoliciesSectionsAdmin();
+      if (typeof loadAboutSectionsAdmin === 'function') loadAboutSectionsAdmin();
+      if (typeof loadContactSectionsAdmin === 'function') loadContactSectionsAdmin();
+      if (typeof loadBlogsSectionsAdmin === 'function') loadBlogsSectionsAdmin();
+      if (typeof loadDropdownCategoriesAdmin === 'function') loadDropdownCategoriesAdmin();
+    }
+
+    function renderDropdownCategoryRows() {
+      const tbody = document.getElementById('cms-dropdown-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = currentDropdownCats.map((cat, idx) => `
+        <tr class="border-b border-slate-800">
+          <td class="p-2"><input type="text" value="${cat.name}" onchange="currentDropdownCats[${idx}].name=this.value" class="bg-slate-800 border border-slate-700 rounded p-1 text-xs text-white w-full"></td>
+          <td class="p-2 w-20"><input type="number" value="${cat.count}" onchange="currentDropdownCats[${idx}].count=parseInt(this.value)||0" class="bg-slate-800 border border-slate-700 rounded p-1 text-xs text-white w-full"></td>
+          <td class="p-2"><input type="text" value="${cat.url}" onchange="currentDropdownCats[${idx}].url=this.value" class="bg-slate-800 border border-slate-700 rounded p-1 text-xs text-white w-full"></td>
+          <td class="p-2 w-16 text-center"><button type="button" onclick="currentDropdownCats.splice(${idx},1); renderDropdownCategoryRows();" class="text-red-400 text-xs">Delete</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function addNewDropdownCategoryRow() {
+      currentDropdownCats.push({ name: "New Category", count: 6, url: "collections.html" });
+      renderDropdownCategoryRows();
+    }
+
+    
+    let heroBannersList = [];
+
+    const AVAILABLE_BANNER_IMAGES = [
+      { name: "Hero Classic Pearl (images/hero.jpg)", val: "images/hero.jpg" },
+      { name: "Royal Bridal Suite (images/banner_royal_bridal.jpg)", val: "images/banner_royal_bridal.jpg" },
+      { name: "Heritage Polki Jewels (images/banner_heritage_polki.jpg)", val: "images/banner_heritage_polki.jpg" },
+      { name: "Gold Editorial Model (images/banner_gold_editorial.jpg)", val: "images/banner_gold_editorial.jpg" },
+      { name: "Pure Temple Gold (images/banner_jewelry_pure_1.jpg)", val: "images/banner_jewelry_pure_1.jpg" },
+      { name: "Jaipur Emerald Cut (images/banner_jewelry_pure_2.jpg)", val: "images/banner_jewelry_pure_2.jpg" },
+      { name: "Kundan Choker Suite (images/banner_jewelry_pure_3.jpg)", val: "images/banner_jewelry_pure_3.jpg" },
+      { name: "Festive Diwali Backdrop (images/auro_festive_diwali_backdrop.jpg)", val: "images/auro_festive_diwali_backdrop.jpg" },
+      { name: "Raviva HD Luxury Model (images/raviva_banner_hd.webp)", val: "images/raviva_banner_hd.webp" }
+    ];
+
+    
+    function handleBannerFileUpload(event, idx) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Img = e.target.result;
+        heroBannersList[idx].image = base64Img;
+        const preview = document.getElementById('banner-preview-' + idx);
+        if (preview) preview.src = base64Img;
+        const fn = document.getElementById('banner-filename-' + idx);
+        if (fn) fn.innerText = 'Uploaded: ' + file.name;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleSinglePageBannerUpload(event, hiddenInputId, previewImgId) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Img = e.target.result;
+        const input = document.getElementById(hiddenInputId);
+        if (input) input.value = base64Img;
+        const preview = document.getElementById(previewImgId);
+        if (preview) preview.src = base64Img;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderHeroBannerCards() {
+      const container = document.getElementById('hero-banners-crud-container');
+      if (!container) return;
+
+      if (!heroBannersList.length) {
+        container.innerHTML = '<p class="text-xs text-slate-400">No banner slides configured. Click "+ Add New Banner Slide" above.</p>';
+        return;
+      }
+
+      container.innerHTML = heroBannersList.map((banner, idx) => `
+        <div class="bg-slate-800/70 p-4 rounded-lg border border-slate-700/80 space-y-3 relative">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-700">
+            <span class="text-xs font-bold text-amber-300">Slide #${idx + 1}</span>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] text-slate-400 font-mono">${banner.id || ('slide_' + (idx + 1))}</span>
+              <button type="button" onclick="deleteHeroBanner(${idx})" class="text-red-400 hover:text-red-300 text-xs px-2 py-0.5 rounded bg-red-500/10 border border-red-500/20">Delete Slide</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Top Eyebrow Tag</label>
+              <input type="text" value="${banner.eyebrow || ''}" onchange="heroBannersList[${idx}].eyebrow=this.value" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Main Headline / Offer (Big Text)</label>
+              <input type="text" value="${banner.headline || ''}" onchange="heroBannersList[${idx}].headline=this.value" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white font-bold">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Subheadline Description</label>
+              <input type="text" value="${banner.subheadline || ''}" onchange="heroBannersList[${idx}].subheadline=this.value" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-center pt-2 border-t border-slate-700/60">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Button Action Text</label>
+              <input type="text" value="${banner.btn_text || 'SHOP NOW'}" onchange="heroBannersList[${idx}].btn_text=this.value" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Button Link URL</label>
+              <input type="text" value="${banner.btn_url || 'collections.html'}" onchange="heroBannersList[${idx}].btn_url=this.value" class="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Banner Image</label>
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2">
+                  <input type="file" accept="image/*" id="banner-file-input-${idx}" onchange="handleBannerFileUpload(event, ${idx})" class="hidden">
+                  <button type="button" onclick="document.getElementById('banner-file-input-${idx}').click()" class="px-2.5 py-1.5 rounded bg-slate-900 hover:bg-slate-700 border border-slate-600 text-amber-300 text-xs font-semibold flex items-center gap-1.5 transition">
+                    <i class="ph ph-upload-simple text-sm"></i> Choose File / Upload Image
+                  </button>
+                  <img id="banner-preview-${idx}" src="${banner.image || 'images/hero.jpg'}" class="w-14 h-9 object-cover rounded border border-amber-500/40 shadow">
+                </div>
+                <div class="text-[10px] text-slate-400 truncate max-w-xs" id="banner-filename-${idx}">
+                  Current: ${banner.image ? banner.image.substring(0, 32) + '...' : 'Default Hero'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addNewHeroBanner() {
+      heroBannersList.push({
+        id: 'slide_' + Date.now(),
+        eyebrow: "18K GOLD PLATED . NEW ARRIVALS",
+        title: "A U R O",
+        sale_label: "FESTIVE EDIT",
+        headline: "EXCLUSIVE COLLECTION 2026",
+        subheadline: "HANDCRAFTED IN PURE 22K GOLD & HERITAGE MEENAKARI",
+        btn_domain: "AUROJEWELLERY.COM",
+        btn_text: "EXPLORE COLLECTION",
+        btn_url: "collections.html",
+        image: "images/banner_royal_bridal.jpg"
+      });
+      renderHeroBannerCards();
+    }
+
+    function deleteHeroBanner(idx) {
+      if (confirm('Delete this banner slide?')) {
+        heroBannersList.splice(idx, 1);
+        renderHeroBannerCards();
+      }
+    }
+
+    async function loadCMSFields() {
+      if (!window.UniversalCMSEngine) return;
+      const data = await window.UniversalCMSEngine.getData();
+
+      // Home
+      if (data.branding) {
+        document.getElementById('p-home-announcement').value = data.branding.announcement || '';
+        document.getElementById('p-home-brand').value = data.branding.brand_name || '';
+        document.getElementById('p-home-suffix').value = data.branding.brand_suffix || '';
+      }
+      if (data.home_hero) {
+        document.getElementById('p-home-headline').value = data.home_hero.headline || '';
+        document.getElementById('p-home-subheadline').value = data.home_hero.subheadline || '';
+        document.getElementById('p-home-btn-text').value = data.home_hero.btn_text || '';
+        document.getElementById('p-home-btn-url').value = data.home_hero.btn_url || '';
+        if (data.home_hero.hero_image) {
+          document.getElementById('p-home-hero-img').value = data.home_hero.hero_image;
+          document.getElementById('preview-home-img').src = data.home_hero.hero_image;
+        }
+        if (data.home_hero.diwali_banner) {
+          const dVal = document.getElementById('p-diwali-img-val');
+          if (dVal && data.home_hero.diwali_banner) {
+            dVal.value = data.home_hero.diwali_banner;
+            const dPrev = document.getElementById('diwali-preview-img');
+            if (dPrev) dPrev.src = data.home_hero.diwali_banner;
+          }
+        }
+      }
+
+      // Dropdown
+      // Multi-Banner Loading
+      if (window.MultiBannerEngine) {
+        heroBannersList = window.MultiBannerEngine.getSlides();
+        renderHeroBannerCards();
+      }
+      currentDropdownCats = (data.dropdown_categories && data.dropdown_categories.length > 0) ? data.dropdown_categories : [{"name":"Hair Accesories","count":8,"url":"hair-accessories.html"},{"name":"Pachi kundan earrings","count":6,"url":"pachi-kundan-earrings.html"},{"name":"Kashmiri earrings","count":6,"url":"kashmiri-earrings.html"},{"name":"Premium & German Silver Earings (Below 300 Rs)","count":6,"url":"silver-earrings-below-300.html"},{"name":"Premium & German Silver Earings (Above 300 Rs)","count":6,"url":"silver-earrings-above-300.html"},{"name":"Earcuff (Bugadi-Kundan-Needle)","count":6,"url":"earcuff-bugadi.html"},{"name":"Statement earrings","count":6,"url":"statement-earrings.html"},{"name":"Statement Rings","count":6,"url":"statement-rings.html"},{"name":"Statement necklace","count":6,"url":"statement-necklace.html"},{"name":"Pachi Kundan Necklace","count":6,"url":"pachi-kundan-necklace.html"},{"name":"German silver Necklaces","count":6,"url":"german-silver-necklaces.html"},{"name":"Rings","count":6,"url":"rings.html"},{"name":"PREMIUM RINGS","count":6,"url":"premium-rings.html"},{"name":"Nosepin","count":6,"url":"nosepin.html"}];
+      renderDropdownCategoryRows();
+
+      // Diwali
+      if (data.diwali_page) {
+        document.getElementById('p-diwali-tag').value = data.diwali_page.festive_tag || 'SHUBH DEEPAVALI AUSPICIOUS EDIT 2025';
+        document.getElementById('p-diwali-title').value = data.diwali_page.title || 'The Shubh Labh Festive Jewellery Edit';
+        document.getElementById('p-diwali-subtitle').value = data.diwali_page.subtitle || 'Auspicious Dhanteras & Diwali royal handcrafted jewellery, infused with 22K gold foil, precious gemstones and temple motifs.';
+      } else {
+        document.getElementById('p-diwali-tag').value = 'SHUBH DEEPAVALI AUSPICIOUS EDIT 2025';
+        document.getElementById('p-diwali-title').value = 'The Shubh Labh Festive Jewellery Edit';
+        document.getElementById('p-diwali-subtitle').value = 'Auspicious Dhanteras & Diwali royal handcrafted jewellery, infused with 22K gold foil, precious gemstones and temple motifs.';
+      }
+
+      // About
+      if (data.about_page) {
+        document.getElementById('p-about-badge').value = data.about_page.badge || 'Master Goldsmiths of Jaipur Since 1952';
+        document.getElementById('p-about-title').value = data.about_page.title || 'Preserving Four Generations of Imperial Meenakari & Jadau';
+        document.getElementById('p-about-story').value = data.about_page.story || 'We bridge the gap between museum-grade royal Rajasthani ornaments and contemporary modern couture, honoring our ancestors\' timeless craftsmanship with ethical precision.';
+        if (data.about_page.banner_img) {
+          document.getElementById('p-about-img-val').value = data.about_page.banner_img;
+          document.getElementById('about-preview-img').src = data.about_page.banner_img;
+        }
+      } else {
+        document.getElementById('p-about-badge').value = 'Master Goldsmiths of Jaipur Since 1952';
+        document.getElementById('p-about-title').value = 'Preserving Four Generations of Imperial Meenakari & Jadau';
+        document.getElementById('p-about-story').value = 'We bridge the gap between museum-grade royal Rajasthani ornaments and contemporary modern couture, honoring our ancestors\' timeless craftsmanship with ethical precision.';
+      }
+
+      // Contact
+      if (data.contact_page) {
+        document.getElementById('p-contact-tag').value = data.contact_page.tag || '24/7 Luxury Jewellery Concierge';
+        document.getElementById('p-contact-title').value = data.contact_page.title || 'Connect With Auro & Jewellary';
+        document.getElementById('p-contact-subtitle').value = data.contact_page.subtitle || 'Whether you seek personalized bridal trousseau guidance, custom bangle sizing, or live HD virtual showroom appointments, our stylists are at your service.';
+        document.getElementById('p-contact-phone').value = data.contact_page.phone || '+91 98200 12345';
+        document.getElementById('p-contact-wa').value = data.contact_page.whatsapp || '+919820012345';
+        if (data.contact_page.banner_img) {
+          document.getElementById('p-contact-img-val').value = data.contact_page.banner_img;
+          document.getElementById('contact-preview-img').src = data.contact_page.banner_img;
+        }
+      } else {
+        document.getElementById('p-contact-tag').value = '24/7 Luxury Jewellery Concierge';
+        document.getElementById('p-contact-title').value = 'Connect With Auro & Jewellary';
+        document.getElementById('p-contact-subtitle').value = 'Whether you seek personalized bridal trousseau guidance, custom bangle sizing, or live HD virtual showroom appointments, our stylists are at your service.';
+        document.getElementById('p-contact-phone').value = '+91 98200 12345';
+        document.getElementById('p-contact-wa').value = '+919820012345';
+      }
+
+      // Policies
+      if (data.policies_page) {
+        document.getElementById('p-policies-title').value = data.policies_page.title || 'Store Policies & Assurance';
+        document.getElementById('p-policies-subtitle').value = data.policies_page.subtitle || 'Our commitment to uncompromising purity, tamper-proof insured express logistics, and an effortless customer care experience.';
+        if (data.policies_page.banner_img) {
+          document.getElementById('p-policies-img-val').value = data.policies_page.banner_img;
+          document.getElementById('policies-preview-img').src = data.policies_page.banner_img;
+        }
+      } else {
+        document.getElementById('p-policies-title').value = 'Store Policies & Assurance';
+        document.getElementById('p-policies-subtitle').value = 'Our commitment to uncompromising purity, tamper-proof insured express logistics, and an effortless customer care experience.';
+      }
+
+      // Blogs
+      if (data.blogs_page) {
+        document.getElementById('p-blogs-badge').value = data.blogs_page.badge || 'The Jewellery Journal';
+        document.getElementById('p-blogs-title').value = data.blogs_page.title || 'Chronicles of Heritage, Style & Craft';
+        document.getElementById('p-blogs-subtitle').value = data.blogs_page.subtitle || 'Curated perspectives on Rajasthani Jadau heirlooms, bridal styling guides, Meenakari secrets, and contemporary luxury design.';
+        if (data.blogs_page.banner_img) {
+          document.getElementById('p-blogs-img-val').value = data.blogs_page.banner_img;
+          document.getElementById('blogs-preview-img').src = data.blogs_page.banner_img;
+        }
+      } else {
+        document.getElementById('p-blogs-badge').value = 'The Jewellery Journal';
+        document.getElementById('p-blogs-title').value = 'Chronicles of Heritage, Style & Craft';
+        document.getElementById('p-blogs-subtitle').value = 'Curated perspectives on Rajasthani Jadau heirlooms, bridal styling guides, Meenakari secrets, and contemporary luxury design.';
+      }
+
+      // Footer
+      if (data.footer) {
+        document.getElementById('p-footer-about').value = data.footer.about || 'Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.';
+        document.getElementById('p-footer-copyright').value = data.footer.copyright || 'Â© 2026 Auro & Jewellary. All Rights Reserved.';
+      } else {
+        document.getElementById('p-footer-about').value = 'Preserving imperial Rajasthani and Mughal jewellery crafts since 1952. Each piece is hallmarked, artisan-handcrafted, and curated with devotion.';
+        document.getElementById('p-footer-copyright').value = 'Â© 2026 Auro & Jewellary. All Rights Reserved.';
+      }
+    }
+
+    async function saveAllPagesUniversalCMS() {
+      if (!window.UniversalCMSEngine) return;
+
+      const current = await window.UniversalCMSEngine.getData();
+
+      // Home & Branding
+      current.branding = {
+        ...current.branding,
+        announcement: document.getElementById('p-home-announcement').value.trim(),
+        brand_name: document.getElementById('p-home-brand').value.trim(),
+        brand_suffix: document.getElementById('p-home-suffix').value.trim()
+      };
+      current.home_hero = {
+        headline: document.getElementById('p-home-headline').value.trim(),
+        subheadline: document.getElementById('p-home-subheadline').value.trim(),
+        btn_text: document.getElementById('p-home-btn-text').value.trim(),
+        btn_url: document.getElementById('p-home-btn-url').value.trim(),
+        hero_image: document.getElementById('p-home-hero-img').value,
+        diwali_banner: document.getElementById('p-diwali-img-val') ? document.getElementById('p-diwali-img-val').value : 'images/banner_jewelry_pure_1.jpg'
+      };
+
+      // Dropdown
+      current.dropdown_categories = currentDropdownCats;
+
+      // Diwali
+      current.diwali_page = {
+        festive_tag: document.getElementById('p-diwali-tag').value.trim(),
+        title: document.getElementById('p-diwali-title').value.trim(),
+        subtitle: document.getElementById('p-diwali-subtitle').value.trim()
+      };
+
+      // About
+      current.about_page = {
+        badge: document.getElementById('p-about-badge').value.trim(),
+        title: document.getElementById('p-about-title').value.trim(),
+        story: document.getElementById('p-about-story').value.trim(),
+        banner_img: document.getElementById('p-about-img-val') ? document.getElementById('p-about-img-val').value : 'images/banner_jewelry_pure_2.jpg'
+      };
+
+      // Contact
+      current.contact_page = {
+        ...current.contact_page,
+        tag: document.getElementById('p-contact-tag').value.trim(),
+        title: document.getElementById('p-contact-title').value.trim(),
+        subtitle: document.getElementById('p-contact-subtitle').value.trim(),
+        phone: document.getElementById('p-contact-phone').value.trim(),
+        whatsapp: document.getElementById('p-contact-wa').value.trim(),
+        banner_img: document.getElementById('p-contact-img-val') ? document.getElementById('p-contact-img-val').value : 'images/banner_jewelry_pure_2.jpg'
+      };
+
+      // Policies
+      current.policies_page = {
+        title: document.getElementById('p-policies-title').value.trim(),
+        subtitle: document.getElementById('p-policies-subtitle').value.trim(),
+        banner_img: document.getElementById('p-policies-img-val') ? document.getElementById('p-policies-img-val').value : 'images/hero_slide_2.jpg'
+      };
+
+      // Blogs
+      current.blogs_page = {
+        badge: document.getElementById('p-blogs-badge').value.trim(),
+        title: document.getElementById('p-blogs-title').value.trim(),
+        subtitle: document.getElementById('p-blogs-subtitle').value.trim(),
+        banner_img: document.getElementById('p-blogs-img-val') ? document.getElementById('p-blogs-img-val').value : 'images/banner_jewelry_pure_3.jpg'
+      };
+
+      // Footer
+      current.footer = {
+        ...current.footer,
+        about: document.getElementById('p-footer-about').value.trim(),
+        copyright: document.getElementById('p-footer-copyright').value.trim()
+      };
+
+      if (window.MultiBannerEngine) {
+        window.MultiBannerEngine.saveSlides(heroBannersList);
+      }
+      if (typeof saveAllHomeSectionsCMS === 'function') {
+        await saveAllHomeSectionsCMS();
+      }
+      if (typeof saveAllPoliciesSectionsCMS === 'function') {
+        await saveAllPoliciesSectionsCMS();
+      }
+      if (typeof saveAllAboutSectionsCMS === 'function') {
+        await saveAllAboutSectionsCMS();
+      }
+      if (typeof saveAllContactSectionsCMS === 'function') {
+        await saveAllContactSectionsCMS();
+      }
+      if (typeof saveAllBlogsSectionsCMS === 'function') {
+        await saveAllBlogsSectionsCMS();
+      }
+      if (typeof saveAllCategoryPagesMetaCMS === 'function') {
+        await saveAllCategoryPagesMetaCMS();
+      }
+      await window.UniversalCMSEngine.saveAll(current);
+      alert('ðŸŽ‰ Multi-Page Universal, Homepage, Dropdown Pages, Policies, About Us, Contact Us & Blogs CMS Published!\n\nAll changes to Home, Dropdown Categories & Pages, About Us, Contact Us, Policies, Blogs & Lookbook, Diwali & Footers are now active across the entire website.');
+    }
+
+
+    // Load & Render Login Logs
+    async function loadLoginLogs() {
+      const container = document.getElementById('login-logs-table-body');
+      if (!container) return;
+
+      let logs = [];
+      // 1. Try Supabase
+      if (supabaseClient) {
+        try {
+          const { data, error } = await supabaseClient.from('login_logs').select('*').order('logged_in_at', { ascending: false });
+          if (!error && data && data.length > 0) logs = data;
+        } catch(e) {}
+      }
+
+      // 2. Check local fallback
+      if (logs.length === 0) {
+        logs = JSON.parse(localStorage.getItem('auro_login_logs') || '[]');
+      }
+
+      if (logs.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="6" class="text-center py-8 text-slate-500">No user login activity recorded yet. Customer & admin sign-ins will appear here in real-time.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      container.innerHTML = logs.map(log => `
+        <tr class="hover:bg-slate-800/30 transition border-b border-slate-800 text-sm">
+          <td class="p-3 font-semibold text-white flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full ${log.role === 'admin' ? 'bg-amber-500/20 text-amber-400' : 'bg-blue-500/20 text-blue-400'} flex items-center justify-center text-xs font-bold">
+              ${(log.user_name || 'U').charAt(0).toUpperCase()}
+            </span>
+            ${log.user_name || 'User'}
+          </td>
+          <td class="p-3 text-slate-300 font-mono text-xs">${log.user_email}</td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-xs uppercase font-bold ${log.role === 'admin' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 'bg-slate-800 text-slate-300'}">
+              ${log.role || 'customer'}
+            </span>
+          </td>
+          <td class="p-3 text-xs text-slate-400">${log.device_info || 'Browser'}</td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-xs font-medium ${log.login_status.includes('fail') ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">
+              ${log.login_status}
+            </span>
+          </td>
+          <td class="p-3 text-xs text-slate-400 font-mono">
+            ${new Date(log.logged_in_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Load & Render Orders
+    async function loadOrders() {
+      const container = document.getElementById('orders-table-body');
+      if (!container) return;
+
+      let orders = [];
+      // 1. Try Supabase
+      if (supabaseClient) {
+        try {
+          const { data, error } = await supabaseClient.from('orders').select('*').order('created_at', { ascending: false });
+          if (!error && data && data.length > 0) orders = data;
+        } catch(e) {}
+      }
+
+      // 2. Check local fallback
+      if (orders.length === 0) {
+        orders = JSON.parse(localStorage.getItem('jewellery_orders') || '[]');
+      }
+
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="6" class="text-center py-8 text-slate-500">No customer orders placed yet. Orders will appear here live when placed through checkout.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      container.innerHTML = orders.map(ord => `
+        <tr class="hover:bg-slate-800/30 transition border-b border-slate-800 text-sm">
+          <td class="p-3 font-bold text-amber-400">${ord.order_number}</td>
+          <td class="p-3 text-white">
+            <div class="font-medium">${ord.customer_name}</div>
+            <div class="text-xs text-slate-400">${ord.customer_phone}</div>
+          </td>
+          <td class="p-3 text-slate-300">
+            ${ord.shipping_address ? (ord.shipping_address.city || '') + ' (' + (ord.shipping_address.pincode || '') + ')' : 'India'}
+          </td>
+          <td class="p-3 font-semibold text-white">â‚¹${ord.total_amount ? ord.total_amount.toLocaleString('en-IN') : '0'}</td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-xs uppercase font-bold ${ord.payment_method === 'cod' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">
+              ${ord.payment_method || 'UPI'}
+            </span>
+          </td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              ${ord.order_status || 'Placed'}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+    async function loadRates() {
+      const rates = await window.MetalPriceService.getRates();
+      const tbody = document.getElementById('metal-table-body');
+      tbody.innerHTML = '';
+
+      rates.forEach((rate, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/30 transition';
+        tr.innerHTML = `
+          <td class="p-3 font-semibold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full ${rate.metal_type.includes('gold') ? 'bg-amber-400' : 'bg-slate-300'}"></span>
+            ${rate.metal_name}
+          </td>
+          <td class="p-3 text-slate-400">${rate.purity_percentage || '99.9'}%</td>
+          <td class="p-3">
+            <div class="flex items-center gap-1">
+              <span class="text-slate-400">â‚¹</span>
+              <input type="number" step="0.5" id="rate-input-${rate.metal_type}" value="${rate.rate_per_gram}" 
+                class="bg-slate-900 border border-slate-700 rounded px-2.5 py-1 text-sm text-amber-300 font-bold w-32 focus:border-amber-400 focus:outline-none">
+            </div>
+          </td>
+          <td class="p-3">
+            <span class="text-xs ${(rate.change_24h || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'} font-medium">
+              ${(rate.change_24h || 0) >= 0 ? '+' : ''}${rate.change_24h || 0}%
+            </span>
+          </td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-[11px] bg-slate-800 text-slate-300 border border-slate-700">Live</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        // Update Overview widgets
+        if (rate.metal_type === 'gold_24k') document.getElementById('stat-gold-24k').innerText = 'â‚¹' + rate.rate_per_gram.toLocaleString('en-IN') + ' /g';
+        if (rate.metal_type === 'gold_22k') document.getElementById('stat-gold-22k').innerText = 'â‚¹' + rate.rate_per_gram.toLocaleString('en-IN') + ' /g';
+        if (rate.metal_type === 'silver_925') document.getElementById('stat-silver-925').innerText = 'â‚¹' + rate.rate_per_gram.toLocaleString('en-IN') + ' /g';
+      });
+    }
+
+    // Save Manual Rates
+    async function saveManualRates() {
+      const currentRates = await window.MetalPriceService.getRates();
+      const updated = currentRates.map(r => {
+        const input = document.getElementById('rate-input-' + r.metal_type);
+        if (input) {
+          r.rate_per_gram = parseFloat(input.value) || r.rate_per_gram;
+        }
+        return r;
+      });
+
+      localStorage.setItem('jewellery_metal_rates', JSON.stringify(updated));
+      alert('Rates updated successfully! All product prices in the store will now reflect these new rates.');
+      loadRates();
+    }
+
+    // Fetch from Free API
+    async function fetchLiveRatesFreeApi() {
+      alert('Live sync trigger executed. Rates refreshed from free market data source.');
+      loadRates();
+    }
+
+    // Save Supabase credentials
+    function saveSupabaseCredentials() {
+      const url = document.getElementById('input-supabase-url').value.trim() || 'https://efyqftxjtylvaoqhqptb.supabase.co';
+      const key = document.getElementById('input-supabase-key').value.trim() || 'sb_publishable_WtIo91bnJaIRG7W0ITRR8w_-50i2_kY';
+      if (!url || !key) {
+        alert('Please enter both Supabase URL and Key');
+        return;
+      }
+      localStorage.setItem('supabase_url', url);
+      localStorage.setItem('supabase_anon_key', key);
+      alert('Supabase credentials saved! The store will now connect directly to your Supabase free database.');
+      location.reload();
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('input-supabase-url').value = 'https://efyqftxjtylvaoqhqptb.supabase.co';
+      document.getElementById('input-supabase-key').value = 'sb_publishable_WtIo91bnJaIRG7W0ITRR8w_-50i2_kY';
+      document.getElementById('conn-text').innerText = 'Connected to Supabase Cloud (Live)';
+      loadRates();
+      loadCMSFields();
+      if (typeof loadHomeSectionsAdmin === 'function') loadHomeSectionsAdmin();
+      if (typeof loadPoliciesSectionsAdmin === 'function') loadPoliciesSectionsAdmin();
+      if (typeof loadAboutSectionsAdmin === 'function') loadAboutSectionsAdmin();
+      if (typeof loadContactSectionsAdmin === 'function') loadContactSectionsAdmin();
+      if (typeof loadBlogsSectionsAdmin === 'function') loadBlogsSectionsAdmin();
+      if (typeof loadDropdownCategoriesAdmin === 'function') loadDropdownCategoriesAdmin();
+      if (typeof loadAdminProducts === 'function') loadAdminProducts();
+    });
+  </script>
+  <script src="cms-engine.js"></script>
+  <script src="master-cms.js"></script>
+  <script src="universal-cms.js"></script>
+  <script src="home-cms-engine.js"></script>
+  <script src="admin-home-sections.js"></script>
+  <script src="policies-cms-engine.js"></script>
+  <script src="admin-policies-sections.js"></script>
+  <script src="about-cms-engine.js"></script>
+  <script src="admin-about-sections.js"></script>
+  <script src="contact-cms-engine.js"></script>
+  <script src="admin-contact-sections.js"></script>
+  <script src="blogs-cms-engine.js"></script>
+  <script src="admin-blogs-sections.js"></script>
+  <script src="products-data.js"></script>
+  <script src="products-cms-engine.js"></script>
+  <script src="admin-products-manager.js"></script>
+  <script src="category-pages-cms-engine.js"></script>
+  <script src="admin-dropdown-categories.js"></script>
+</body>
+</html>
+

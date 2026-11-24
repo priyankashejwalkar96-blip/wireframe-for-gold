@@ -5086,3 +5086,83 @@ h1, h2, h3, h4, h5 {
     min-height: 60vh;
   }
 }
+
+
+/* --- Fix Floating Contact Hub & Tooltips --- */
+.floating-contact-hub {
+  position: fixed !important;
+  bottom: 25px !important;
+  right: 25px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  z-index: 999999 !important;
+}
+
+.floating-btn {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.floating-btn:hover {
+  transform: scale(1.08) translateY(-2px) !important;
+}
+
+.floating-btn.call-float {
+  background: #9A2143 !important;
+}
+
+.floating-btn.call-float svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.floating-btn.whatsapp-float-btn {
+  background: #25d366 !important;
+}
+
+.floating-btn.whatsapp-float-btn svg {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  width: 26px !important;
+  height: 26px !important;
+}
+
+/* Tooltips MUST BE HIDDEN by default */
+.floating-btn .hub-tooltip {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  right: 64px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: rgba(17, 17, 17, 0.95) !important;
+  color: #ffffff !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
+}
+
+/* Show tooltip ONLY on hover */
+.floating-btn:hover .hub-tooltip {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

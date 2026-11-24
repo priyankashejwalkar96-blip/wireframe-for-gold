@@ -12,18 +12,34 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
+  <!-- Supabase & Cart Systems -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="auth-service.js"></script>
+  <script src="luxury-dropdown.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20261124">
 </head>
 <body>
 
   <!-- Top Announcement Bar (Static Original Layout) -->
-  <div class="top-bar">
-    <div class="container top-bar-content">
-      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
-      <div class="top-bar-links">
-        <a href="boutiques.html">Boutiques</a>
+  <div class="top-bar" style="background: #111; border-bottom: 1px solid rgba(212,175,55,0.25);">
+    <div class="container top-bar-content" style="display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
+      <div id="live-metal-ticker" style="display: flex; align-items: center; gap: 14px; color: #d4af37;">
+        <span style="display: inline-flex; align-items: center; gap: 4px; font-weight: 600; letter-spacing: 0.5px;">
+          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+          LIVE RATES:
+        </span>
+        <span id="ticker-gold-24k" style="color: #fff;">Gold 24K: <strong>₹7,850/g</strong></span>
+        <span style="color: rgba(255,255,255,0.2);">|</span>
+        <span id="ticker-gold-22k" style="color: #fff;">Gold 22K: <strong>₹7,250/g</strong></span>
+        <span style="color: rgba(255,255,255,0.2);">|</span>
+        <span id="ticker-silver-925" style="color: #fff;">Silver 925: <strong>₹87.50/g</strong></span>
+      </div>
+      <div class="top-bar-links" style="display: flex; gap: 16px;">
+        <a href="admin.html" style="color: #d4af37; font-weight: 600;">👑 Admin Panel</a>
         <a href="track-order.html">Track Order</a>
-        <a href="https://wa.me/919820012345">Concierge: +91 98200 12345</a>
+        <a href="checkout.html" style="color: #fff; font-weight: 600;">🛍️ Checkout</a>
       </div>
     </div>
   </div>
@@ -148,28 +164,33 @@
           â˜…â˜…â˜…â˜…â˜… <span class="count" style="color: var(--color-text-main); font-weight: 500;">4.9 / 5.0 (142 Customer Reviews)</span>
         </div>
 
-        <div class="price-row" style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem;">
-          <span class="current-price" style="font-size: 2.2rem; color: var(--color-dark);">â‚¹4,499</span>
-          <span class="original-price" style="font-size: 1.2rem;">â‚¹6,999</span>
-          <span class="discount-percent" style="font-size: 0.85rem;">35% SAVINGS TODAY</span>
-          <span style="font-size: 0.75rem; color: #27ae60; display: block; width: 100%; margin-top: 0.3rem;">â— Inclusive of all GST & Insured Express Air Shipping</span>
+        <div class="price-row" style="margin-bottom: 1.2rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.2rem;">
+          <div style="display: flex; align-items: baseline; gap: 1rem;">
+            <span id="pdpFinalPrice" class="current-price" style="font-size: 2.3rem; color: #9A2143; font-weight: 700;">₹42,548</span>
+            <span class="original-price" id="pdpOriginalPrice" style="font-size: 1.2rem; text-decoration: line-through; color: #888;">₹48,999</span>
+            <span class="discount-percent" style="font-size: 0.85rem; background: #eef8f1; color: #15803d; padding: 2px 8px; border-radius: 4px; font-weight: 600;">LIVE DYNAMIC RATE</span>
+          </div>
+          <span style="font-size: 0.78rem; color: #16a34a; display: block; width: 100%; margin-top: 0.4rem;">
+            ✓ Real-time metal rate calculation applied | Inclusive of 3% GST &amp; Insured Express Delivery
+          </span>
         </div>
 
-        <p style="font-size: 0.95rem; color: #444; line-height: 1.7; margin-bottom: 1.8rem;">
-          The iconic <strong>Meera Kada</strong> is meticulously handcrafted by 4th-generation master enamelers from Johari Bazaar, Jaipur. It displays double-headed Peacock finials with genuine lapis blue and ruby red mineral enamel on high-grade allergen-free brass with 22K micro-micron gold plating. Features a smooth screw-open mechanism.
-        </p>
-
-        <!-- Sizing Block (Vijay Bangles Pattern) -->
-        <div style="margin-bottom: 1.8rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-            <label style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Select Wrist Size (Indian Bangle Scale):</label>
-            <a href="#sizeModal" onclick="alert('Bangle Sizing: 2.4 = 2.25 inches dia | 2.6 = 2.375 inches dia | 2.8 = 2.5 inches dia')" style="font-size: 0.75rem; color: var(--color-gold-dark); text-decoration: underline;"><i data-lucide="ruler"></i> Size Guide</a>
+        <!-- Live Metal Price Breakdown Accordion (Transparent Pricing) -->
+        <div style="background: #fffcf8; border: 1px solid #ebd9c8; border-radius: 6px; padding: 1.2rem; margin-bottom: 1.8rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+            <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #855529; display: flex; align-items: center; gap: 6px;">
+              💎 Transparent Metal Price Breakdown
+            </span>
+            <span id="pdpMetalTypeBadge" style="font-size: 0.75rem; background: #9A2143; color: #fff; padding: 2px 8px; border-radius: 12px; font-weight: 600;">22K Gold (91.6% Pure)</span>
           </div>
-          <div class="size-selector">
-            <button class="size-btn">2.4 (Small)</button>
-            <button class="size-btn active">2.6 (Medium Regular)</button>
-            <button class="size-btn">2.8 (Broad)</button>
-            <button class="size-btn">Openable Universal</button>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.82rem; color: #555;">
+            <div>Metal Weight: <strong id="pdpWeight" style="color: #222;">5.200 grams</strong></div>
+            <div>Today's Live Rate: <strong id="pdpLiveRate" style="color: #222;">₹7,250 /g</strong></div>
+            <div>Pure Metal Value: <strong id="pdpMetalCost" style="color: #222;">₹37,700</strong></div>
+            <div>Artisan Making Charges: <strong id="pdpMakingCost" style="color: #222;">₹3,600</strong></div>
+            <div>Gemstone / Enamel: <strong id="pdpStoneCost" style="color: #222;">₹0</strong></div>
+            <div>GST (3%): <strong id="pdpGstCost" style="color: #222;">₹1,239</strong></div>
           </div>
         </div>
 
@@ -191,7 +212,7 @@
             <span style="font-weight: 600; padding: 0 1rem;">1</span>
             <button style="font-size: 1.2rem;">+</button>
           </div>
-          <button class="btn btn-primary" style="flex: 1; height: 52px;" onclick="addToCart('Meera Royal Peacock Meenakari Kada', 4499, 'images/bangles.jpg')">
+          <button class="btn btn-primary" style="flex: 1; height: 52px;" id="pdpAddToCartBtn" onclick="handleAddToCartClick()">
             <i data-lucide="shopping-bag"></i> Add To Royal Bag
           </button>
         </div>
@@ -316,7 +337,7 @@
       <div class="cart-items-list" id="cartItemsContainer"></div>
       <div class="cart-drawer-footer">
         <div class="subtotal-row"><span>Subtotal</span><span id="cartSubtotal">â‚¹17,349</span></div>
-        <button class="btn btn-primary btn-block checkout-btn" onclick="alert('Checkout initiated!')">Secure Checkout</button>
+        <button class="btn btn-primary btn-block checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Secure Checkout</button>
       </div>
     </div>
   </div>
@@ -341,6 +362,78 @@
     </a>
   </div>
   <script src="script.js"></script>
+
+  <script>
+    // Product Specs
+    const currentProduct = {
+      id: 'prod_meera_kada_042',
+      title: 'Meera Royal Peacock Meenakari Kada',
+      image: 'images/bangles.jpg',
+      metal_type: 'gold_22k',
+      metal_weight_grams: 5.200,
+      making_charge_value: 3600,
+      stone_charge: 0,
+      gst_percent: 3.0
+    };
+
+    let calculatedPriceData = null;
+    let selectedSize = '2.6 (Medium Regular)';
+
+    // Dynamic Price Calculation
+    async function initPdpDynamicPricing() {
+      const rates = await window.MetalPriceService.getRates();
+      
+      // Update Top Ticker
+      const gold24k = rates.find(r => r.metal_type === 'gold_24k');
+      const gold22k = rates.find(r => r.metal_type === 'gold_22k');
+      const silver925 = rates.find(r => r.metal_type === 'silver_925');
+      if (gold24k) document.getElementById('ticker-gold-24k').innerHTML = 'Gold 24K: <strong>₹' + gold24k.rate_per_gram.toLocaleString('en-IN') + '/g</strong>';
+      if (gold22k) document.getElementById('ticker-gold-22k').innerHTML = 'Gold 22K: <strong>₹' + gold22k.rate_per_gram.toLocaleString('en-IN') + '/g</strong>';
+      if (silver925) document.getElementById('ticker-silver-925').innerHTML = 'Silver 925: <strong>₹' + silver925.rate_per_gram.toLocaleString('en-IN') + '/g</strong>';
+
+      // Calculate for this Kada
+      calculatedPriceData = window.MetalPriceService.calculatePrice(currentProduct, rates);
+
+      document.getElementById('pdpFinalPrice').innerText = '₹' + calculatedPriceData.finalPrice.toLocaleString('en-IN');
+      document.getElementById('pdpOriginalPrice').innerText = '₹' + Math.round(calculatedPriceData.finalPrice * 1.15).toLocaleString('en-IN');
+      document.getElementById('pdpLiveRate').innerText = '₹' + calculatedPriceData.ratePerGram.toLocaleString('en-IN') + ' /g';
+      document.getElementById('pdpMetalCost').innerText = '₹' + calculatedPriceData.metalCost.toLocaleString('en-IN');
+      document.getElementById('pdpMakingCost').innerText = '₹' + calculatedPriceData.makingCharge.toLocaleString('en-IN');
+      document.getElementById('pdpGstCost').innerText = '₹' + calculatedPriceData.gstAmount.toLocaleString('en-IN');
+    }
+
+    function handleAddToCartClick() {
+      if (!calculatedPriceData) return;
+      CartSystem.addItem({
+        id: currentProduct.id,
+        title: currentProduct.title,
+        price: calculatedPriceData.finalPrice,
+        image: currentProduct.image,
+        metalType: currentProduct.metal_type,
+        weightGrams: currentProduct.metal_weight_grams,
+        metalRate: calculatedPriceData.ratePerGram,
+        makingCharge: calculatedPriceData.makingCharge,
+        size: selectedSize,
+        quantity: 1
+      });
+    }
+
+    // Size Selector handler
+    document.querySelectorAll('.size-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        selectedSize = this.innerText;
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', initPdpDynamicPricing);
+  </script>
+
+  <script src="cms-engine.js"></script>
+  <script src="master-cms.js"></script>
+  <script src="universal-cms.js"></script>
 </body>
 </html>
 

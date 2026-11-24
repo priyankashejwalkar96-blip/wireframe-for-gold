@@ -12,7 +12,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261124">
   <style>
     /* Specific Redesign Styles for ALL PRODUCTS Page */
     .catalog-layout {
@@ -2559,107 +2559,11 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Client-Side Pagination: Exactly 3 cards per row (9 cards per page = 3 full rows)
-    document.addEventListener("DOMContentLoaded", function () {
-      const itemsPerPage = 9; // 3 items per row * 3 rows = 9 items per page
-      let currentPage = 1;
-      const grid = document.getElementById("catalogProductsGrid");
-      if (!grid) return;
-
-      const cards = Array.from(grid.querySelectorAll(".product-card"));
-      const totalItems = cards.length;
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
-      const paginationContainer = document.getElementById("paginationControls");
-      const showingText = document.getElementById("showingCountText");
-
-      function renderPage(page) {
-        currentPage = page;
-        const start = (page - 1) * itemsPerPage;
-        const end = Math.min(start + itemsPerPage, totalItems);
-
-        cards.forEach((card, index) => {
-          if (index >= start && index < end) {
-            card.style.display = "flex";
-          } else {
-            card.style.display = "none";
-          }
-        });
-
-        if (showingText) {
-          showingText.innerHTML = `Showing <strong>${start + 1} - ${end}</strong> of ${totalItems} Designs`;
-        }
-
-        renderPaginationButtons();
-      }
-
-      function renderPaginationButtons() {
-        if (!paginationContainer) return;
-        paginationContainer.innerHTML = "";
-
-        // Prev Button
-        const prevBtn = document.createElement("button");
-        prevBtn.className = "page-btn nav-text-btn";
-        prevBtn.innerHTML = "&larr; Prev";
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.onclick = () => {
-          if (currentPage > 1) {
-            renderPage(currentPage - 1);
-            window.scrollTo({ top: grid.offsetTop - 120, behavior: "smooth" });
-          }
-        };
-        paginationContainer.appendChild(prevBtn);
-
-        // Page Numbers
-        let pageNumbers = [];
-        if (totalPages <= 7) {
-          for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
-        } else {
-          if (currentPage <= 4) {
-            pageNumbers = [1, 2, 3, 4, 5, "...", totalPages];
-          } else if (currentPage >= totalPages - 3) {
-            pageNumbers = [1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
-          } else {
-            pageNumbers = [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
-          }
-        }
-
-        pageNumbers.forEach(p => {
-          if (p === "...") {
-            const span = document.createElement("span");
-            span.className = "page-ellipsis";
-            span.textContent = "...";
-            paginationContainer.appendChild(span);
-          } else {
-            const btn = document.createElement("button");
-            btn.className = `page-btn ${p === currentPage ? "active" : ""}`;
-            btn.textContent = p;
-            btn.onclick = () => {
-              renderPage(p);
-              window.scrollTo({ top: grid.offsetTop - 120, behavior: "smooth" });
-            };
-            paginationContainer.appendChild(btn);
-          }
-        });
-
-        // Next Button
-        const nextBtn = document.createElement("button");
-        nextBtn.className = "page-btn nav-text-btn";
-        nextBtn.innerHTML = "Next &rarr;";
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.onclick = () => {
-          if (currentPage < totalPages) {
-            renderPage(currentPage + 1);
-            window.scrollTo({ top: grid.offsetTop - 120, behavior: "smooth" });
-          }
-        };
-        paginationContainer.appendChild(nextBtn);
-      }
-
-      // Initialize First Page
-      renderPage(1);
-    });
-  </script>
+  <script src="cms-engine.js"></script>
+  <script src="master-cms.js"></script>
+  <script src="universal-cms.js"></script>
+  <script src="products-data.js"></script>
+  <script src="products-cms-engine.js"></script>
 </body>
 </html>
 

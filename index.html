@@ -14,18 +14,31 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261124">
 </head>
 <body>
 
-  <!-- Top Announcement Bar (Static Original Layout) -->
-  <div class="top-bar">
-    <div class="container top-bar-content">
-      <span class="top-bar-text">✨ Complimentary Insured Express Shipping on Orders Above ₹3,999</span>
-      <div class="top-bar-links">
+  <!-- Top Announcement Bar With Dynamic Live Metal Ticker -->
+  <div class="top-bar" style="background: #111; border-bottom: 1px solid rgba(212,175,55,0.25);">
+    <div class="container top-bar-content" style="display: flex; justify-content: space-between; align-items: center; font-size: 11px;">
+      <!-- Live Metal Rates Ticker -->
+      <div id="live-metal-ticker" style="display: flex; align-items: center; gap: 14px; color: #d4af37;">
+        <span style="display: inline-flex; align-items: center; gap: 4px; font-weight: 600; letter-spacing: 0.5px;">
+          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; animation: pulse 1.5s infinite;"></span>
+          LIVE RATES:
+        </span>
+        <span id="ticker-gold-24k" style="color: #fff;">Gold 24K: <strong>₹7,850/g</strong></span>
+        <span style="color: rgba(255,255,255,0.2);">|</span>
+        <span id="ticker-gold-22k" style="color: #fff;">Gold 22K: <strong>₹7,250/g</strong></span>
+        <span style="color: rgba(255,255,255,0.2);">|</span>
+        <span id="ticker-silver-925" style="color: #fff;">Silver 925: <strong>₹87.50/g</strong></span>
+      </div>
+
+      <div class="top-bar-links" style="display: flex; gap: 16px;">
+        <a href="admin.html" style="color: #d4af37; font-weight: 600;">👑 Admin Panel</a>
+        <a href="login.html" id="topBarAuthLink" style="color: #fff; font-weight: 600;">👤 Sign In / Register</a>
         <a href="boutiques.html">Boutiques</a>
         <a href="track-order.html">Track Order</a>
-        <a href="#help">Concierge: +91 98200 12345</a>
       </div>
     </div>
   </div>
@@ -1645,8 +1658,36 @@
     </a>
   </div>
 
+  <!-- Supabase & Live Metal Dynamic Pricing Scripts (100% Free CDN Engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="cart-system.js"></script>
+  <script src="auth-service.js"></script>
+  <script src="luxury-dropdown.js"></script>
+  <script>
+    // Live Metal Top Ticker Auto Updater
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const rates = await window.MetalPriceService.getRates();
+        const gold24k = rates.find(r => r.metal_type === 'gold_24k');
+        const gold22k = rates.find(r => r.metal_type === 'gold_22k');
+        const silver925 = rates.find(r => r.metal_type === 'silver_925');
+
+        if (gold24k) document.getElementById('ticker-gold-24k').innerHTML = `Gold 24K: <strong>₹${gold24k.rate_per_gram.toLocaleString('en-IN')}/g</strong>`;
+        if (gold22k) document.getElementById('ticker-gold-22k').innerHTML = `Gold 22K: <strong>₹${gold22k.rate_per_gram.toLocaleString('en-IN')}/g</strong>`;
+        if (silver925) document.getElementById('ticker-silver-925').innerHTML = `Silver 925: <strong>₹${silver925.rate_per_gram.toLocaleString('en-IN')}/g</strong>`;
+      } catch (e) {
+        console.warn('Ticker update note:', e);
+      }
+    });
+  </script>
   <!-- Script Initialization -->
   <script src="script.js"></script>
+  <script src="cms-engine.js"></script>
+  <script src="master-cms.js"></script>
+  <script src="universal-cms.js"></script>
+  <script src="multi-banner-slider.js"></script>
+  <script src="home-cms-engine.js"></script>
 </body>
 </html>
 
